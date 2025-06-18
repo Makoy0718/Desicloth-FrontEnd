@@ -4,11 +4,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 
 @Component({
   selector: 'app-root',
-<<<<<<< Updated upstream
-  imports: [GeneroComponent],
-=======
-  imports: [AplicacionComponent, GeneroComponent,ProductoComponent],
->>>>>>> Stashed changes
+  imports: [ GeneroComponent,ProductoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
