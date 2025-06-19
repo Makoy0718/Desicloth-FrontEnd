@@ -1,0 +1,140 @@
+/* Contenedor general */
+div {
+  margin: 20px;
+  padding: 25px;
+  background-color: #eaf4ff;
+  border-radius: 12px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Título de la lista */
+h1 {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #003366;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la tabla */
+table.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Encabezado de la tabla */
+th.mat-header-cell {
+  background: linear-gradient(135deg, #005f99, #007acc);
+  color: #fff;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 12px 18px;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Estilo de las celdas */
+td.mat-cell {
+  text-align: center;
+  padding: 12px 18px;
+  color: #333;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+tr.mat-row:hover {
+  background-color: #f0f8ff;
+  transform: scale(1.02);
+}
+
+/* Fila de encabezado */
+tr.mat-header-row {
+  border-bottom: 3px solid #007acc;
+}
+
+/* Botones de acción */
+button.mat-button {
+  background-color: #007acc;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+button.mat-button:hover {
+  background-color: #005f99;
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button.mat-button:focus {
+  outline: none;
+}
+
+button mat-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Columnas */
+.mat-column-c1,
+.mat-column-c2,
+.mat-column-c3 {
+  min-width: 160px;
+}
+
+.mat-column-c4,
+.mat-column-c5 {
+  min-width: 130px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  table.mat-table {
+    font-size: 1rem;
+  }
+
+  th.mat-header-cell,
+  td.mat-cell {
+    padding: 10px 12px;
+  }
+
+  button.mat-button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Animación en hover sobre filas */
+tr.mat-row {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Mejoras en la tabla en pantallas pequeñas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  table.mat-table {
+    font-size: 0.9rem;
+  }
+
+  button.mat-button {
+    padding: 8px 10px;
+  }
+}

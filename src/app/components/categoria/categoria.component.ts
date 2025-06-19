@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ListarcategoriaComponent } from './listarcategoria/listargenero.component';
+import { ListarcategoriaComponent } from './listarcategoria/listarcategoria.component';
 
 @Component({
   selector: 'app-categoria',

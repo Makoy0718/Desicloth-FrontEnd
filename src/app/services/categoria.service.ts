@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../models/categoria';
+import { Subject } from 'rxjs';
 
 const base_url = environment.base;
 
@@ -9,10 +10,37 @@ const base_url = environment.base;
   providedIn: 'root'
 })
 export class CategoriaService {
-  private url = `${base_url}/categoria`;
+  private url = `${base_url}/categorias`;  
+
+  private listaCambio = new Subject<Categoria[]>();
 
   constructor(private http: HttpClient) {}
+
   list() {
-    return this.http.get<Categoria[]>(this.url);
+    return this.http.get<Categoria[]>(`${this.url}/listaCategoria`);
+  }
+
+  insert(c: Categoria) {
+    return this.http.post(`${this.url}/insertarCategoria`, c);
+  }
+
+  setList(listaNueva: Categoria[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
+
+  listId(id: number) {
+    return this.http.get<Categoria>(`${this.url}/${id}`);
+  }
+
+  update(c: Categoria) {
+    return this.http.put(`${this.url}/modificarCategoria`, c);
+  }
+
+  deleteA(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
