@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Genero } from '../models/genero';
 import { Subject } from 'rxjs';
+import { Users } from '../models/users';
 
 
 const base_url = environment.base;
@@ -10,33 +10,33 @@ const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
-export class GeneroService {
-  private url = `${base_url}/generos`;
+export class UsersService {
+  private url = `${base_url}/usuarios`;
 
-  private listaCambio = new Subject<Genero[]>();
+  private listaCambio = new Subject<Users[]>();
 
   constructor(private http: HttpClient) {}
   list() {
-    return this.http.get<Genero[]>(`${this.url}/lista`);
+    return this.http.get<Users[]>(`${this.url}/verUsuarios`);
   }
-  insert(a: Genero) {
-    return this.http.post(`${this.url}/creacion`, a);
+  insert(a: Users) {
+    return this.http.post(`${this.url}/registro`, a);
   }
-  setList(listaNueva: Genero[]) {
+  setList(listaNueva: Users[]) {
     this.listaCambio.next(listaNueva);
   }
   getList() {
     return this.listaCambio.asObservable();
   }
   listId(id: number) {
-    return this.http.get<Genero>(`${this.url}/ver/${id}`);
+    return this.http.get<Users>(`${this.url}/ver/${id}`);
   }
 
-  update(a: Genero) {
-    return this.http.put(`${this.url}/edicion`, a);
+  update(a: Users) {
+    return this.http.put(this.url, a);
   }
 
-  deleteGe(id: number) {
+  deleteU(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 
