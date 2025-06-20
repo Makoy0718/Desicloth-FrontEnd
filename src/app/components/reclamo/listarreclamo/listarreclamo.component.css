@@ -1,0 +1,8 @@
+button[matButton="outlined"] {
+  background-color: rgb(254, 251, 251);
+  border: none;
+  width: 50%;
+  box-shadow: none;
+  outline: none;
+  color: rgb(12, 19, 92)
+ }

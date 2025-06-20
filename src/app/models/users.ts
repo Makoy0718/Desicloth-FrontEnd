@@ -5,5 +5,5 @@ export class Users {
     username:string=""
     correoUser:string=""
     password:string=""
-    role:Role = new Role()
+    rol:Role = new Role()
 }

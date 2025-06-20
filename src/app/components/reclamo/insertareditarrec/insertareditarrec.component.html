@@ -1,0 +1,63 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de Reclamos</h1>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El Código del reclamo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Título</mat-label>
+        <input matInput placeholder="Ex. Pedido no entregado" formControlName="title" />
+        <mat-error *ngIf="form.get('title')?.hasError('required')">
+          El título del reclamo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Descripción</mat-label>
+        <input
+          matInput
+          placeholder="Ex. desc1"
+          formControlName="description"
+        />
+        <mat-error *ngIf="form.get('description')?.hasError('required')">
+          La descripción del reclamo es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Estado</mat-label>
+        <input matInput placeholder="Ex. En revisión" formControlName="state" />
+        <mat-error *ngIf="form.get('state')?.hasError('required')">
+          El estado del reclamo es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (usuario of usuarios; track usuario) {
+          <mat-option [value]="usuario">{{ usuario.username }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <button matButton="outlined">Aceptar</button>
+    </form>
+  </div>
+</div>

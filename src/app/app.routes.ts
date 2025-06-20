@@ -13,6 +13,8 @@ import { GeneroComponent } from './components/genero/genero.component';
 import { InsertareditargenComponent } from './components/genero/insertareditargen/insertareditargen.component';
 import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
+import { ReclamoComponent } from './components/reclamo/reclamo.component';
+import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
 
 
 //RUTAS DEL FRONTEND
@@ -104,6 +106,19 @@ export const routes: Routes = [
             {
                 path: 'edicionesUsers/:id',
                 component: InsertareditarusersComponent,
+            },
+        ],
+    },
+    {
+    path:'rutareclamo',component:ReclamoComponent,
+        children: [
+            {
+                path: 'insertarReclamo',
+                component: InsertareditarrecComponent,
+            },
+            {
+                path: 'edicionesReclamo/:id',
+                component: InsertareditarrecComponent,
             },
         ],
     },
