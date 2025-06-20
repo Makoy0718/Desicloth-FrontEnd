@@ -4,6 +4,9 @@ import { InsertareditarComponent } from './components/aplicacion/insertareditar/
 import { ListarproductoComponent } from './components/producto/listarproducto/listarproducto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { IsertareditarCategoriaComponent } from './components/categoria/isertareditar-categoria/isertareditar-categoria.component';
+import { DisenoComponent } from './components/diseno/diseno.component';
+import { ListardisenoComponent } from './components/diseno/listardiseno/listardiseno.component';
+import { CreardisenoComponent } from './components/diseno/creardiseno/creardiseno.component';
 
 
 //RUTAS DEL FRONTEND
@@ -45,10 +48,19 @@ export const routes: Routes = [
         ],
         
     },
-
-
+	{
+        path: 'rutadisenos',
+        component: DisenoComponent,
+        children:[
+            { 
+                path: 'listarDiseno',
+                component: ListardisenoComponent
+            },{ 
+                path: 'crearDiseno',
+                component: CreardisenoComponent
+            }
+        ]
+    },
      // Ruta comodín (opcional)
     { path: '**', redirectTo: 'productos' }
-
-
 ];
