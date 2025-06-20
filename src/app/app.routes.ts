@@ -4,6 +4,9 @@ import { InsertareditarComponent } from './components/aplicacion/insertareditar/
 import { ListarproductoComponent } from './components/producto/listarproducto/listarproducto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { IsertareditarCategoriaComponent } from './components/categoria/isertareditar-categoria/isertareditar-categoria.component';
+import { DisenoComponent } from './components/diseno/diseno.component';
+import { ListardisenoComponent } from './components/diseno/listardiseno/listardiseno.component';
+import { CreardisenoComponent } from './components/diseno/creardiseno/creardiseno.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { InsertareditarGaleriaComponent } from './components/galeria/insertareditar-galeria/insertareditar-galeria.component';
 import { GeneroComponent } from './components/genero/genero.component';
@@ -51,6 +54,19 @@ export const routes: Routes = [
         ],
         
     },
+	  {
+        path: 'rutadisenos',
+        component: DisenoComponent,
+        children:[
+            { 
+                path: 'listarDiseno',
+                component: ListardisenoComponent
+            },{ 
+                path: 'crearDiseno',
+                component: CreardisenoComponent
+            }
+        ]
+    },
     {
         path:'rutaGaleria',
         component:GaleriaComponent,
@@ -95,6 +111,4 @@ export const routes: Routes = [
 
      // Ruta comodín (opcional)
     { path: '**', redirectTo: 'productos' },
-
-
 ];
