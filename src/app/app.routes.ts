@@ -4,6 +4,8 @@ import { InsertareditarComponent } from './components/aplicacion/insertareditar/
 import { ListarproductoComponent } from './components/producto/listarproducto/listarproducto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { IsertareditarCategoriaComponent } from './components/categoria/isertareditar-categoria/isertareditar-categoria.component';
+import { GaleriaComponent } from './components/galeria/galeria.component';
+import { InsertareditarGaleriaComponent } from './components/galeria/insertareditar-galeria/insertareditar-galeria.component';
 
 
 //RUTAS DEL FRONTEND
@@ -44,6 +46,20 @@ export const routes: Routes = [
             },
         ],
         
+    },
+    {
+        path:'rutaGaleria',
+        component:GaleriaComponent,
+        children: [
+            {
+                path: 'insertarGaleria',
+                component: InsertareditarGaleriaComponent,
+            },
+            {
+                path: 'edicionesGaleria/:id',
+                component: InsertareditarGaleriaComponent,
+            },
+        ],
     },
 
 
