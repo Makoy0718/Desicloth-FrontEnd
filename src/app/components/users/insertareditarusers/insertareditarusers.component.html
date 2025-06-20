@@ -7,7 +7,7 @@
         <mat-label>ID</mat-label>
         <input matInput formControlName="codigo" />
         <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-          El Código de la género es obligatorio!!
+          El Código del usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
@@ -16,7 +16,7 @@
         <mat-label>Nombre de usuario</mat-label>
         <input matInput placeholder="Ex. Juan" formControlName="nombre" />
         <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-          El nombre del género es obligatorio!!
+          El nombre del usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
@@ -25,7 +25,7 @@
         <mat-label>Correo</mat-label>
         <input matInput placeholder="Ex. example@example.com" formControlName="correo" />
         <mat-error *ngIf="form.get('correo')?.hasError('required')">
-          La descripción del género es obligatoria!!
+          El correo del usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
       <br />
@@ -34,7 +34,7 @@
         <mat-label>Contraseña</mat-label>
         <input matInput placeholder="Ex. 123456" formControlName="contrasena" />
         <mat-error *ngIf="form.get('contrasena')?.hasError('required')">
-          La descripción del género es obligatoria!!
+          La contraseña del usuario es obligatoria!!
         </mat-error>
       </mat-form-field>
       <br />
