@@ -1,0 +1,58 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;"><h1>Registro de Usuarios</h1></div>
+  <div style="text-align: center;margin: 5%;">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El Código de la género es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput placeholder="Ex. Juan" formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El nombre del género es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Correo</mat-label>
+        <input matInput placeholder="Ex. example@example.com" formControlName="correo" />
+        <mat-error *ngIf="form.get('correo')?.hasError('required')">
+          La descripción del género es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Ex. 123456" formControlName="contrasena" />
+        <mat-error *ngIf="form.get('contrasena')?.hasError('required')">
+          La descripción del género es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role">
+          @for (role of roles; track role) {
+          <mat-option [value]="role">{{ role.nombreRole }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('role')?.hasError('required')">
+          El rol es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+
+      <button matButton="outlined">Aceptar</button>
+    </form>
+  </div>
+</div>

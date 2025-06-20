@@ -7,6 +7,12 @@ import { IsertareditarCategoriaComponent } from './components/categoria/isertare
 import { DisenoComponent } from './components/diseno/diseno.component';
 import { ListardisenoComponent } from './components/diseno/listardiseno/listardiseno.component';
 import { CreardisenoComponent } from './components/diseno/creardiseno/creardiseno.component';
+import { GaleriaComponent } from './components/galeria/galeria.component';
+import { InsertareditarGaleriaComponent } from './components/galeria/insertareditar-galeria/insertareditar-galeria.component';
+import { GeneroComponent } from './components/genero/genero.component';
+import { InsertareditargenComponent } from './components/genero/insertareditargen/insertareditargen.component';
+import { UsersComponent } from './components/users/users.component';
+import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
 
 
 //RUTAS DEL FRONTEND
@@ -48,7 +54,7 @@ export const routes: Routes = [
         ],
         
     },
-	{
+	  {
         path: 'rutadisenos',
         component: DisenoComponent,
         children:[
@@ -61,6 +67,48 @@ export const routes: Routes = [
             }
         ]
     },
+    {
+        path:'rutaGaleria',
+        component:GaleriaComponent,
+        children: [
+            {
+                path: 'insertarGaleria',
+                component: InsertareditarGaleriaComponent,
+            },
+            {
+                path: 'edicionesGaleria/:id',
+                component: InsertareditarGaleriaComponent,
+            },
+        ],
+    },
+    {
+    path:'rutagenero',component:GeneroComponent,
+        children: [
+            {
+                path: 'insertarGenero',
+                component: InsertareditargenComponent,
+            },
+            {
+                path: 'edicionesGenero/:id',
+                component: InsertareditargenComponent,
+            },
+        ],
+    },
+    {
+    path:'rutausers',component:UsersComponent,
+        children: [
+            {
+                path: 'insertarUsers',
+                component: InsertareditarusersComponent,
+            },
+            {
+                path: 'edicionesUsers/:id',
+                component: InsertareditarusersComponent,
+            },
+        ],
+    },
+
+
      // Ruta comodín (opcional)
-    { path: '**', redirectTo: 'productos' }
+    { path: '**', redirectTo: 'productos' },
 ];
