@@ -5,7 +5,6 @@ import { ListarproductoComponent } from './components/producto/listarproducto/li
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { IsertareditarCategoriaComponent } from './components/categoria/isertareditar-categoria/isertareditar-categoria.component';
 import { DisenoComponent } from './components/diseno/diseno.component';
-import { ListardisenoComponent } from './components/diseno/listardiseno/listardiseno.component';
 import { CreardisenoComponent } from './components/diseno/creardiseno/creardiseno.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { InsertareditarGaleriaComponent } from './components/galeria/insertareditar-galeria/insertareditar-galeria.component';
@@ -13,11 +12,15 @@ import { GeneroComponent } from './components/genero/genero.component';
 import { InsertareditargenComponent } from './components/genero/insertareditargen/insertareditargen.component';
 import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
+import { RoleComponent } from './components/role/role.component';
+import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
+import { InsertareditarRoleComponent } from './components/role/insertareditar-role/insertareditar-role.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
-    
+    //Rutas para componentes de Producto
     {
         path: 'rutaProductos',
         component: ListarproductoComponent,
@@ -29,18 +32,24 @@ export const routes: Routes = [
             //{path: 'insertar', component: ProductoInsertarComponent }, //productos/insertar
         ]
     },
+	//Rutas para componentes de Rol
     {
-        path: 'rutarole',
-        component:AplicacionComponent,
+        path: 'rutaRoles',
+        component:RoleComponent,
         children:[
-        { 
-            path:'conexionRole',
-            component:InsertareditarComponent
-        }
-    ]
+			{ 
+				path:'insertarRole',
+				component:InsertareditarRoleComponent
+			},
+			{ 
+				path:'editarRole/:id',
+				component:InsertareditarRoleComponent
+			}
+    	]
     },
+	//Rutas para componentes de Categoria
     {   
-        path:'rutacategorias',
+        path:'rutaCategorias',
         component:CategoriaComponent,
         children: [
             {
@@ -54,21 +63,24 @@ export const routes: Routes = [
         ],
         
     },
+	//Rutas para componentes de Diseno
 	  {
-        path: 'rutadisenos',
+        path: 'rutaDisenos',
         component: DisenoComponent,
         children:[
             { 
-                path: 'listarDiseno',
-                component: ListardisenoComponent
-            },{ 
-                path: 'crearDiseno',
+                path: 'insertarDiseno',
                 component: CreardisenoComponent
+            },
+            {
+                path: 'edicionDiseno/:id',
+                component: CreardisenoComponent,
             }
         ]
     },
+	//Rutas para componentes de Galeria
     {
-        path:'rutaGaleria',
+        path:'rutaGalerias',
         component:GaleriaComponent,
         children: [
             {
@@ -81,8 +93,9 @@ export const routes: Routes = [
             },
         ],
     },
+	//Rutas para componentes de Genero
     {
-    path:'rutagenero',component:GeneroComponent,
+    path:'rutaGeneros',component:GeneroComponent,
         children: [
             {
                 path: 'insertarGenero',
@@ -94,8 +107,9 @@ export const routes: Routes = [
             },
         ],
     },
+	//Rutas para componentes de Users
     {
-    path:'rutausers',component:UsersComponent,
+    path:'rutaUsers',component:UsersComponent,
         children: [
             {
                 path: 'insertarUsers',
@@ -107,8 +121,9 @@ export const routes: Routes = [
             },
         ],
     },
-
-
+	{
+    path:'rutaLanding',component:LandingComponent,
+    },
      // Ruta comodín (opcional)
-    { path: '**', redirectTo: 'productos' },
+    { path: '', redirectTo: 'rutaLanding', pathMatch: 'full' }, // Redirige a la ruta de inicio
 ];

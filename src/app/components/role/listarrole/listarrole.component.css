@@ -1,0 +1,21 @@
+::ng-deep table.mat-table {
+  border: 1px solid #f0f1f1;
+  border-collapse: collapse;
+}
+
+::ng-deep .mat-header-cell {
+  background-color: #f0f1f1;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #f0f1f1;
+}
+
+::ng-deep .mat-cell {
+  border: 1px solid #f0f1f1;
+  color: black;
+}
+
+::ng-deep .mat-header-row,
+::ng-deep .mat-row {
+  border: 1px solid #f0f1f1;
+}
