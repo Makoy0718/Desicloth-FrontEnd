@@ -21,6 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductoService } from '../../../services/producto.service';
 import { GeneroService } from '../../../services/genero.service';
 import { CategoriaService } from '../../../services/categoria.service';
+import { Router } from 'express';
+import { ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
@@ -37,11 +39,15 @@ export class CreardisenoComponent {
   	generos: Genero[] = [];
   	productos: Producto[] = [];
 
+	id: number = 0;
+  	edicion: boolean = false;
+
 	//Iniciamos el gemini para poder usarlo en el componente
 	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyB_r3HqUXYRNoApZB_X_FvUYqfQFaVj0l8" });
 	imagenBase64: string = '';
 	
-	constructor(private fb: FormBuilder, private disenoService: DisenoService, private categoriaService: CategoriaService, private generoService: GeneroService, private productoService: ProductoService) {
+	constructor(private fb: FormBuilder, private disenoService: DisenoService, private categoriaService: CategoriaService, 
+	private generoService: GeneroService, private productoService: ProductoService, private route: ActivatedRoute) {
 		this.form = this.fb.group({
 			imagenDiseno: [''],
 			precioDiseno: [0],
@@ -57,6 +63,7 @@ export class CreardisenoComponent {
 	}
 
 	ngOnInit() {
+
 		this.categoriaService.list().subscribe(data => this.categorias = data);
 		this.generoService.list().subscribe(data => this.generos = data);
 		this.productoService.list().subscribe(data => this.productos = data);
@@ -123,15 +130,44 @@ export class CreardisenoComponent {
 
 	aceptar() {
 		const diseno: Diseno = this.form.value;
-
 		diseno.tipoOrigenDiseno = this.form.get('tipoIA')?.value ? 'IA' : 'Manual';
-		diseno.fechaOrigenDiseno = new Date(); // fecha actual
+		diseno.fechaOrigenDiseno = new Date();
 
-		this.disenoService.insertDiseno(diseno).subscribe(() => {
+		if (this.edicion) {
+			diseno.idDiseno = this.id; // Asegúrate que tu modelo tenga este campo
+			this.disenoService.updateDiseno(diseno).subscribe(() => {
+			alert('Diseño actualizado correctamente');
+			});
+		} else {
+			this.disenoService.insertDiseno(diseno).subscribe(() => {
 			alert('Diseño registrado correctamente');
-			this.form.reset();
-			this.imagenBase64 = '';
-			this.imagenGenerada = '';
-		});
+			});
+		}
+
+		this.form.reset();
+		this.imagenBase64 = '';
+		this.imagenGenerada = '';
+	}
+
+	init() {
+		if (this.edicion) {
+			this.disenoService.listIdDiseno(this.id).subscribe((data) => {
+				this.form.patchValue({
+					imagenDiseno: data.imagenDiseno,
+					precioDiseno: data.precioDiseno,
+					fechaOrigenDiseno: new Date(data.fechaOrigenDiseno),
+					tipoIA: data.tipoOrigenDiseno === 'IA',
+					tipoOrigenDiseno: data.tipoOrigenDiseno,
+					promtDiseno: data.promtDiseno,
+					respuestaTextoDiseno: data.respuestaTextoDiseno,
+					categoria: data.categoria,
+					genero: data.genero,
+					producto: data.producto
+				});
+
+				this.imagenBase64 = data.imagenDiseno;
+				this.imagenGenerada = data.imagenDiseno;
+			});
+		}
 	}
 }

@@ -15,13 +15,14 @@ import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
     
     {
-        path: 'rutaProductos',
+        path: 'rutaproductos',
         component: ListarproductoComponent,
         children:[
             { 
@@ -36,7 +37,7 @@ export const routes: Routes = [
         component:AplicacionComponent,
         children:[
         { 
-            path:'conexionRole',
+            path:'insertarrole',
             component:InsertareditarComponent
         }
     ]
@@ -46,11 +47,11 @@ export const routes: Routes = [
         component:CategoriaComponent,
         children: [
             {
-                path: 'insertarCategoria',
+                path: 'insertarcategoria',
                 component: IsertareditarCategoriaComponent,
             },
             {
-                path: 'edicionesCategoria/:id',
+                path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
             },
         ],
@@ -61,24 +62,27 @@ export const routes: Routes = [
         component: DisenoComponent,
         children:[
             { 
-                path: 'listarDiseno',
+                path: 'listardiseno',
                 component: ListardisenoComponent
             },{ 
-                path: 'crearDiseno',
+                path: 'insertardiseno',
                 component: CreardisenoComponent
-            }
+            },{
+                path: 'edicionesdiseno/:id',
+                component: CreardisenoComponent,
+            },
         ]
     },
     {
-        path:'rutaGaleria',
+        path:'rutagaleria',
         component:GaleriaComponent,
         children: [
             {
-                path: 'insertarGaleria',
+                path: 'insertagaleria',
                 component: InsertareditarGaleriaComponent,
             },
             {
-                path: 'edicionesGaleria/:id',
+                path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
             },
         ],
@@ -87,11 +91,11 @@ export const routes: Routes = [
     path:'rutagenero',component:GeneroComponent,
         children: [
             {
-                path: 'insertarGenero',
+                path: 'insertargenero',
                 component: InsertareditargenComponent,
             },
             {
-                path: 'edicionesGenero/:id',
+                path: 'edicionesgenero/:id',
                 component: InsertareditargenComponent,
             },
         ],
@@ -100,11 +104,11 @@ export const routes: Routes = [
     path:'rutausers',component:UsersComponent,
         children: [
             {
-                path: 'insertarUsers',
+                path: 'insertarusers',
                 component: InsertareditarusersComponent,
             },
             {
-                path: 'edicionesUsers/:id',
+                path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
             },
         ],
@@ -113,17 +117,21 @@ export const routes: Routes = [
     path:'rutareclamo',component:ReclamoComponent,
         children: [
             {
-                path: 'insertarReclamo',
+                path: 'insertarreclamo',
                 component: InsertareditarrecComponent,
             },
             {
-                path: 'edicionesReclamo/:id',
+                path: 'edicionesreclamo/:id',
                 component: InsertareditarrecComponent,
             },
         ],
     },
+	{
+    path:'rutalanding',component:LandingComponent,
+    },
+
 
 
      // Ruta comodín (opcional)
-    { path: '**', redirectTo: 'productos' },
+    { path: '', redirectTo: 'rutalanding', pathMatch: 'full' },
 ];

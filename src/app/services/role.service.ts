@@ -19,8 +19,8 @@ export class RoleService {
   list(){
     return this.http.get<Role[]>(`${this.url}/lista`);
   }
-  insert(r:Role){
-    return this.http.post(`${this.url}/crearRol`,r)
+  insert(role : Role){
+    return this.http.post(`${this.url}/crearRol`,role)
   }
   setList(listaNueva:Role[]){
     this.listaCambio.next(listaNueva)
