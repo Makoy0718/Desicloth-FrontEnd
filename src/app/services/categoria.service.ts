@@ -10,14 +10,14 @@ const base_url = environment.base;
   providedIn: 'root'
 })
 export class CategoriaService {
-  private url = `${base_url}/categorias`;  
+  private url = `${base_url}/Categorias`;  
 
   private listaCambio = new Subject<Categoria[]>();
 
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Categoria[]>(`${this.url}/listaCategoria`);
+    return this.http.get<Categoria[]>(`${this.url}/listarCategoria`);
   }
 
   insert(c: Categoria) {
@@ -41,6 +41,6 @@ export class CategoriaService {
   }
 
   deleteA(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/eliminarCategoria/${id}`);
   }
 }

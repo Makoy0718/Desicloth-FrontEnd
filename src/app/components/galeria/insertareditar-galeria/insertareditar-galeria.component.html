@@ -38,7 +38,22 @@
         </mat-error>
       </mat-form-field>
 
+
+      <mat-form-field>
+        <mat-label>User</mat-label>
+        <mat-select formControlName="userS">
+          @for (food of listaUser; track food) {
+            <mat-option [value]="food.idUser">{{food.idUser}}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('user')?.hasError('required')">
+          El username es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
       <button matButton="outlined">Aceptar</button>
+      <button matButton (click)="cancelar()">Cancelar</button>
     </form>
   </div>
 </div>
