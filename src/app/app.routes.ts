@@ -36,11 +36,15 @@ export const routes: Routes = [
         path: 'rutarole',
         component:AplicacionComponent,
         children:[
-        { 
-            path:'insertarrole',
-            component:InsertareditarComponent
-        }
-    ]
+			{ 
+				path:'insertarrole',
+				component:InsertareditarComponent
+			},
+			{ 
+				path:'editarrole/:id',
+				component:InsertareditarComponent
+			}
+    	]
     },
     {   
         path:'rutacategorias',

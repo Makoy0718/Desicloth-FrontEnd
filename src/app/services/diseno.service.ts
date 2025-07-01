@@ -40,6 +40,6 @@ export class DisenoService {
   	}
 
 	deleteDiseno(id: number) {
-      return this.http.delete(`${this.url}/${id}`);
+      return this.http.delete(`${this.url}/eliminarDiseno/${id}`);
     }
 }
