@@ -1,0 +1,33 @@
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1D4ED8;
+  color: white;
+  padding: 0 20px;
+}
+
+.menu-group {
+  display: flex;
+  gap: 15px;
+}
+
+.menu-items button {
+  color: white;
+}
+
+.menu-group,
+.menu-items {
+  overflow: visible;
+  position: relative;
+}
+
+
+.nombre-app h3 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.cdk-overlay-container {
+  z-index: 1000;
+}

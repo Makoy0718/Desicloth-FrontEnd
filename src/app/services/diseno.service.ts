@@ -19,6 +19,10 @@ export class DisenoService {
 		return this.http.get<Diseno[]>(`${this.url}/listaDiseno`);
 	}
 
+	listIdDiseno(id: number) {
+		return this.http.get<Diseno>(`${this.url}/verDiseno/${id}`);
+	}
+
 	getListDiseno(): Observable<Diseno[]> {
 		return this.listaCambio.asObservable();
 	}
@@ -30,6 +34,10 @@ export class DisenoService {
 	insertDiseno(diseno: Diseno): Observable<any> {
 		return this.http.post(`${this.url}/insertarDiseno`, diseno);
 	}
+
+	updateDiseno(diseno: Diseno) {
+    	return this.http.put(`${this.url}/modificarDiseno`, diseno);
+  	}
 
 	deleteDiseno(id: number) {
       return this.http.delete(`${this.url}/${id}`);

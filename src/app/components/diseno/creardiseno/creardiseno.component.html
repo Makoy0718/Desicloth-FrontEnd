@@ -13,24 +13,35 @@
       		<p class="descripcion" *ngIf="form.get('tipoIA')?.value">Utiliza nuestra inteligencia artificial para diseñar prendas personalizadas al instante. Describe lo que deseas y la IA generará una visualización de tu prenda ideal.</p>
 			<br>
 			<br>
-			<!--
-				<mat-form-field class="full-width">
-					<mat-label>Imagen (URL)</mat-label>
-					<input matInput formControlName="imagenDiseno" />
-				</mat-form-field>
-			-->
+
+			<mat-form-field class="full-width" *ngIf="edicion">
+				<mat-label>Id</mat-label>
+				<input matInput formControlName="idDiseno" />
+			</mat-form-field>
+			<br *ngIf="edicion">
+			<br *ngIf="edicion">
+			
+			<mat-form-field class="full-width" *ngIf="edicion">
+				<mat-label>Imagen (URL)</mat-label>
+				<input matInput formControlName="imagenDiseno" />
+			</mat-form-field>
+			<br *ngIf="edicion">
+			<br *ngIf="edicion">
+
 			<mat-form-field class="full-width">
 				<mat-label>Asigna un precio al diseño</mat-label>
 				<input matInput type="number" formControlName="precioDiseno" />
 			</mat-form-field>
-			<!--
-			<mat-form-field class="full-width">
+			
+			<br *ngIf="edicion">
+			<br *ngIf="edicion">
+			<mat-form-field class="full-width" *ngIf="edicion">
 				<mat-label>Fecha de Origen</mat-label>
 				<input matInput [matDatepicker]="picker" formControlName="fechaOrigenDiseno" />
 				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 				<mat-datepicker #picker></mat-datepicker>
 			</mat-form-field>
-			-->
+			
 			<br>
 			<br>
 			<div *ngIf="!form.get('tipoIA')?.value">
@@ -52,6 +63,7 @@
 					<mat-icon>autorenew</mat-icon>
 				</button>
 			</div>
+			<br>
 			<br>
 			<!-- Selects para categoría, género y producto -->
 			<mat-form-field class="full-width">
@@ -83,8 +95,9 @@
 
 		<!-- Imagen generada a la derecha -->
 		<div class="imagen-preview" *ngIf="imagenGenerada">
-		<img [src]="imagenGenerada" alt="Diseño generado por IA" />
-		<div class="tips">
+			<img [src]="imagenGenerada" alt="Diseño generado por IA" />
+		</div>
+		<div class="tips" *ngIf="form.get('tipoIA')?.value">
 			<h3>Consejos para mejores resultados:</h3>
 			<ul>
 			<li>Sé específico sobre el tipo de prenda (camiseta, vestido, etc.)</li>
@@ -92,7 +105,6 @@
 			<li>Menciona el estilo que buscas (casual, formal, vintage)</li>
 			<li>Indica si deseas algún texto o logo específico</li>
 			</ul>
-		</div>
 		</div>
 	</div>
 </div>
