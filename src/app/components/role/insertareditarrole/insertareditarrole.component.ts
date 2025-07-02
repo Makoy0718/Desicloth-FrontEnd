@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,7 @@ import { MenuComponent } from '../../menu/menu.component';
 	ReactiveFormsModule, CommonModule,
     MatRadioModule, MatDatepickerModule,
     MatSelectModule, MatButtonModule,
-	MenuComponent
+	MenuComponent, RouterLink
   ],
   templateUrl: './insertareditarrole.component.html',
   styleUrl: './insertareditarrole.component.css'
@@ -90,7 +90,7 @@ export class InsertareditarroleComponent implements OnInit {
 				this.form = new FormGroup({
 					codigo: new FormControl(data.idRole),
 					nombre: new FormControl(data.nombreRole),
-					correo: new FormControl(data.descripcionRole),
+					descripcion: new FormControl(data.descripcionRole),
 				});
 			});
 		}

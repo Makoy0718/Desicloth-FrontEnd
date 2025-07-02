@@ -38,15 +38,11 @@ export class ListardisenoComponent {
 	constructor(private disenoService: DisenoService) {}
 
 	ngOnInit(): void {
-    	this.disenoService.listDiseno().subscribe(data=>{
-      		this.disenos = data;
-      		//this.dataSource=new MatTableDataSource(data)
-    	})
-
-		this.disenoService.getListDiseno().subscribe((data) => {
+    	this.disenoService.listDiseno().subscribe(data => {
 			this.disenos = data;
-      		//this.dataSource = new MatTableDataSource(data);
-    	});
+			this.disenosFiltrados = data; // Inicializa las tarjetas con todos los diseños
+			this.extraerCategoriasYGeneros(); // Extrae las categorías y géneros para los filtros
+		  });
   	}
 
 	extraerCategoriasYGeneros() {
@@ -63,9 +59,12 @@ export class ListardisenoComponent {
 	}
 
 	eliminarDiseno(id: number) {
+		console.log('Intentando eliminar diseño con ID:', id);
     	this.disenoService.deleteDiseno(id).subscribe((data) => {
       		this.disenoService.listDiseno().subscribe((data) => {
-        		this.disenoService.setListDiseno(data);
+        		this.disenos = data;
+  				this.filtrarDisenos(); // Aplica los filtros actuales a los nuevos datos
+  				this.extraerCategoriasYGeneros(); // Si quieres actualizar las opciones del filtro también
       		});
     	});
   	}

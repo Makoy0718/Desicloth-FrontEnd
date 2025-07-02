@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DisenoService } from '../../../services/diseno.service';
 import { Diseno } from '../../../models/diseno';
 import { Categoria } from '../../../models/categoria';
@@ -22,6 +22,10 @@ import { GeneroService } from '../../../services/genero.service';
 import { CategoriaService } from '../../../services/categoria.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MenuComponent } from '../../menu/menu.component';
+import { Galeria } from '../../../models/galeria';
+import { GaleriaService } from '../../../services/galeria.service';
+import { Users } from '../../../models/users';
+import { UsersService } from '../../../services/users.service';
 
 
 @Component({
@@ -38,40 +42,66 @@ import { MenuComponent } from '../../menu/menu.component';
   styleUrl: './creardiseno.component.css'
 })
 export class CreardisenoComponent {
-	form: FormGroup;
+	form: FormGroup = new FormGroup({});
+	diseno: Diseno = new Diseno();
+
   	imagenGenerada: string = "";
   	categorias: Categoria[] = [];
   	generos: Genero[] = [];
   	productos: Producto[] = [];
+	galerias: Galeria[] = [];
+	users: Users[] = [];
 
 	id: number = 0;
   	edicion: boolean = false;
 
 	//Iniciamos el gemini para poder usarlo en el componente
-	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyB_r3HqUXYRNoApZB_X_FvUYqfQFaVj0l8" });
+	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyDUbwHdIZQE7lsbh6ffwZD7Ozj739-hdXI" });
 	imagenBase64: string = '';
 	
-	constructor(private fb: FormBuilder, private disenoService: DisenoService, private categoriaService: CategoriaService, 
-	private generoService: GeneroService, private productoService: ProductoService, private route: ActivatedRoute) {
-		this.form = this.fb.group({
-			imagenDiseno: [''],
-			precioDiseno: [0],
-			fechaOrigenDiseno: [new Date()],
-			tipoIA: [false],
-			tipoOrigenDiseno: [''],
-			promtDiseno: [''],
-			respuestaTextoDiseno: [''],
-			categoria: [null],
-			genero: [null],
-			producto: [null]
-		});
-	}
+	constructor(
+		private fb: FormBuilder, private disenoService: DisenoService, 
+		private categoriaService: CategoriaService, private generoService: GeneroService, 
+		private productoService: ProductoService, private galeriaService: GaleriaService,
+		private usersService: UsersService, private route: ActivatedRoute) {
+}
 
 	ngOnInit() {
+		this.route.params.subscribe((data: Params) => {
+			this.id = data['id'];
+			this.edicion = data['id'] != null;
+			//actualizar trae data
+			this.init();
+			console.log('Valor de id desde ruta:', this.id);
+		});
+
+		this.form = this.fb.group({
+			idDiseno: [''],
+			imagenDiseno: ['', Validators.required],
+			precioDiseno: [0, Validators.required],
+			fechaOrigenDiseno: [new Date(), Validators.required],
+			tipoIA: [false, Validators.required],
+			promtDiseno: [''],
+			respuestaTextoDiseno: [''],
+			categoria: [null, Validators.required],
+			genero: [null, Validators.required],
+			producto: [null, Validators.required],
+			galeria: [null, Validators.required],
+			user: [null, Validators.required]
+		});
+
+		this.form.get('tipoIA')?.valueChanges.subscribe((valor) => {
+			this.form.patchValue({
+			  tipoOrigenDiseno: valor ? 'IA' : 'Manual'
+			});
+		});
 
 		this.categoriaService.list().subscribe(data => this.categorias = data);
 		this.generoService.list().subscribe(data => this.generos = data);
 		this.productoService.list().subscribe(data => this.productos = data);
+		this.galeriaService.list().subscribe(data => this.galerias = data);	
+		this.usersService.list().subscribe(data => this.users = data);
+
 	}
 
 	async generarImagen() {
@@ -134,30 +164,50 @@ export class CreardisenoComponent {
 
 
 	aceptar() {
-		const diseno: Diseno = this.form.value;
-		diseno.tipoOrigenDiseno = this.form.get('tipoIA')?.value ? 'IA' : 'Manual';
-		diseno.fechaOrigenDiseno = new Date();
-
-		if (this.edicion) {
-			diseno.idDiseno = this.id; // Asegúrate que tu modelo tenga este campo
-			this.disenoService.updateDiseno(diseno).subscribe(() => {
-			alert('Diseño actualizado correctamente');
-			});
-		} else {
-			this.disenoService.insertDiseno(diseno).subscribe(() => {
-			alert('Diseño registrado correctamente');
-			});
+		if (!this.form.valid) {
+			console.warn("Formulario inválido:", this.form.value);
+			return;
 		}
+		if (this.form.valid) {
+			this.diseno.idDiseno = this.form.value.idDiseno;
+			this.diseno.fechaOrigenDiseno = this.form.value.fechaOrigenDiseno;
+			this.diseno.imagenDiseno = this.form.value.imagenDiseno;
+			this.diseno.precioDiseno = this.form.value.precioDiseno;
+			this.diseno.promtDiseno = this.form.value.promtDiseno;
+			this.diseno.respuestaTextoDiseno = this.form.value.respuestaTextoDiseno;
+			this.diseno.tipoOrigenDiseno = this.form.get('tipoIA')?.value ? 'IA' : 'Manual';
+			this.diseno.categoria = this.form.value.categoria
+			this.diseno.genero =this.form.value.genero;
+			this.diseno.producto =this.form.value.producto;
+			this.diseno.users = this.form.value.user;
+			
 
-		this.form.reset();
-		this.imagenBase64 = '';
-		this.imagenGenerada = '';
+			if (this.edicion) {
+				this.diseno.idDiseno = this.id; // Asegúrate que tu modelo tenga este campo
+				this.disenoService.updateDiseno(this.diseno).subscribe(() => {
+					this.disenoService.listDiseno().subscribe((data) => {
+						this.disenoService.setListDiseno(data);
+					});
+				});
+			} else {
+				this.disenoService.insertDiseno(this.diseno).subscribe(() => {
+					this.disenoService.listDiseno().subscribe((data) => {
+						this.disenoService.setListDiseno(data);
+					});
+				});
+			}
+
+			this.form.reset();
+			this.imagenBase64 = '';
+			this.imagenGenerada = '';
+		}
 	}
 
 	init() {
 		if (this.edicion) {
 			this.disenoService.listIdDiseno(this.id).subscribe((data) => {
 				this.form.patchValue({
+					idDiseno: data.idDiseno,
 					imagenDiseno: data.imagenDiseno,
 					precioDiseno: data.precioDiseno,
 					fechaOrigenDiseno: new Date(data.fechaOrigenDiseno),

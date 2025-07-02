@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 <div class="container">
-  <div style="text-align: center;margin: 5%;"><h1>Registro de Usuarios</h1></div>
+  <div style="text-align: center;margin: 5%;"><h1>Registro de Rol</h1></div>
   <div style="text-align: center;margin: 5%;">
     <form [formGroup]="form" (submit)="aceptar()">
 
@@ -32,7 +32,8 @@
       <br />
 
 
-      <button matButton="outlined">Aceptar</button>
+      <button mat-button="outlined">Aceptar</button>
+      <button matButton type="button"  routerLink="/rutarole">Cancelar</button>
     </form>
   </div>
 </div>
