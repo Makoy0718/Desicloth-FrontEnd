@@ -105,6 +105,6 @@ export class InsertareditarGaleriaComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['rutaGaleria']);  
+    this.router.navigate(['rutagaleria']);  
   }
 }
