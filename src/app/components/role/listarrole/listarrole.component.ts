@@ -6,15 +6,14 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Role } from '../../../models/role';
 import { RoleService } from '../../../services/role.service';
+import { MenuComponent } from '../../menu/menu.component';
 
 @Component({
   selector: 'app-listarrole',
   imports: [
-    MatTableModule,
-    CommonModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
+    MatTableModule, CommonModule,
+    MatButtonModule, RouterLink,
+    MatIconModule, MenuComponent
   ],
   templateUrl: './listarrole.component.html',
   styleUrl: './listarrole.component.css'

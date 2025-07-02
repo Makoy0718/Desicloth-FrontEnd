@@ -5,7 +5,6 @@ import { Diseno } from '../../../models/diseno';
 import { Categoria } from '../../../models/categoria';
 import { Genero } from '../../../models/genero';
 import { Producto } from '../../../models/producto';
-
 import { GoogleGenAI, Modality } from "@google/genai";
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,13 +20,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductoService } from '../../../services/producto.service';
 import { GeneroService } from '../../../services/genero.service';
 import { CategoriaService } from '../../../services/categoria.service';
-import { Router } from 'express';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MenuComponent } from '../../menu/menu.component';
 
 
 @Component({
   selector: 'app-creardiseno',
-  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule, CommonModule, MatRadioModule, MatSelectModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSlideToggleModule, MatIconModule],
+  imports: [
+	MatInputModule, MatFormFieldModule, 
+	ReactiveFormsModule, CommonModule, 
+	MatRadioModule, MatSelectModule, 
+	MatButtonModule, MatDatepickerModule, 
+	MatNativeDateModule, MatSlideToggleModule, 
+	MatIconModule, MenuComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './creardiseno.component.html',
   styleUrl: './creardiseno.component.css'

@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Diseno } from '../models/diseno';
+import { ComparacionPreciosDisenoDTO } from '../models/ComparacionPreciosDisenoDTO';
 
 const base_url = environment.base;
 
@@ -42,4 +43,8 @@ export class DisenoService {
 	deleteDiseno(id: number) {
       return this.http.delete(`${this.url}/eliminarDiseno/${id}`);
     }
+
+	getAvrgPreciosDiseno(): Observable<ComparacionPreciosDisenoDTO[]> {
+    	return this.http.get<ComparacionPreciosDisenoDTO[]>(`${this.url}/compararPreciosOrigenDiseno`)
+  	}
 }
