@@ -10,10 +10,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MenuComponent } from '../../menu/menu.component';
 
 @Component({
   selector: 'app-listardiseno',
-  imports: [MatTableModule, CommonModule, MatCardModule, MatButtonModule, RouterLink, MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule],
+  imports: [
+	MatTableModule, CommonModule, 
+	MatCardModule, MatButtonModule, 
+	RouterLink, MatIconModule, 
+	MatFormFieldModule, MatSelectModule, 
+	MatOptionModule, MenuComponent],
   templateUrl: './listardiseno.component.html',
   styleUrl: './listardiseno.component.css'
 })

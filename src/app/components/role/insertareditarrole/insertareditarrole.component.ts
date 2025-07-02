@@ -16,18 +16,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Role } from '../../../models/role';
 import { RoleService } from '../../../services/role.service';
+import { MenuComponent } from '../../menu/menu.component';
 
 @Component({
   selector: 'app-insertareditarrole',
   imports: [
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    CommonModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatButtonModule,
+    MatInputModule, MatFormFieldModule,
+	ReactiveFormsModule, CommonModule,
+    MatRadioModule, MatDatepickerModule,
+    MatSelectModule, MatButtonModule,
+	MenuComponent
   ],
   templateUrl: './insertareditarrole.component.html',
   styleUrl: './insertareditarrole.component.css'
