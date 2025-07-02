@@ -16,6 +16,9 @@ import { InsertareditarusersComponent } from './components/users/insertareditaru
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { RoleComponent } from './components/role/role.component';
+import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
+import { InsertareditarroleComponent } from './components/role/insertareditarrole/insertareditarrole.component';
 
 
 //RUTAS DEL FRONTEND
@@ -34,15 +37,15 @@ export const routes: Routes = [
     },
     {
         path: 'rutarole',
-        component:AplicacionComponent,
+        component:RoleComponent,
         children:[
 			{ 
 				path:'insertarrole',
-				component:InsertareditarComponent
+				component:InsertareditarroleComponent
 			},
 			{ 
 				path:'editarrole/:id',
-				component:InsertareditarComponent
+				component:InsertareditarroleComponent
 			}
     	]
     },

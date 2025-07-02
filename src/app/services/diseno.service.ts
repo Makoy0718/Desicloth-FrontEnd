@@ -17,11 +17,11 @@ export class DisenoService {
 	constructor(private http: HttpClient) { }
 
 	listDiseno() {
-		return this.http.get<Diseno[]>(`${this.url}/listaDiseno`);
+		return this.http.get<Diseno[]>(`${this.url}/listarDiseno`);
 	}
 
 	listIdDiseno(id: number) {
-		return this.http.get<Diseno>(`${this.url}/verDiseno/${id}`);
+		return this.http.get<Diseno>(`${this.url}/detallarDiseno/${id}`);
 	}
 
 	getListDiseno(): Observable<Diseno[]> {
