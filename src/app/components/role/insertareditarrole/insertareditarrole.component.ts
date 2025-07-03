@@ -25,7 +25,7 @@ import { MenuComponent } from '../../menu/menu.component';
 	ReactiveFormsModule, CommonModule,
     MatRadioModule, MatDatepickerModule,
     MatSelectModule, MatButtonModule,
-	MenuComponent, RouterLink
+	RouterLink
   ],
   templateUrl: './insertareditarrole.component.html',
   styleUrl: './insertareditarrole.component.css'

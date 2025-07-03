@@ -19,7 +19,7 @@ import { MenuComponent } from '../../menu/menu.component';
 	MatCardModule, MatButtonModule, 
 	RouterLink, MatIconModule, 
 	MatFormFieldModule, MatSelectModule, 
-	MatOptionModule, MenuComponent],
+	MatOptionModule,],
   templateUrl: './listardiseno.component.html',
   styleUrl: './listardiseno.component.css'
 })

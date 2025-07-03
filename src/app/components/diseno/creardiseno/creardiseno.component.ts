@@ -36,7 +36,7 @@ import { UsersService } from '../../../services/users.service';
 	MatRadioModule, MatSelectModule, 
 	MatButtonModule, MatDatepickerModule, 
 	MatNativeDateModule, MatSlideToggleModule, 
-	MatIconModule, MenuComponent],
+	MatIconModule,],
   providers: [provideNativeDateAdapter()],
   templateUrl: './creardiseno.component.html',
   styleUrl: './creardiseno.component.css'

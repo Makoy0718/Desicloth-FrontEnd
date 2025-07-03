@@ -24,6 +24,10 @@ export class DisenoService {
 		return this.http.get<Diseno>(`${this.url}/detallarDiseno/${id}`);
 	}
 
+	listByUserIdDiseno(id: number): Observable<Diseno[]> {
+  		return this.http.get<Diseno[]>(`${this.url}/buscarPorIDUserDiseno?idUser=${id}`);
+	}
+
 	getListDiseno(): Observable<Diseno[]> {
 		return this.listaCambio.asObservable();
 	}

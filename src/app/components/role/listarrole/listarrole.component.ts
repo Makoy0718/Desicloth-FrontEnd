@@ -13,7 +13,7 @@ import { MenuComponent } from '../../menu/menu.component';
   imports: [
     MatTableModule, CommonModule,
     MatButtonModule, RouterLink,
-    MatIconModule, MenuComponent
+    MatIconModule,
   ],
   templateUrl: './listarrole.component.html',
   styleUrl: './listarrole.component.css'
