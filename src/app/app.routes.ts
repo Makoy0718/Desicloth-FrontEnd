@@ -19,11 +19,14 @@ import { LandingComponent } from './components/landing/landing.component';
 import { RoleComponent } from './components/role/role.component';
 import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
 import { InsertareditarroleComponent } from './components/role/insertareditarrole/insertareditarrole.component';
+import { LoginComponent } from './components/login/login.component';
+import { seguridadGuard } from './guard/seguridad.guard';
+import { HomeComponent } from './components/home/home.component';
 
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
-    
+    //Rutas y subrutas de productos
     {
         path: 'rutaproductos',
         component: ListarproductoComponent,
@@ -33,8 +36,10 @@ export const routes: Routes = [
                 component: ListarproductoComponent
             }
             //{path: 'insertar', component: ProductoInsertarComponent }, //productos/insertar
-        ]
+        ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de role
     {
         path: 'rutarole',
         component:RoleComponent,
@@ -47,8 +52,11 @@ export const routes: Routes = [
 				path:'editarrole/:id',
 				component:InsertareditarroleComponent
 			}
-    	]
+    	],
+        data: { roles: ['ADMIN'] },
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de categoria
     {   
         path:'rutacategorias',
         component:CategoriaComponent,
@@ -56,30 +64,34 @@ export const routes: Routes = [
             {
                 path: 'insertarcategoria',
                 component: IsertareditarCategoriaComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
+                data: { roles: ['ADMIN'] }
             },
         ],
-        
+        canActivate: [seguridadGuard],
     },
-	  {
+    //Rutas y subrutas disenos
+	{
         path: 'rutadisenos',
         component: DisenoComponent,
         children:[
             { 
-                path: 'listardiseno',
-                component: ListardisenoComponent
-            },{ 
                 path: 'insertardiseno',
                 component: CreardisenoComponent
-            },{
+            },
+            {
                 path: 'edicionesdiseno/:id',
                 component: CreardisenoComponent,
+                data: { roles: ['ADMIN'] }
             },
-        ]
+        ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de galeria
     {
         path:'rutagaleria',
         component:GaleriaComponent,
@@ -93,22 +105,28 @@ export const routes: Routes = [
                 component: InsertareditarGaleriaComponent,
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de genero
     {
-    path:'rutagenero',component:GeneroComponent,
+        path:'rutagenero',component:GeneroComponent,
         children: [
             {
                 path: 'insertargenero',
                 component: InsertareditargenComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'edicionesgenero/:id',
                 component: InsertareditargenComponent,
+                data: { roles: ['ADMIN'] }
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de users
     {
-    path:'rutausers',component:UsersComponent,
+        path:'rutausers',component:UsersComponent,
         children: [
             {
                 path: 'insertarusers',
@@ -119,9 +137,11 @@ export const routes: Routes = [
                 component: InsertareditarusersComponent,
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de reclamo
     {
-    path:'rutareclamo',component:ReclamoComponent,
+        path:'rutareclamo',component:ReclamoComponent,
         children: [
             {
                 path: 'insertarreclamo',
@@ -132,13 +152,27 @@ export const routes: Routes = [
                 component: InsertareditarrecComponent,
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Ruta de la landing page
 	{
-    path:'rutalanding',component:LandingComponent,
+        path:'rutalanding',
+        component: LandingComponent,
     },
-
-
-
-     // Ruta comodín (opcional)
-    { path: '', redirectTo: 'rutalanding', pathMatch: 'full' },
+    //Ruta de login
+    {
+        path:'login',
+        component: LoginComponent,
+    },
+    //Ruta de home
+    {
+        path:'home',
+        component: HomeComponent,
+    },
+    // Ruta comodín (opcional)
+    { 
+        path: '', 
+        redirectTo: 'rutalanding', 
+        pathMatch: 'full' 
+    },
 ];
