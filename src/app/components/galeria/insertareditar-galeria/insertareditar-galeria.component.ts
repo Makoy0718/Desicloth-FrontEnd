@@ -54,7 +54,7 @@ export class InsertareditarGaleriaComponent implements OnInit {
       codigo: [''],
       nombre: ['', Validators.required],
       visibilidad: ['', Validators.required],
-      rating: ['', Validators.required],
+      rating: ['', [Validators.required,Validators.min(1), Validators.max(5)]],
       userS:['',Validators.required]
     });
     this.uS.list().subscribe(data=>{
@@ -86,7 +86,7 @@ export class InsertareditarGaleriaComponent implements OnInit {
             });
           });
       }
-      this.router.navigate(['rutaGaleria']);
+      this.router.navigate(['rutagaleria']);
     }
   }
 

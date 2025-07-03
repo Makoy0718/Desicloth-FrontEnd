@@ -22,6 +22,7 @@ import { InsertareditarroleComponent } from './components/role/insertareditarrol
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
+import { BuscargaleriaComponent } from './components/galeria/buscargaleria/buscargaleria.component';
 
 
 //RUTAS DEL FRONTEND
@@ -103,6 +104,12 @@ export const routes: Routes = [
             {
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
+            },
+            {
+                path:'busquedagaleria',
+                component:BuscargaleriaComponent,
+                data: { roles: ['ADMIN'] }
+
             },
         ],
         canActivate: [seguridadGuard],
