@@ -27,7 +27,12 @@
       <mat-radio-group formControlName="visibilidad">
         <mat-radio-button [value]="true">Publica</mat-radio-button>
         <mat-radio-button [value]="false">Privada</mat-radio-button>
+        <br />
+        
       </mat-radio-group>
+      <mat-error *ngIf="form.get('visibilidad')?.hasError('required')">
+          La visibilidad es obligatorio!!
+        </mat-error>
       <br />
 
       <mat-form-field class="example-full-width">
@@ -35,6 +40,12 @@
         <input matInput placeholder="Colocar rating" formControlName="rating" />
         <mat-error *ngIf="form.get('rating')?.hasError('required')">
           El rating es obligatorio!!
+        </mat-error>
+        <mat-error *ngIf="form.get('rating')?.hasError('max')">
+          El rating no puede ser mayor a 5!!
+        </mat-error>
+        <mat-error *ngIf="form.get('rating')?.hasError('min')">
+          El rating no puede ser menor a 1!!
         </mat-error>
       </mat-form-field>
 
