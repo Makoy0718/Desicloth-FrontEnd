@@ -16,6 +16,19 @@ import { InsertareditarusersComponent } from './components/users/insertareditaru
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
 
+import { LandingComponent } from './components/landing/landing.component';
+import { RoleComponent } from './components/role/role.component';
+import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
+import { InsertareditarroleComponent } from './components/role/insertareditarrole/insertareditarrole.component';
+import { LoginComponent } from './components/login/login.component';
+import { seguridadGuard } from './guard/seguridad.guard';
+import { HomeComponent } from './components/home/home.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
+import { InsertareditarpedidoComponent } from './components/pedido/insertareditarpedido/insertareditarpedido.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { InsertareditarpagoComponent } from './components/pago/insertareditarpago/insertareditarpago.component';
+
+
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
@@ -171,6 +184,36 @@ export const routes: Routes = [
         canActivate: [seguridadGuard],
     },
 
+    //Ruta y subrutas de pedido
+    {
+        path:'rutapedidos',component:PedidoComponent,
+        children:[
+            {
+                path:'insertarpedido',
+                component: InsertareditarpedidoComponent,
+            },
+            {
+                path:'edicionespedido/:id',
+                component:InsertareditarpedidoComponent,
+            },
+        ],
+    },
+    //Ruta y subrutas de pago
+    {
+        path:'rutapagos',component:PagoComponent,
+        children:[
+            {
+                path:'insertarpago',
+                component: InsertareditarpagoComponent,
+            },
+            {
+                path:'edicionespago/:id',
+                component:InsertareditarpagoComponent,
+            },
+        ],
+    },
+
+
     {
         path:'rutadashboard',component:DashboardComponent,
         children: [
@@ -189,6 +232,7 @@ export const routes: Routes = [
         ],
         canActivate: [seguridadGuard],
     },
+
 
     //Ruta de la landing page
 	{
