@@ -2,13 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtRequest } from '../models/jwtRequest';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UsersService } from './users.service';
+import { catchError, Observable, of, switchMap } from 'rxjs';
+import { Users } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UsersService) {}
 
   //Encargado de entrar al backend al controlador de login de seguridad
   login(request: JwtRequest) {
@@ -34,7 +37,7 @@ export class LoginService {
   }
 
   //Muestra el id que contiene el token
-  showUserId() {
+  showUsername() {
     let token = sessionStorage.getItem('token');
     if (!token) {
       return null;

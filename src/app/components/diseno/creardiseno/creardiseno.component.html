@@ -25,46 +25,49 @@
 			</mat-form-field>
 			<br><br>
 
+			<!-- Input de Id de diseno, solo visible si es edicion -->
 			<mat-form-field class="full-width" *ngIf="edicion">
 				<mat-label>Id</mat-label>
 				<input matInput formControlName="idDiseno" />
 			</mat-form-field>
-			<br *ngIf="edicion">
-			<br *ngIf="edicion">
+			<br *ngIf="edicion"><br *ngIf="edicion">
 			
+			<!-- Input de la base64 de la imagen cargada, solo visible si es edicion -->
 			<mat-form-field class="full-width" *ngIf="edicion">
 				<mat-label>Imagen (URL)</mat-label>
 				<input matInput formControlName="imagenDiseno" />
 			</mat-form-field>
-			<br *ngIf="edicion">
-			<br *ngIf="edicion">
+			<br *ngIf="edicion"><br *ngIf="edicion">
 
+			<!-- Input visible de precio de diseno -->
 			<mat-form-field class="full-width">
 				<mat-label>Asigna un precio al diseño</mat-label>
 				<input matInput type="number" formControlName="precioDiseno" />
 			</mat-form-field>
-			
-			<br *ngIf="edicion">
-			<br *ngIf="edicion">
+			<br><br>
+
+			<!-- Input del comentario del diseno en la galeria almacenada, solo visible si NO es edicion -->
+			<mat-form-field class="full-width" *ngIf="!edicion">
+				<mat-label>Deja un comentario en tu diseno</mat-label>
+				<input matInput formControlName="comentarioDiseno" />
+			</mat-form-field>
+			<br><br>
+
+			<!-- Modificador de fecha que solo aparece si es edicion -->
 			<mat-form-field class="full-width" *ngIf="edicion">
 				<mat-label>Fecha de Origen</mat-label>
 				<input matInput [matDatepicker]="picker" formControlName="fechaOrigenDiseno" />
 				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 				<mat-datepicker #picker></mat-datepicker>
 			</mat-form-field>
-			
-			<br>
-			<br>
+			<br *ngIf="edicion"><br *ngIf="edicion">
+
+			<!-- Selector de archivo, si es manual la carga -->
 			<div>
-  				<mat-form-field class="full-width">
-    				<mat-label>Imagen (URL o subida)</mat-label>
-    				<input matInput formControlName="imagenDiseno" />
-  				</mat-form-field>
-			</div>
-			<div><!-- Selector de archivo -->
 				<input type="file" accept="image/*" (change)="onFileSelected($event)" *ngIf="!form.get('tipoIA')?.value"/>
 			</div>
-			<!-- Solo aparece si usa IA -->
+
+			<!-- Generador de imagen por IA, si es por IA la carga -->
 			<div *ngIf="form.get('tipoIA')?.value" class="prompt-section">
 				<mat-form-field class="full-width">
 					<mat-label>Describe tu diseño ideal</mat-label>
@@ -74,26 +77,27 @@
 					<mat-icon>autorenew</mat-icon>
 				</button>
 			</div>
-			<br>
-			<br>
-			<!-- Selects para categoría, género y producto -->
+			<br><br>
+
+			<!-- Selector de categoría -->
 			<mat-form-field class="full-width">
 				<mat-label>Categoría</mat-label>
 				<mat-select formControlName="categoria">
 					<mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria.nombreCategoria }}</mat-option>
 				</mat-select>
 			</mat-form-field>
-			<br>
-			<br>
+			<br><br>
+
+			<!-- Selector de genero -->
 			<mat-form-field class="full-width">
 				<mat-label>Género</mat-label>
 				<mat-select formControlName="genero">
 					<mat-option *ngFor="let genero of generos" [value]="genero">{{ genero.nombreGenero }}</mat-option>
 				</mat-select>
 			</mat-form-field>
-			<br>
-			<br>
-			<!-- Selector de Galería (puedes cambiar 'galerias' por tu variable si ya la tienes) -->
+			<br><br>
+
+			<!-- Selector de Galería -->
 			<mat-form-field appearance="outline" class="full-width">
 				<mat-label>Selecciona una galería</mat-label>
 				<mat-select [(value)]="form.controls['galeria'].value" formControlName="galeria">
@@ -104,16 +108,6 @@
 			</mat-form-field>
 			<br><br>
 
-			<!-- Selector de Galería (puedes cambiar 'galerias' por tu variable si ya la tienes) -->
-			<mat-form-field appearance="outline" class="full-width">
-				<mat-label>Selecciona una galería</mat-label>
-				<mat-select [(value)]="form.controls['user'].value" formControlName="user">
-				<mat-option *ngFor="let user of users" [value]="user">
-					{{ user.username }}
-				</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br><br>
 			<button mat-raised-button color="primary" type="submit">Guardar Diseño</button>
 		</form>
 

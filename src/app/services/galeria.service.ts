@@ -43,7 +43,12 @@ export class GaleriaService {
       return this.http.delete(`${this.url}/${id}`);
     }
 
-    searchByName(name: string): Observable<Galeria[]> {
+  getGaleriaByUsername(username: string) {
+    const params = new HttpParams().set('nombre', username);
+    return this.http.get<Galeria[]>(`${this.url}/buscarPorNombreUsuario`, { params });
+  }
+
+  searchByName(name: string): Observable<Galeria[]> {
     const params = new HttpParams().set('nombre', name);
     return this.http.get<Galeria[]>(`${this.url}/buscarPorNombre`, { params });
   }
