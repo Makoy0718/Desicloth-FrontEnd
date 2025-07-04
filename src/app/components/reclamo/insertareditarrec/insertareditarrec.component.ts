@@ -37,7 +37,7 @@ import { UsersService } from '../../../services/users.service';
 export class InsertareditarrecComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   reclamo: Reclamo = new Reclamo();
-  usuarios: Users[] = [];
+  listaUsuarios: Users[] = [];
   status: boolean = false;
 
   id: number = 0;
@@ -63,10 +63,10 @@ export class InsertareditarrecComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       state: ['', Validators.required],
-      usuario: [null, Validators.required],
+      us: ['', Validators.required],
     });
-    this.uS.list().subscribe((usuarioss: Users[]) => {
-      this.usuarios = usuarioss;
+    this.uS.list().subscribe(data => {
+      this.listaUsuarios = data;
     });
   }
   aceptar() {
@@ -76,7 +76,7 @@ export class InsertareditarrecComponent implements OnInit {
       this.reclamo.titulo = this.form.value.title;
       this.reclamo.descripcion = this.form.value.description;
       this.reclamo.estado = this.form.value.state;
-      this.reclamo.users = this.form.value.usuario;
+      this.reclamo.user = this.form.value.us;
       if (this.edicion) {
         //actualizar
         this.rS.update(this.reclamo).subscribe(() => {
@@ -92,7 +92,8 @@ export class InsertareditarrecComponent implements OnInit {
           });
         });
       }
-      this.router.navigate(['rutareclamo']);
+      console.log(this.reclamo);
+      //this.router.navigate(['rutareclamo']);
     }
   }
 
@@ -104,7 +105,7 @@ export class InsertareditarrecComponent implements OnInit {
           nombre: new FormControl(data.titulo),
           correo: new FormControl(data.descripcion),
           contrasena: new FormControl(data.estado),
-          usuario: new FormControl(data.users.idUser),
+          us: new FormControl(data.user.idUser),
         });
       });
     }

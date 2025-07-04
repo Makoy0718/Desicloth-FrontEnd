@@ -1,0 +1,173 @@
+<mat-toolbar class="custom-toolbar" *ngIf="verificar()">
+	<div class="nombre-app">
+		<h3>Desicloth</h3>
+	</div>
+	
+	<!-- Boton de menu de users -->
+	<div class="menu-items" *ngIf="isAdmin()">
+		<button mat-button [matMenuTriggerFor]="menuUsers" class="btn-rojo" >
+			<!-- <mat-icon>person</mat-icon> -->
+			Usuarios
+		</button>
+	</div>
+
+	<!-- Boton de menu de roles -->
+	<div class="menu-items" *ngIf="isAdmin()">
+		<button mat-button [matMenuTriggerFor]="menuRoles" class="btn-rojo">
+			<!--<mat-icon>group</mat-icon>-->
+			Roles
+		</button>
+	</div>
+
+	<!-- Boton de menu de galerias -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuGalerias" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Galerias
+		</button>
+	</div>
+
+	<!-- Boton de menu de disenos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuDisenos" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Diseños
+		</button>
+	</div>
+
+	<!-- Boton de menu de categorias -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuCategorias" class="btn-rojo">
+			<!--<mat-icon>apps</mat-icon>-->
+			Categorias
+		</button>
+	</div>
+
+	<!-- Boton de menu de generos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuGeneros" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Generos
+		</button>
+	</div>
+
+	<!-- Boton de menu de productos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuProductos" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Productos
+		</button>
+	</div>
+
+	<!-- Boton de menu de pedidos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuPedidos" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Pedidos
+		</button>
+	</div>
+
+	<!-- Boton de menu de pagos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuPagos" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Pagos
+		</button>
+	</div>
+
+	<!-- Boton de menu de reclamos -->
+	<div class="menu-items">
+		<button mat-button [matMenuTriggerFor]="menuReclamos" class="btn-rojo">
+			<!--<mat-icon>add_photo_alternate</mat-icon>-->
+			Reclamos
+		</button>
+	</div>
+
+	<!-- Boton de menu de usuario osea la persona que inicio sesion -->
+	<div class="right-menu">
+		<button mat-button [matMenuTriggerFor]="menuSalir" class="btn-rojo" >
+			<mat-icon>person</mat-icon>Usuario
+		</button>
+ 	</div>
+	
+</mat-toolbar>
+
+
+<!-- Opciones para el menu de users -->
+<mat-menu #menuUsers="matMenu">
+	<button mat-menu-item routerLink="/rutausers">Listar</button>
+	<button mat-menu-item routerLink="/rutausers/insertarusers">Registrar</button>
+	<button mat-menu-item routerLink="/rutausers/busquedausers">Buscar Usuario </button>
+</mat-menu>
+
+<!-- Opciones para el menu de roles -->
+<mat-menu #menuRoles="matMenu">
+	<button mat-menu-item routerLink="/rutarole">Listar</button>
+	<button mat-menu-item routerLink="/rutarole/insertarrole">Registrar</button>
+</mat-menu>
+
+<!-- Opciones para el menu de disenos -->
+<mat-menu #menuGalerias="matMenu">
+	<button mat-menu-item routerLink="/rutagaleria">Listar</button>
+	<button mat-menu-item routerLink="/rutagaleria/insertagaleria">Crear</button>
+	<button mat-menu-item routerLink="/rutagaleria/busquedagaleria">Buscar Galeria</button>
+</mat-menu>
+
+<!-- Opciones para el menu de disenos -->
+<mat-menu #menuDisenos="matMenu">
+	<button mat-menu-item routerLink="/rutadisenos">Listar</button>
+	<button mat-menu-item routerLink="/rutadisenos/insertardiseno">Crear</button>
+</mat-menu>
+
+<!-- Opciones para el menu de categorias -->
+<mat-menu #menuCategorias="matMenu">
+	<button mat-menu-item routerLink="/rutacategorias">Listar</button>
+	<button mat-menu-item routerLink="/rutacategorias/insertarcategoria">Registrar</button>
+	<button mat-menu-item routerLink="/rutacategorias/busquedacategoria">Buscar Categoria </button>
+</mat-menu>
+
+<!-- Opciones para el menu de generos -->
+<mat-menu #menuGeneros="matMenu">
+	<button mat-menu-item routerLink="/rutagenero">Listar</button>
+	<button mat-menu-item routerLink="/rutagenero/insertargenero">Registrar</button>
+	<button mat-menu-item routerLink="/rutagenero/busquedagenero">Buscar Genero </button>
+</mat-menu>
+
+<!-- Opciones para el menu de prodctos -->
+<mat-menu #menuProductos="matMenu">
+	<button mat-menu-item routerLink="/rutaproductos">Listar</button>
+	<button mat-menu-item routerLink="/rutaproductos/insertarproducto">Registrar</button>
+</mat-menu>
+
+<!-- Opciones para el menu de pedidos -->
+<mat-menu #menuPedidos="matMenu">
+	<button mat-menu-item routerLink="/rutapedidos">Listar</button>
+	<button mat-menu-item routerLink="/rutapedidos/insertarpedido">Registrar</button>
+</mat-menu>
+
+<!-- Opciones para el menu de pagos -->
+<mat-menu #menuPagos="matMenu">
+	<button mat-menu-item routerLink="/rutapagos">Listar</button>
+	<button mat-menu-item routerLink="/rutapagos/insertarpago">Registrar</button>
+</mat-menu>
+
+<!-- Opciones para el menu de reclamos -->
+<mat-menu #menuReclamos="matMenu">
+	<button mat-menu-item routerLink="/rutareclamo">Listar</button>
+	<button mat-menu-item routerLink="/rutareclamo/insertarreclamo">Registrar</button>
+</mat-menu>
+
+<mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  <button mat-menu-item>
+    Rol:
+    <span>{{ role }}</span>
+  </button>
+  <button mat-menu-item>
+    Id:
+    <span>{{ id }}</span>
+  </button>
+</mat-menu>

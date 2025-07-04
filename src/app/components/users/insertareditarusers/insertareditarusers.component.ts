@@ -109,4 +109,8 @@ export class InsertareditarusersComponent implements OnInit {
       });
     }
   }
+
+  cancelar() {
+    this.router.navigate(['rutausers']);  
+  }
 }

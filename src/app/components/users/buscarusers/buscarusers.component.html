@@ -1,13 +1,17 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Lista de usuarios</h1>
+    <h1>Lista de Usuarios</h1>
   </div>
 
-  <div style="text-align: right; margin: 0 5% 1% 5%;"> 
-    <button mat-raised-button color="primary" [routerLink]="['insertarusers']">
-      <mat-icon>add</mat-icon> Agregar Usuario
-    </button>
+  <div>
+    <form [formGroup]="form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ingrese nombre del usuario</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+    </form>
   </div>
+
   <div style="text-align: center; margin: 5%">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Position Column -->
@@ -37,39 +41,12 @@
           {{ element.rol.nombreRole }}
         </td>
       </ng-container>
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button matButton="outlined" [routerLink]="['edicionesUsers',element.idUser]"
-          >
-          <mat-icon>edit</mat-icon>
-        </button>
-        </td>
-      </ng-container>
-         <!-- Symbol Column -->
-         <ng-container matColumnDef="c6">
-          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-          <td mat-cell *matCellDef="let element">
-            <button matButton="outlined" (click)="eliminar(element.idUser)"
-            >
-            <mat-icon>delete_outline</mat-icon>
-          </button>
-          </td>
-        </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    
-    <br />
-    <br />
 
-    <mat-paginator
-      [length]="20"
-      [pageSize]="10"
-      [pageSizeOptions]="[4, 8, 10]"
-      aria-label="Select page"
-    >
-    </mat-paginator>
+    <br />
+    <br />
   </div>
 </div>
