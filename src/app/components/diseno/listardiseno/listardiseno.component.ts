@@ -23,7 +23,7 @@ import { MenuComponent } from '../../menu/menu.component';
   templateUrl: './listardiseno.component.html',
   styleUrl: './listardiseno.component.css'
 })
-export class ListardisenoComponent {
+export class ListardisenoComponent{
 	disenos: Diseno[] = [];
   	disenosFiltrados: Diseno[] = [];
 
@@ -42,7 +42,7 @@ export class ListardisenoComponent {
 			this.disenos = data;
 			this.disenosFiltrados = data; // Inicializa las tarjetas con todos los diseños
 			this.extraerCategoriasYGeneros(); // Extrae las categorías y géneros para los filtros
-		  });
+		});
   	}
 
 	extraerCategoriasYGeneros() {
@@ -59,7 +59,6 @@ export class ListardisenoComponent {
 	}
 
 	eliminarDiseno(id: number) {
-		console.log('Intentando eliminar diseño con ID:', id);
     	this.disenoService.deleteDiseno(id).subscribe((data) => {
       		this.disenoService.listDiseno().subscribe((data) => {
         		this.disenos = data;

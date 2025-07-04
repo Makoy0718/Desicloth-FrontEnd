@@ -26,6 +26,9 @@ import { Galeria } from '../../../models/galeria';
 import { GaleriaService } from '../../../services/galeria.service';
 import { Users } from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
+import { LoginService } from '../../../services/login.service';
+import { GaleriadisenoService } from '../../../services/galeriadiseno.service';
+import { GaleriaDiseno } from '../../../models/galeriadiseno';
 
 
 @Component({
@@ -44,13 +47,16 @@ import { UsersService } from '../../../services/users.service';
 export class CreardisenoComponent {
 	form: FormGroup = new FormGroup({});
 	diseno: Diseno = new Diseno();
+	galeriaDiseno: GaleriaDiseno = new GaleriaDiseno();
 
   	imagenGenerada: string = "";
   	categorias: Categoria[] = [];
   	generos: Genero[] = [];
   	productos: Producto[] = [];
 	galerias: Galeria[] = [];
-	users: Users[] = [];
+	user: Users = new Users();
+
+	idUser: number = 0;
 
 	id: number = 0;
   	edicion: boolean = false;
@@ -59,14 +65,19 @@ export class CreardisenoComponent {
 	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyDUbwHdIZQE7lsbh6ffwZD7Ozj739-hdXI" });
 	imagenBase64: string = '';
 	
+	//Constructor donde llamamos todos los servicios
 	constructor(
 		private fb: FormBuilder, private disenoService: DisenoService, 
 		private categoriaService: CategoriaService, private generoService: GeneroService, 
 		private productoService: ProductoService, private galeriaService: GaleriaService,
-		private usersService: UsersService, private route: ActivatedRoute) {
-}
+		private usersService: UsersService, private route: ActivatedRoute,
+		private loginService: LoginService, private galeriadisenoService: GaleriadisenoService
+	) {
+	}
 
+	//Funcion al cargar el componente
 	ngOnInit() {
+		//Funcion que se encarga de reconocer si se va a editar
 		this.route.params.subscribe((data: Params) => {
 			this.id = data['id'];
 			this.edicion = data['id'] != null;
@@ -75,6 +86,7 @@ export class CreardisenoComponent {
 			console.log('Valor de id desde ruta:', this.id);
 		});
 
+		//Funcion que inicializar el formulario con validar
 		this.form = this.fb.group({
 			idDiseno: [''],
 			imagenDiseno: ['', Validators.required],
@@ -87,23 +99,26 @@ export class CreardisenoComponent {
 			genero: [null, Validators.required],
 			producto: [null, Validators.required],
 			galeria: [null, Validators.required],
-			user: [null, Validators.required]
+			comentarioDiseno: ['', Validators.required]
 		});
 
+		//Funcion de que se encarga de toglear si el diseno se genera por IA o Manual
 		this.form.get('tipoIA')?.valueChanges.subscribe((valor) => {
 			this.form.patchValue({
 			  tipoOrigenDiseno: valor ? 'IA' : 'Manual'
 			});
 		});
 
+		this.obtenerIdUsuario();
+		
+		//Funciones que se encargan de cargar las listas
 		this.categoriaService.list().subscribe(data => this.categorias = data);
 		this.generoService.list().subscribe(data => this.generos = data);
-		this.productoService.list().subscribe(data => this.productos = data);
-		this.galeriaService.list().subscribe(data => this.galerias = data);	
-		this.usersService.list().subscribe(data => this.users = data);
+		this.productoService.list().subscribe(data => this.productos = data);	
 
 	}
 
+	//Funcion para generar imagen
 	async generarImagen() {
   		const prompt = this.form.get('promtDiseno')?.value;
   		if (!prompt) return;
@@ -144,6 +159,7 @@ export class CreardisenoComponent {
   		}
 	}
 
+	//Funcion para cargar imagen cuando se carga archivo
 	onFileSelected(event: Event): void {
 		const input = event.target as HTMLInputElement;
 
@@ -162,24 +178,30 @@ export class CreardisenoComponent {
 		}
 	}
 
-
+	//Funcion para insertar diseno
 	aceptar() {
 		if (!this.form.valid) {
 			console.warn("Formulario inválido:", this.form.value);
 			return;
 		}
 		if (this.form.valid) {
+			console.log(this.form)
+			console.log(this.form.value.galeria)
 			this.diseno.idDiseno = this.form.value.idDiseno;
 			this.diseno.fechaOrigenDiseno = this.form.value.fechaOrigenDiseno;
 			this.diseno.imagenDiseno = this.form.value.imagenDiseno;
 			this.diseno.precioDiseno = this.form.value.precioDiseno;
 			this.diseno.promtDiseno = this.form.value.promtDiseno;
 			this.diseno.respuestaTextoDiseno = this.form.value.respuestaTextoDiseno;
-			this.diseno.tipoOrigenDiseno = this.form.get('tipoIA')?.value ? 'IA' : 'Manual';
+			this.diseno.tipoOrigenDiseno = this.form.get('tipoIA')?.value ? 'IA' : 'Disenador';
 			this.diseno.categoria = this.form.value.categoria
 			this.diseno.genero =this.form.value.genero;
 			this.diseno.producto =this.form.value.producto;
-			this.diseno.users = this.form.value.user;
+			this.diseno.users = this.user;
+
+			
+			this.galeriaDiseno.galeria = this.form.value.categoria
+			this.galeriaDiseno.comentarios = this.form.value.comentarioDiseno
 			
 
 			if (this.edicion) {
@@ -190,7 +212,15 @@ export class CreardisenoComponent {
 					});
 				});
 			} else {
-				this.disenoService.insertDiseno(this.diseno).subscribe(() => {
+				this.disenoService.insertDiseno(this.diseno).subscribe((disenoCreado) => {
+					console.log(disenoCreado)
+					this.galeriaDiseno.diseno = disenoCreado
+					this.galeriadisenoService.insert(this.galeriaDiseno).subscribe(() => {
+						this.galeriadisenoService.listGaleriaDiseno().subscribe((data)=>{
+							this.galeriadisenoService.setListGaleriaDiseno(data);
+						})
+					})
+
 					this.disenoService.listDiseno().subscribe((data) => {
 						this.disenoService.setListDiseno(data);
 					});
@@ -203,6 +233,7 @@ export class CreardisenoComponent {
 		}
 	}
 
+	//Funcion para activar si es edicion
 	init() {
 		if (this.edicion) {
 			this.disenoService.listIdDiseno(this.id).subscribe((data) => {
@@ -224,5 +255,17 @@ export class CreardisenoComponent {
 				this.imagenGenerada = data.imagenDiseno;
 			});
 		}
+	}
+
+	obtenerIdUsuario() {
+		const username = this.loginService.showUsername();
+		console.log(username)
+
+		this.usersService.searchUserByName(username).subscribe({
+		next: (user) => {
+			this.user = user; // Aquí asignas el id que venga del usuario
+			this.galeriaService.getGaleriaByUsername(this.user.username).subscribe(data => this.galerias = data);
+		}
+		});
 	}
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Galeria } from '../models/galeria';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 const base_url = environment.base;
 @Injectable({
@@ -41,5 +41,10 @@ export class GaleriaService {
     deleteA(id: number) {
       return this.http.delete(`${this.url}/${id}`);
     }
+
+  getGaleriaByUsername(username: string) {
+    const params = new HttpParams().set('nombre', username);
+    return this.http.get<Galeria[]>(`${this.url}/buscarPorNombreUsuario`, { params });
+  }
   
 }

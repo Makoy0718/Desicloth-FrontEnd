@@ -40,4 +40,7 @@ export class UsersService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
+  searchUserByName(username: string){
+    return this.http.get<Users>(`${this.url}/buscarPorNombreUsuario/${username}`);
+  }
 }

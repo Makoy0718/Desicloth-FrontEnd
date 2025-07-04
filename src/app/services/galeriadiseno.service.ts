@@ -19,11 +19,11 @@ export class GaleriadisenoService {
     return this.http.get<GaleriaDiseno[]>(`${this.url}/listarGaleriaDiseno`);
   }
 
-  getListDiseno(): Observable<GaleriaDiseno[]> {
+  getListGaleriaDiseno(): Observable<GaleriaDiseno[]> {
     return this.listaCambio.asObservable();
   }
   
-  setListDiseno(listaNueva: GaleriaDiseno[]): void {
+  setListGaleriaDiseno(listaNueva: GaleriaDiseno[]): void {
     this.listaCambio.next(listaNueva);
   }
 
