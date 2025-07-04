@@ -23,6 +23,9 @@ import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
 import { BuscargaleriaComponent } from './components/galeria/buscargaleria/buscargaleria.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
+import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
 
 
 //RUTAS DEL FRONTEND
@@ -109,8 +112,8 @@ export const routes: Routes = [
                 path:'busquedagaleria',
                 component:BuscargaleriaComponent,
                 data: { roles: ['ADMIN'] }
-
             },
+            
         ],
         canActivate: [seguridadGuard],
     },
@@ -161,6 +164,22 @@ export const routes: Routes = [
         ],
         canActivate: [seguridadGuard],
     },
+
+    {
+        path:'rutadashboard',component:DashboardComponent,
+        children: [
+            {
+                path: 'reportediseno',
+                component: ReportedisenosComponent,
+            },
+            {
+                path:'promedioraiting',
+                component:ReporteraitingComponent,
+            },
+        ],
+        canActivate: [seguridadGuard],
+    },
+
     //Ruta de la landing page
 	{
         path:'rutalanding',
