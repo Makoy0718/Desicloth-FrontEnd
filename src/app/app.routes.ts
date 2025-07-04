@@ -15,7 +15,6 @@ import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
-
 import { LandingComponent } from './components/landing/landing.component';
 import { RoleComponent } from './components/role/role.component';
 import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
@@ -27,6 +26,13 @@ import { PedidoComponent } from './components/pedido/pedido.component';
 import { InsertareditarpedidoComponent } from './components/pedido/insertareditarpedido/insertareditarpedido.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { InsertareditarpagoComponent } from './components/pago/insertareditarpago/insertareditarpago.component';
+import { BuscargaleriaComponent } from './components/galeria/buscargaleria/buscargaleria.component';
+import { BuscargeneroComponent } from './components/genero/buscargenero/buscargenero.component';
+import { BuscarusersComponent } from './components/users/buscarusers/buscarusers.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
+import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
+import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
 
 
 
@@ -77,11 +83,11 @@ export const routes: Routes = [
                 component: IsertareditarCategoriaComponent,
                 data: { roles: ['ADMIN'] }
             },
-            {
-                path:'busquedacategoria',
-                component:BuscarcategoriaComponent,
-                data: { roles: ['ADMIN'] }
-            },
+            //{
+                //path:'busquedacategoria',
+                //component:BusquedaCategoriaComponent,
+                //data: { roles: ['ADMIN'] }
+            //},
         ],
         canActivate: [seguridadGuard],
     },
