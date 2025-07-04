@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Categoria } from '../../../models/categoria';
 import { CategoriaService } from '../../../services/categoria.service';
@@ -28,10 +34,9 @@ import { MatSelectModule } from '@angular/material/select';
 export class IsertareditarCategoriaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   categoria: Categoria = new Categoria();
-  descipcion: string = '';
+
   id: number = 0;
   edicion: boolean = false;
-  nombreCategoria: string = '';
 
   constructor(
     private cS: CategoriaService,
@@ -50,16 +55,16 @@ export class IsertareditarCategoriaComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombreCategoria: ['', Validators.required],
-      descripcionCategoria: ['', Validators.required],
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
     });
   }
 
   aceptar() {
     if (this.form.valid) {
       this.categoria.idCategoria = this.form.value.codigo;
-      this.categoria.nombreCategoria = this.form.value.nombreCategoria;
-      this.categoria.descripcionCategoria = this.form.value.descripcionCategoria;
+      this.categoria.nombreCategoria = this.form.value.nombre;
+      this.categoria.descripcionCategoria =this.form.value.descripcion;
       if (this.edicion) {
         // actualizar
         this.cS.update(this.categoria).subscribe(() => {
@@ -84,10 +89,14 @@ export class IsertareditarCategoriaComponent implements OnInit {
       this.cS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idCategoria),
-          nombreCategoria: new FormControl(data.nombreCategoria),
-          descripcionCategoria: new FormControl(data.descripcionCategoria),
+          nombre: new FormControl(data.nombreCategoria),
+          descripcion: new FormControl(data.descripcionCategoria),
         });
       });
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['rutacategorias']);  
   }
 }
