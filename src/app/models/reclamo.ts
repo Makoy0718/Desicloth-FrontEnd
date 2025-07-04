@@ -5,5 +5,5 @@ export class Reclamo {
     titulo:string=""
     descripcion:string=""
     estado:string=""
-    users:Users = new Users()
+    user:Users = new Users()
 }

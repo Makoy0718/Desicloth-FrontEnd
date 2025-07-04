@@ -1,0 +1,13 @@
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de Diseños por Categoría</h2>
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [type]="barChartType"
+      [legend]="barChartLegend"
+    ></canvas>
+  </div>
+</div>

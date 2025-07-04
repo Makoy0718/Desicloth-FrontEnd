@@ -1,0 +1,13 @@
+<div class="chart-container">
+  <h2 class="chart-title">Promedio de Rating de Galerías</h2>
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [datasets]="barCharData"
+      [labels]="barCharLabels"
+      [options]="barCharOptions"
+      [type]="barCharType"
+      [legend]="barCharLegend"
+    ></canvas>
+  </div>
+</div>

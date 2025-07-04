@@ -36,8 +36,8 @@ export class DisenoService {
 		this.listaCambio.next(listaNueva);
 	}
 
-	insertDiseno(diseno: Diseno): Observable<any> {
-		return this.http.post(`${this.url}/insertarDiseno`, diseno);
+	insertDiseno(diseno: Diseno): Observable<Diseno> {
+		return this.http.post<Diseno>(`${this.url}/insertarDiseno`, diseno);
 	}
 
 	updateDiseno(diseno: Diseno) {

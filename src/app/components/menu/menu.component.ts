@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { CommonModule } from '@angular/common';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +19,9 @@ export class MenuComponent {
   role: string = '';
   id: number = 0;
 
-  constructor(private loginService: LoginService) {}
+  usuarioVerificado : boolean = false
+
+  constructor(private loginService: LoginService, private userService: UsersService) {}
 
   //Limpia el token y los datos de la sesion actual
   cerrar() {
@@ -28,7 +31,6 @@ export class MenuComponent {
   //Llamamos el metodo para mostrar el rol y luego llama al metodo para verificar si hay un token
   verificar() {
     this.role = this.loginService.showRole();
-    this.id = this.loginService.showUserId();
     return this.loginService.verificar();
   }
 
@@ -40,5 +42,16 @@ export class MenuComponent {
   //Checa si el rol traido coincide con CLIENTE
   isCliente() {
     return this.role === 'CLIENTE';
+  }
+
+  obtenerIdUsuario() {
+    const username = this.loginService.showUsername();
+
+    this.userService.searchUserByName(username).subscribe({
+      next: (user) => {
+        this.id = user.idUser; // Aquí asignas el id que venga del usuario
+      }
+    });
+    
   }
 }

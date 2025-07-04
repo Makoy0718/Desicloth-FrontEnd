@@ -15,6 +15,7 @@ import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
+
 import { LandingComponent } from './components/landing/landing.component';
 import { RoleComponent } from './components/role/role.component';
 import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
@@ -26,6 +27,7 @@ import { PedidoComponent } from './components/pedido/pedido.component';
 import { InsertareditarpedidoComponent } from './components/pedido/insertareditarpedido/insertareditarpedido.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { InsertareditarpagoComponent } from './components/pago/insertareditarpago/insertareditarpago.component';
+
 
 
 //RUTAS DEL FRONTEND
@@ -75,6 +77,11 @@ export const routes: Routes = [
                 component: IsertareditarCategoriaComponent,
                 data: { roles: ['ADMIN'] }
             },
+            {
+                path:'busquedacategoria',
+                component:BuscarcategoriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
         ],
         canActivate: [seguridadGuard],
     },
@@ -108,6 +115,12 @@ export const routes: Routes = [
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
             },
+            {
+                path:'busquedagaleria',
+                component:BuscargaleriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            
         ],
         canActivate: [seguridadGuard],
     },
@@ -125,6 +138,11 @@ export const routes: Routes = [
                 component: InsertareditargenComponent,
                 data: { roles: ['ADMIN'] }
             },
+            {
+                path: 'busquedagenero',
+                component: BuscargeneroComponent,
+                data: { roles: ['ADMIN'] }
+            },
         ],
         canActivate: [seguridadGuard],
     },
@@ -135,10 +153,17 @@ export const routes: Routes = [
             {
                 path: 'insertarusers',
                 component: InsertareditarusersComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            {
+                path: 'busquedausers',
+                component: BuscarusersComponent,
+                data: { roles: ['ADMIN'] }
             },
         ],
         canActivate: [seguridadGuard],
@@ -158,6 +183,7 @@ export const routes: Routes = [
         ],
         canActivate: [seguridadGuard],
     },
+
     //Ruta y subrutas de pedido
     {
         path:'rutapedidos',component:PedidoComponent,
@@ -186,6 +212,28 @@ export const routes: Routes = [
             },
         ],
     },
+
+
+    {
+        path:'rutadashboard',component:DashboardComponent,
+        children: [
+            {
+                path: 'reportediseno',
+                component: ReportedisenosComponent,
+            },
+            {
+                path:'promedioraiting',
+                component:ReporteraitingComponent,
+            },
+            {
+                path:'conteodisenoporcategoria',
+                component:ReportecategoriaComponent,
+            },
+        ],
+        canActivate: [seguridadGuard],
+    },
+
+
     //Ruta de la landing page
 	{
         path:'rutalanding',

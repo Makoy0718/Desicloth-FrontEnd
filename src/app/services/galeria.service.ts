@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Galeria } from '../models/galeria';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { RaitingDTO } from '../models/RaitingDTO';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,19 @@ export class GaleriaService {
     deleteA(id: number) {
       return this.http.delete(`${this.url}/${id}`);
     }
+
+  getGaleriaByUsername(username: string) {
+    const params = new HttpParams().set('nombre', username);
+    return this.http.get<Galeria[]>(`${this.url}/buscarPorNombreUsuario`, { params });
+  }
+
+  searchByName(name: string): Observable<Galeria[]> {
+    const params = new HttpParams().set('nombre', name);
+    return this.http.get<Galeria[]>(`${this.url}/buscarPorNombre`, { params });
+  }
+
+  getAverageRating(idGaleria: number): Observable<RaitingDTO> { 
+    return this.http.get<RaitingDTO>(`${this.url}/galerias/${idGaleria}/rating-promedio`);
+  }
   
 }
