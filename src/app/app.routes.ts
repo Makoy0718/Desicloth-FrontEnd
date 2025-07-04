@@ -26,6 +26,7 @@ import { BuscargaleriaComponent } from './components/galeria/buscargaleria/busca
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
 import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
+import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
 
 
 //RUTAS DEL FRONTEND
@@ -73,6 +74,11 @@ export const routes: Routes = [
             {
                 path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            {
+                path:'busquedacategoria',
+                component:BuscarcategoriaComponent,
                 data: { roles: ['ADMIN'] }
             },
         ],
