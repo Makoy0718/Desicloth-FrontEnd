@@ -17,6 +17,8 @@ export class ProductoService {
 
   constructor(private http: HttpClient) {}
   //GET /Producto/listaProducto
+
+  
   list() {
     return this.http.get<Producto[]>(`${this.url}/listaProducto`);
   }

@@ -1,0 +1,72 @@
+<div class="container">
+    <div style="text-align: center;margin: 5%;">
+        <h1>Registro de Pedido</h1>
+    </div>
+    <div style="text-align: center;margin: 5%;">
+        <form [formGroup]="form" (ngSubmit)="aceptar()" style="flex: 1;">
+
+            <mat-form-field class="example-full-width" *ngIf="edicion">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="1" formControlName="codigo" />
+                <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+                El Código del pedido es obligatorio!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field class="example-full-width">
+                 <mat-label>Fecha</mat-label>
+                 <input matInput [matDatepicker]="picker" formControlName="fecha" />
+                 <mat-hint>MM/DD/YYYY</mat-hint>
+                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                 <mat-datepicker #picker></mat-datepicker>
+                 <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+                La fecha es obligatoria!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <!-- [ngModel]="status":se elimina por que solo quiero usar formControlName y no ngModel-->
+
+            <mat-radio-group aria-label="Select an option" formControlName="estado">
+            <mat-radio-button [value]="true">Pendiente</mat-radio-button>
+            <mat-radio-button [value]="false">Procesado</mat-radio-button>
+            </mat-radio-group>
+            <br />
+
+            <br />
+            <mat-form-field>
+                <mat-label>User</mat-label>
+                <mat-select formControlName="usu"> <!--Reactive Forms-->
+                    @for (food of listaUsuarios; track food) {
+                        <mat-option [value]="food.idUser">
+                            <!--{{food.username}}: {{food.idUser}}-->
+                            ID:{{food.idUser}} - Usuario:{{food.username}}
+                        </mat-option>
+                    }
+                </mat-select>
+                <mat-error *ngIf="form.get('usu')?.hasError('required')">
+                    El username es obligatorio!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+            
+            <!-- Para administrador
+            <mat-form-field class="example-full-width">
+                <mat-label>ID Usuario</mat-label>
+                <mat-select formControlName="usu">
+                    <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
+                        {{u.username}} (ID: {{u.idUser}})
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('usu')?.hasError('required')">
+                    El usuario es obligatorio!!
+                    </mat-error>
+            </mat-form-field>
+            <br />-->
+            <button mattButton ="outlined">Aceptar</button>
+            <button matButton (click)="cancelar()">Cancelar</button>
+            <!--<button mat-raised-button color="primary" type="submit">Guardar Pedido</button>-->
+        </form>
+    </div>
+</div>

@@ -22,6 +22,10 @@ import { InsertareditarroleComponent } from './components/role/insertareditarrol
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
+import { InsertareditarpedidoComponent } from './components/pedido/insertareditarpedido/insertareditarpedido.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { InsertareditarpagoComponent } from './components/pago/insertareditarpago/insertareditarpago.component';
 
 
 //RUTAS DEL FRONTEND
@@ -153,6 +157,34 @@ export const routes: Routes = [
             },
         ],
         canActivate: [seguridadGuard],
+    },
+    //Ruta y subrutas de pedido
+    {
+        path:'rutapedidos',component:PedidoComponent,
+        children:[
+            {
+                path:'insertarpedido',
+                component: InsertareditarpedidoComponent,
+            },
+            {
+                path:'edicionespedido/:id',
+                component:InsertareditarpedidoComponent,
+            },
+        ],
+    },
+    //Ruta y subrutas de pago
+    {
+        path:'rutapagos',component:PagoComponent,
+        children:[
+            {
+                path:'insertarpago',
+                component: InsertareditarpagoComponent,
+            },
+            {
+                path:'edicionespago/:id',
+                component:InsertareditarpagoComponent,
+            },
+        ],
     },
     //Ruta de la landing page
 	{
