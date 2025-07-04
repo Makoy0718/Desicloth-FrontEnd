@@ -54,7 +54,7 @@ export class ReportecategoriaComponent implements OnInit{
     this.cS.getConteoDisenosPorCategoria().subscribe(
       (data: ConteoDisenosPorCategoriaDTO[]) => {
         // Mapea los nombres de las categorías para las etiquetas del gráfico
-        this.barChartLabels = data.map(item => item.nombreCategoria);
+        this.barChartLabels = data.map(item => item.nombreCategoria); 
 
         // Mapea las cantidades de diseños para los datos del gráfico
         this.barChartData = [
