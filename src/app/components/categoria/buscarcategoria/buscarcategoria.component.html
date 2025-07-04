@@ -1,0 +1,46 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Lista de Categorias</h1>
+  </div>
+
+  <div>
+    <form [formGroup]="form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ingrese nombre de la categoria</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.idCategoria }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Categoria</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.nombreCategoria }}
+        </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.descripcionCategoria }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <br />
+    <br />
+  </div>
+</div>

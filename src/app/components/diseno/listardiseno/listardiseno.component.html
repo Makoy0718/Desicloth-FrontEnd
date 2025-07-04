@@ -1,0 +1,50 @@
+<div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+  <mat-form-field appearance="outline">
+    <mat-label>Filtrar por Categoría</mat-label>
+    <mat-select [(value)]="categoriaSeleccionada" (selectionChange)="filtrarDisenos()">
+      <mat-option [value]="null">Todas</mat-option>
+      <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombreCategoria">
+        {{ categoria.nombreCategoria }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Filtrar por Género</mat-label>
+    <mat-select [(value)]="generoSeleccionado" (selectionChange)="filtrarDisenos()">
+      <mat-option [value]="null">Todos</mat-option>
+      <mat-option *ngFor="let genero of generos" [value]="genero.nombreGenero">
+        {{ genero.nombreGenero }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="card-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 5%">
+  <mat-card *ngFor="let diseno of disenosFiltrados" class="example-card mat-elevation-z8" style="width: 300px">
+
+    <mat-card-header>
+      <mat-card-title>Precio: S/. {{ diseno.precioDiseno }}</mat-card-title>
+      <mat-card-subtitle>Para producto: {{ diseno.producto.nombreProducto }}</mat-card-subtitle>
+      <mat-card-subtitle>ID: {{ diseno.idDiseno }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="diseno.imagenDiseno || 'https://material.angular.dev/assets/img/examples/shiba2.jpg'" alt="Diseño" />
+
+    <mat-card-content>
+      <p><strong>Origen:</strong> {{ diseno.tipoOrigenDiseno }}</p>
+	    <p><strong>Genero:</strong> {{ diseno.genero.nombreGenero }}</p>
+	    <p><strong>Categoria:</strong> {{ diseno.categoria.nombreCategoria }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="primary" [routerLink]="['/rutadisenos/edicionesdiseno', diseno.idDiseno]">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+      <button mat-button color="warn" (click)="eliminarDiseno(diseno.idDiseno)">
+        <mat-icon>delete_outline</mat-icon> Eliminar
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

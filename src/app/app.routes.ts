@@ -4,6 +4,9 @@ import { InsertareditarComponent } from './components/aplicacion/insertareditar/
 import { ListarproductoComponent } from './components/producto/listarproducto/listarproducto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { IsertareditarCategoriaComponent } from './components/categoria/isertareditar-categoria/isertareditar-categoria.component';
+import { DisenoComponent } from './components/diseno/diseno.component';
+import { ListardisenoComponent } from './components/diseno/listardiseno/listardiseno.component';
+import { CreardisenoComponent } from './components/diseno/creardiseno/creardiseno.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { InsertareditarGaleriaComponent } from './components/galeria/insertareditar-galeria/insertareditar-galeria.component';
 import { GeneroComponent } from './components/genero/genero.component';
@@ -12,31 +15,13 @@ import { UsersComponent } from './components/users/users.component';
 import { InsertareditarusersComponent } from './components/users/insertareditarusers/insertareditarusers.component';
 import { ReclamoComponent } from './components/reclamo/reclamo.component';
 import { InsertareditarrecComponent } from './components/reclamo/insertareditarrec/insertareditarrec.component';
-<<<<<<< Updated upstream
-=======
-import { LandingComponent } from './components/landing/landing.component';
-import { RoleComponent } from './components/role/role.component';
-import { ListarroleComponent } from './components/role/listarrole/listarrole.component';
-import { InsertareditarroleComponent } from './components/role/insertareditarrole/insertareditarrole.component';
-import { LoginComponent } from './components/login/login.component';
-import { seguridadGuard } from './guard/seguridad.guard';
-import { HomeComponent } from './components/home/home.component';
-import { BuscargaleriaComponent } from './components/galeria/buscargaleria/buscargaleria.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
-import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
-import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
-import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
-import { BuscarusersComponent } from './components/users/buscarusers/buscarusers.component';
-import { BuscargeneroComponent } from './components/genero/buscargenero/buscargenero.component';
->>>>>>> Stashed changes
 
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
-    
+    //Rutas y subrutas de productos
     {
-        path: 'rutaProductos',
+        path: 'rutaproductos',
         component: ListarproductoComponent,
         children:[
             { 
@@ -44,57 +29,101 @@ export const routes: Routes = [
                 component: ListarproductoComponent
             }
             //{path: 'insertar', component: ProductoInsertarComponent }, //productos/insertar
-        ]
+        ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de role
     {
         path: 'rutarole',
-        component:AplicacionComponent,
+        component:RoleComponent,
         children:[
-        { 
-            path:'conexionRole',
-            component:InsertareditarComponent
-        }
-    ]
+			{ 
+				path:'insertarrole',
+				component:InsertareditarroleComponent
+			},
+			{ 
+				path:'editarrole/:id',
+				component:InsertareditarroleComponent
+			}
+    	],
+        data: { roles: ['ADMIN'] },
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de categoria
     {   
         path:'rutacategorias',
         component:CategoriaComponent,
         children: [
             {
-                path: 'insertarCategoria',
+                path: 'insertarcategoria',
                 component: IsertareditarCategoriaComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
-                path: 'edicionesCategoria/:id',
+                path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            {
+                path:'busquedacategoria',
+                component:BuscarcategoriaComponent,
+                data: { roles: ['ADMIN'] }
             },
         ],
-        
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas disenos
+	{
+        path: 'rutadisenos',
+        component: DisenoComponent,
+        children:[
+            { 
+                path: 'insertardiseno',
+                component: CreardisenoComponent
+            },
+            {
+                path: 'edicionesdiseno/:id',
+                component: CreardisenoComponent,
+                data: { roles: ['ADMIN'] }
+            },
+        ],
+        canActivate: [seguridadGuard],
+    },
+    //Rutas y subrutas de galeria
     {
-        path:'rutaGaleria',
+        path:'rutagaleria',
         component:GaleriaComponent,
         children: [
             {
-                path: 'insertarGaleria',
+                path: 'insertagaleria',
                 component: InsertareditarGaleriaComponent,
             },
             {
-                path: 'edicionesGaleria/:id',
+                path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
             },
+            {
+                path:'busquedagaleria',
+                component:BuscargaleriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de genero
     {
-    path:'rutagenero',component:GeneroComponent,
+        path:'rutagenero',component:GeneroComponent,
         children: [
             {
-                path: 'insertarGenero',
+                path: 'insertargenero',
                 component: InsertareditargenComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
-                path: 'edicionesGenero/:id',
+                path: 'edicionesgenero/:id',
                 component: InsertareditargenComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'busquedagenero',
@@ -102,17 +131,19 @@ export const routes: Routes = [
                 data: { roles: ['ADMIN'] }
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de users
     {
-    path:'rutausers',component:UsersComponent,
+        path:'rutausers',component:UsersComponent,
         children: [
             {
-                path: 'insertarUsers',
+                path: 'insertarusers',
                 component: InsertareditarusersComponent,
                 data: { roles: ['ADMIN'] }
             },
             {
-                path: 'edicionesUsers/:id',
+                path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
                 data: { roles: ['ADMIN'] }
             },
@@ -122,24 +153,62 @@ export const routes: Routes = [
                 data: { roles: ['ADMIN'] }
             },
         ],
+        canActivate: [seguridadGuard],
     },
+    //Rutas y subrutas de reclamo
     {
-    path:'rutareclamo',component:ReclamoComponent,
+        path:'rutareclamo',component:ReclamoComponent,
         children: [
             {
-                path: 'insertarReclamo',
+                path: 'insertarreclamo',
                 component: InsertareditarrecComponent,
             },
             {
-                path: 'edicionesReclamo/:id',
+                path: 'edicionesreclamo/:id',
                 component: InsertareditarrecComponent,
             },
         ],
+        canActivate: [seguridadGuard],
     },
 
+    {
+        path:'rutadashboard',component:DashboardComponent,
+        children: [
+            {
+                path: 'reportediseno',
+                component: ReportedisenosComponent,
+            },
+            {
+                path:'promedioraiting',
+                component:ReporteraitingComponent,
+            },
+            {
+                path:'conteodisenoporcategoria',
+                component:ReportecategoriaComponent,
+            },
+        ],
+        canActivate: [seguridadGuard],
+    },
 
-     // Ruta comodín (opcional)
-    { path: '**', redirectTo: 'productos' },
-
-
+    //Ruta de la landing page
+	{
+        path:'rutalanding',
+        component: LandingComponent,
+    },
+    //Ruta de login
+    {
+        path:'login',
+        component: LoginComponent,
+    },
+    //Ruta de home
+    {
+        path:'home',
+        component: HomeComponent,
+    },
+    // Ruta comodín (opcional)
+    { 
+        path: '', 
+        redirectTo: 'rutalanding', 
+        pathMatch: 'full' 
+    },
 ];

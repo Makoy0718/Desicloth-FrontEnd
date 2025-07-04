@@ -14,8 +14,8 @@
       
       <mat-form-field class="example-full-width">
         <mat-label>Categoria</mat-label>
-        <input matInput placeholder="categoria" formControlName="nombreCategoria" />
-        <mat-error *ngIf="form.get('nombreCategoria')?.hasError('required')">
+        <input matInput placeholder="categoria" formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
           El nombre de la Categoria es obligatorio!!
         </mat-error>
       </mat-form-field>
@@ -23,13 +23,14 @@
       
       <mat-form-field class="example-full-width">
         <mat-label>Descripcion</mat-label>
-        <input matInput placeholder="descripcion" formControlName="descripcionCategoria" />
-        <mat-error *ngIf="form.get('descripcionCategoria')?.hasError('required')">
+        <input matInput placeholder="descripcion" formControlName="descripcion" />
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
           La descripcion es obligatoria!!
         </mat-error>
       </mat-form-field>
 
-      <button mat-button="outlined">Aceptar</button>
+      <button matButton>Aceptar</button>
+      <button matButton (click)="cancelar()">Cancelar</button>
     </form>
   </div>
 </div>

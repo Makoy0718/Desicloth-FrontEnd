@@ -41,13 +41,4 @@ export class UsersService {
     return this.http.delete(`${this.url}/eliminarUsuario/${id}`);
   }
 
-  updateRole(a: Users, idRol: number ) {
-    const params = new HttpParams().set('idRole', idRol);
-    return this.http.put(`${this.url}/modificarRol`, a);
-  }
-
-  
-  searchUserByName(username: string){
-    return this.http.get<Users>(`${this.url}/buscarPorNombreUsuario/${username}`);
-  }
 }

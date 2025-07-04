@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Categoria } from '../models/categoria';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { ConteoDisenosPorCategoriaDTO } from '../models/ConteoDisenosPorCategoriaDTO';
 
 const base_url = environment.base;
 
@@ -10,14 +11,14 @@ const base_url = environment.base;
   providedIn: 'root'
 })
 export class CategoriaService {
-  private url = `${base_url}/categorias`;  
+  private url = `${base_url}/Categorias`;  
 
   private listaCambio = new Subject<Categoria[]>();
 
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Categoria[]>(`${this.url}/listaCategoria`);
+    return this.http.get<Categoria[]>(`${this.url}/listarCategoria`);
   }
 
   insert(c: Categoria) {
@@ -41,6 +42,16 @@ export class CategoriaService {
   }
 
   deleteA(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/eliminarCategoria/${id}`);
   }
+
+  searchByName(name: string): Observable<Categoria[]> {
+    const params = new HttpParams().set('c', name);
+    return this.http.get<Categoria[]>(`${this.url}/buscarPorNombreCategoría`, { params });
+  }
+
+  getConteoDisenosPorCategoria(): Observable<ConteoDisenosPorCategoriaDTO[]> {
+    return this.http.get<ConteoDisenosPorCategoriaDTO[]>(`${this.url}/contarDisenos`);
+  }
+
 }

@@ -19,8 +19,11 @@ export class RoleService {
   list(){
     return this.http.get<Role[]>(`${this.url}/lista`);
   }
-  insert(r:Role){
-    return this.http.post(`${this.url}/crearRol`,r)
+  listIdRole(id: number) {
+	return this.http.get<Role>(`${this.url}/ver/${id}`);
+  }
+  insert(role : Role){
+    return this.http.post(`${this.url}/crearRol`,role)
   }
   setList(listaNueva:Role[]){
     this.listaCambio.next(listaNueva)
@@ -30,5 +33,11 @@ export class RoleService {
   }
   getAll(): Observable<Role[]> {
     return this.http.get<Role[]>(`${this.url}/lista`);
+  }
+  updateRole(role: Role) {
+	return this.http.put(`${this.url}/modificarRol`, role);
+  }
+  deleteRole(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
