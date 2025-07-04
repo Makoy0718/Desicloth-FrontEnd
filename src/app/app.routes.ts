@@ -27,6 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
 import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
 import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
+import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
 
 
 //RUTAS DEL FRONTEND
@@ -181,6 +182,10 @@ export const routes: Routes = [
             {
                 path:'promedioraiting',
                 component:ReporteraitingComponent,
+            },
+            {
+                path:'conteodisenoporcategoria',
+                component:ReportecategoriaComponent,
             },
         ],
         canActivate: [seguridadGuard],
