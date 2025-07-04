@@ -15,53 +15,50 @@ export class ReportecategoriaComponent implements OnInit{
     responsive: true,
     scales: {
       y: {
-        beginAtZero: true, // El eje Y debe empezar en 0 para conteos
+        beginAtZero: true, 
         title: {
           display: true,
-          text: 'Cantidad de Diseños' // Etiqueta para el eje Y
+          text: 'Cantidad de Diseños' 
         },
         ticks: {
-          stepSize: 1 // Asegura que las marcas sean números enteros
+          stepSize: 1 
         }
       },
       x: {
         title: {
           display: true,
-          text: 'Categoría' // Etiqueta para el eje X
+          text: 'Categoría' 
         }
       }
     },
     plugins: {
       legend: {
-        position: 'top', // Posición de la leyenda
+        position: 'top', 
       },
       title: {
         display: true,
-        text: 'Cantidad de Diseños por Categoría' // Título del gráfico
+        text: 'Cantidad de Diseños por Categoría' 
       }
     }
   };
 
-  barChartLabels: string[] = []; // Nombres de las categorías
-  barChartType: ChartType = 'bar'; // Tipo de gráfico: barras
+  barChartLabels: string[] = []; 
+  barChartType: ChartType = 'bar'; 
   barChartLegend = true;
-  barChartData: ChartDataset[] = []; // Datos del conteo de diseños
+  barChartData: ChartDataset[] = []; 
 
-  constructor(private cS: CategoriaService) {} // Inyecta CategoriaService
+  constructor(private cS: CategoriaService) {} 
 
   ngOnInit(): void {
-    // Llama al servicio para obtener los datos del conteo de diseños por categoría
     this.cS.getConteoDisenosPorCategoria().subscribe(
       (data: ConteoDisenosPorCategoriaDTO[]) => {
-        // Mapea los nombres de las categorías para las etiquetas del gráfico
-        this.barChartLabels = data.map(item => item.nombreCategoria); 
+        this.barChartLabels = data.map(item => item.nombreCategoria);
 
-        // Mapea las cantidades de diseños para los datos del gráfico
         this.barChartData = [
           {
             data: data.map(item => item.cantidadDisenos),
             label: 'Número de Diseños',
-            backgroundColor: 'rgba(75, 192, 192, 0.6)', // Color de las barras
+            backgroundColor: 'rgba(75, 192, 192, 0.6)', 
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
@@ -71,7 +68,6 @@ export class ReportecategoriaComponent implements OnInit{
       },
       (error) => {
         console.error('Error al cargar el conteo de diseños por categoría:', error);
-        // Puedes añadir lógica para mostrar un mensaje de error en la UI
       }
     );
   }
