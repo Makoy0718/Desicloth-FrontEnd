@@ -5,29 +5,40 @@
   background-color: #1D4ED8;
   color: white;
   padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
-
-.menu-group {
-  display: flex;
-  gap: 15px;
-}
-
-.menu-items button {
-  color: white;
-}
-
-.menu-group,
-.menu-items {
-  overflow: visible;
-  position: relative;
-}
-
 
 .nombre-app h3 {
   margin: 0;
   font-weight: bold;
+  white-space: nowrap;
 }
 
-.cdk-overlay-container {
-  z-index: 1000;
+.menu-group {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px; /* Menor espacio entre botones */
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+
+.menu-items {
+  flex: 1 1 auto; /* Se adaptan al espacio disponible */
+  min-width: 70px; /* Evita que se hagan invisibles */
+  max-width: 130px;
+}
+
+.menu-items button {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: white !important;  /* FORZAR blanco */
 }

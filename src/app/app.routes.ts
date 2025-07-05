@@ -164,20 +164,20 @@ export const routes: Routes = [
             {
                 path: 'insertarusers',
                 component: InsertareditarusersComponent,
-                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'] },
+                canActivate: [seguridadGuard],
             },
             {
                 path: 'busquedausers',
                 component: BuscarusersComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'] },
+                canActivate: [seguridadGuard],
             },
         ],
-        canActivate: [seguridadGuard],
     },
     //Rutas y subrutas de reclamo
     {
