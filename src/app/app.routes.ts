@@ -34,6 +34,7 @@ import { ReportedisenosComponent } from './components/dashboard/reportedisenos/r
 import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
 import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
 import { MisdisenosComponent } from './components/diseno/misdisenos/misdisenos.component';
+import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
 
 
 
@@ -84,11 +85,11 @@ export const routes: Routes = [
                 component: IsertareditarCategoriaComponent,
                 data: { roles: ['ADMIN'] }
             },
-            //{
-                //path:'busquedacategoria',
-                //component:BusquedaCategoriaComponent,
-                //data: { roles: ['ADMIN'] }
-            //},
+            {
+                path:'busquedacategoria',
+                component:BuscarcategoriaComponent,
+                data: { roles: ['ADMIN'] }
+            },
         ],
         canActivate: [seguridadGuard],
     },

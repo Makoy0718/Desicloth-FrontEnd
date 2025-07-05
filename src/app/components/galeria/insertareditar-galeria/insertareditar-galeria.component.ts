@@ -11,6 +11,7 @@ import { GaleriaService } from '../../../services/galeria.service';
 import { Galeria } from '../../../models/galeria';
 import { Users } from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-insertareditar-galeria',
@@ -29,18 +30,19 @@ import { UsersService } from '../../../services/users.service';
 export class InsertareditarGaleriaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   galeria: Galeria = new Galeria();
+  user: Users = new Users();
 
   id: number = 0;
   edicion: boolean = false;
 
-  listaUser:Users[]=[]
 
   constructor(
     private gS: GaleriaService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private uS:UsersService
+    private uS:UsersService,
+    private lS: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -50,16 +52,14 @@ export class InsertareditarGaleriaComponent implements OnInit {
       this.init();
     });
 
+    this.obtenerIdUsuario()
+
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre: ['', Validators.required],
       visibilidad: ['', Validators.required],
       rating: ['', [Validators.required,Validators.min(1), Validators.max(5)]],
-      userS:['',Validators.required]
     });
-    this.uS.list().subscribe(data=>{
-      this.listaUser=data
-    })
   }
 
   aceptar() {
@@ -69,7 +69,7 @@ export class InsertareditarGaleriaComponent implements OnInit {
       this.galeria.nombreGaleria=this.form.value.nombre;
       this.galeria.visibilidadGaleria=this.form.value.visibilidad;
       this.galeria.ratingGaleria=this.form.value.rating;
-      this.galeria.users.idUser=this.form.value.userS
+      this.galeria.users.idUser =this.user.idUser
 
       if (this.edicion) {
         // Actualizar
@@ -107,4 +107,15 @@ export class InsertareditarGaleriaComponent implements OnInit {
   cancelar() {
     this.router.navigate(['rutagaleria']);  
   }
+
+  obtenerIdUsuario() {
+		const username = this.lS.showUsername();
+		console.log(username)
+
+		this.uS.searchUserByName(username).subscribe({
+		next: (user) => {
+			this.user = user; 
+		}
+		});
+	}
 }
