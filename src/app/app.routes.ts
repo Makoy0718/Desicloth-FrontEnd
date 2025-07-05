@@ -33,6 +33,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
 import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
 import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
+import { MisdisenosComponent } from './components/diseno/misdisenos/misdisenos.component';
 
 
 
@@ -104,6 +105,10 @@ export const routes: Routes = [
                 path: 'edicionesdiseno/:id',
                 component: CreardisenoComponent,
                 data: { roles: ['ADMIN'] }
+            },
+            {
+                path: 'misdisenos',
+                component: MisdisenosComponent,
             },
         ],
         canActivate: [seguridadGuard],

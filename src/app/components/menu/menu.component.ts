@@ -17,6 +17,7 @@ import { UsersService } from '../../services/users.service';
 export class MenuComponent {
   //Rol del usuario que inicio sesion
   role: string = '';
+  user: string = '';
   id: number = 0;
 
   usuarioVerificado : boolean = false
@@ -31,6 +32,7 @@ export class MenuComponent {
   //Llamamos el metodo para mostrar el rol y luego llama al metodo para verificar si hay un token
   verificar() {
     this.role = this.loginService.showRole();
+    this.user = this.loginService.showUsername();
     return this.loginService.verificar();
   }
 

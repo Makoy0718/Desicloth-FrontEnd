@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MenuComponent } from '../../menu/menu.component';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-listardiseno',
@@ -35,10 +36,12 @@ export class ListardisenoComponent implements OnInit{
 	categoriaSeleccionada: string | null = null;
 	generoSeleccionado: string | null = null;
 
-	pageSize = 3; // Diseños por página
-	paginaActual = 0; //Pagina con la que comenzara el paginador
+	pageSize = 3;
+	paginaActual = 0;
 
-	constructor(private disenoService: DisenoService) {}
+	role: string = '';
+
+	constructor(private disenoService: DisenoService, private loginService: LoginService) {}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -92,4 +95,22 @@ export class ListardisenoComponent implements OnInit{
       		});
     	});
   	}
+
+	//Llamamos el metodo para mostrar el rol y luego llama al metodo para verificar si hay un token
+	verificar() {
+		this.role = this.loginService.showRole();
+		return this.loginService.verificar();
+	}
+
+	//Checa si el rol traido coincide con ADMIN
+	isAdmin() {
+		return this.role === 'ADMIN';
+	}
+
+	//Checa si el rol traido coincide con CLIENTE
+	isCliente() {
+		return this.role === 'CLIENTE';
+	}
+
+	
 }
