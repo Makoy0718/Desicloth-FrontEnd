@@ -194,7 +194,6 @@ export const routes: Routes = [
         ],
         canActivate: [seguridadGuard],
     },
-
     //Ruta y subrutas de pedido
     {
         path:'rutapedidos',component:PedidoComponent,
@@ -223,8 +222,7 @@ export const routes: Routes = [
             },
         ],
     },
-
-
+    //Rutas de todo lo relacionado con  dashboard y los reportes
     {
         path:'rutadashboard',component:DashboardComponent,
         children: [
