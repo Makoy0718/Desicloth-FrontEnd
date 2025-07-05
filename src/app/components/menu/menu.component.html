@@ -5,6 +5,9 @@
 	
 	<div class="menu-group">
 		<!-- Botones de menú (todos los que ya tenías) -->
+		 <div class="menu-items" *ngIf="isAdmin()">
+			<button mat-button [matMenuTriggerFor]="menuDashboard" class="btn-rojo">Dashboards</button>
+		</div>
 		<div class="menu-items" *ngIf="isAdmin()">
 			<button mat-button [matMenuTriggerFor]="menuUsers" class="btn-rojo">Usuarios</button>
 		</div>
@@ -44,6 +47,10 @@
 	
 </mat-toolbar>
 
+<!-- Opciones para el menu de users -->
+<mat-menu #menuDashboard="matMenu">
+	<button mat-menu-item routerLink="/rutadashboard/reportediseno">Reportes de Diseños</button>
+</mat-menu>
 
 <!-- Opciones para el menu de users -->
 <mat-menu #menuUsers="matMenu">
