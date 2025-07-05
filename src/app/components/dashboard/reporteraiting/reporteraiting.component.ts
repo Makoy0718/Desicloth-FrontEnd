@@ -18,7 +18,7 @@ export class ReporteraitingComponent implements OnInit {
         beginAtZero: false, 
         title: {
           display: true,
-          text: 'Rating Promedio', 
+          text: 'Comparacion', 
         },
         min: 1,
         max: 5, 
@@ -33,13 +33,13 @@ export class ReporteraitingComponent implements OnInit {
       },
       title: {
         display: true,
-        text: 'Promedio de Rating por Galería', 
+        text: 'Comparacion de rating de las galeria', 
       },
     },
   };
 
   barCharLabels: string[] = []; 
-  barCharType: ChartType = 'line'; 
+  barCharType: ChartType = 'bar'; 
   barCharLegend = true;
   barCharData: ChartDataset[] = []; 
 
@@ -53,7 +53,7 @@ export class ReporteraitingComponent implements OnInit {
         this.barCharData = [
           {
             data: data.map((galeria) => galeria.ratingGaleria), 
-            label: 'Rating Promedio', 
+            label: 'Comparacion de rating de las galeria', 
             backgroundColor: 'rgba(63, 81, 181, 0.2)', 
             borderColor: '#3f51b5', 
             pointBackgroundColor: '#3f51b5', 

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Diseno } from '../models/diseno';
 import { ComparacionPreciosDisenoDTO } from '../models/ComparacionPreciosDisenoDTO';
+import { ConteoDisenoCategoriaOrigenDTO } from '../models/ConteoDisenoCategoriaOrigenDTO';
+
 
 const base_url = environment.base;
 
@@ -51,4 +53,12 @@ export class DisenoService {
 	getAvrgPreciosDiseno(): Observable<ComparacionPreciosDisenoDTO[]> {
     	return this.http.get<ComparacionPreciosDisenoDTO[]>(`${this.url}/compararPreciosOrigenDiseno`)
   	}
+
+	getConteoDisenosPorCategoriaYOrigen(): Observable<ConteoDisenoCategoriaOrigenDTO[]> {
+		return this.http.get<ConteoDisenoCategoriaOrigenDTO[]>(`${this.url}/conteoDisenosPorCategoriaYOrigenDiseno`);
+	}
+
+	getDisenosRecientes(): Observable<Diseno[]> {
+		return this.http.get<Diseno[]>(`${this.url}/buscarRecientesDiseno`);
+	}
 }

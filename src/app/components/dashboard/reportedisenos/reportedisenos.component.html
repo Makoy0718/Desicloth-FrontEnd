@@ -1,7 +1,8 @@
 <div class="Reporte-Contenedor-01">
     <div class="Titulo-Contenedor-01">
-        <h1 class="Titulo-01">Reporte de diseños 01</h1>
+        <h1 class="Titulo-01">Reporte de Diseños por precio promedio según su origen</h1>
     </div>
+
     <div class="Grafico-Contenedor-01">
         <canvas
         baseChart
@@ -9,8 +10,51 @@
         [labels]="barCharLabels"
         [options]="barCharOptions"
         [type]="barCharType"
-        [legend]="barCharLegend"
-        >
+        [legend]="barCharLegend">
         </canvas>
+    </div>
+
+    <div class="Titulo-Contenedor-01">
+        <h1 class="Titulo-01">Reporte de Diseños por Categoría y Origen</h1>
+    </div>
+
+    <div class="Grafico-Contenedor-01">
+        <canvas
+        baseChart
+        [datasets]="conteoData"
+        [labels]="conteoLabels"
+        [options]="conteoOptions"
+        [type]="conteoType"
+        [legend]="conteoLegend">
+        </canvas>
+    </div>
+
+    <div class="Titulo-Contenedor-01">
+        <h1 class="Titulo-01">Diseños más recientes</h1>
+    </div>
+
+    <div class="Tarjetas-Contenedor-01">
+        <mat-card *ngFor="let diseno of disenosPaginados" class="example-card mat-elevation-z8">
+            <mat-card-header>
+            <mat-card-title>Precio: S/. {{ diseno.precioDiseno }}</mat-card-title>
+            <mat-card-subtitle>Producto: {{ diseno.producto.nombreProducto }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="diseno.imagenDiseno || 'https://material.angular.dev/assets/img/examples/shiba2.jpg'" alt="Diseño" />
+            <mat-card-content>
+            <p><strong>Origen:</strong> {{ diseno.tipoOrigenDiseno }}</p>
+            <p><strong>Género:</strong> {{ diseno.genero.nombreGenero }}</p>
+            <p><strong>Categoría:</strong> {{ diseno.categoria.nombreCategoria }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="Paginador-Contenedor">
+        <mat-paginator
+            [length]="disenosRecientes.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[2, 4, 6]"
+            showFirstLastButtons
+            (page)="cambiarPagina($event)">
+        </mat-paginator>
     </div>
 </div>
