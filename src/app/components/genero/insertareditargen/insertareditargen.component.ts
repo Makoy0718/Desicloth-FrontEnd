@@ -97,4 +97,7 @@ export class InsertareditargenComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.router.navigate(['rutagenero']);  
+  }
 }

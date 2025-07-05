@@ -2,6 +2,12 @@
   <div style="text-align: center; margin: 5%">
     <h1>Lista de géneros</h1>
   </div>
+
+   <div style="text-align: right; margin: 0 5% 1% 5%;"> 
+    <button mat-raised-button color="primary" [routerLink]="['insertargenero']">
+      <mat-icon>add</mat-icon> Agregar Género
+    </button>
+  </div>
   <div style="text-align: center; margin: 5%">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Position Column -->
@@ -47,5 +53,16 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+    
+    <br />
+    <br />
+
+    <mat-paginator
+      [length]="20"
+      [pageSize]="10"
+      [pageSizeOptions]="[4, 8, 10]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
   </div>
 </div>

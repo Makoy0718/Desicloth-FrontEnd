@@ -6,11 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Categoria } from '../../../models/categoria';
-import { CategoriaService } from '../../../services/categoria.service';
+import { Genero } from '../../../models/genero';
+import { GeneroService } from '../../../services/genero.service';
 
 @Component({
-  selector: 'app-buscarcategoria',
+  selector: 'app-buscargenero',
   imports: [
     MatTableModule,
     CommonModule,
@@ -20,45 +20,39 @@ import { CategoriaService } from '../../../services/categoria.service';
     MatInputModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './buscarcategoria.component.html',
-  styleUrl: './buscarcategoria.component.css'
+  templateUrl: './buscargenero.component.html',
+  styleUrl: './buscargenero.component.css'
 })
-export class BuscarcategoriaComponent implements OnInit {
-   dataSource: MatTableDataSource<Categoria> = new MatTableDataSource();
+export class BuscargeneroComponent {
+dataSource: MatTableDataSource<Genero> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3'];
 
   form: FormGroup;
-  busquedaNombre: string=""
+  idgen: number = 0;
 
-  constructor(
-  private cS: CategoriaService, 
-  private fb: FormBuilder) {
+  constructor(private gS: GeneroService, private fb: FormBuilder) {
     this.form = fb.group({
-      nombre: [''],
+      id: [''],
     });
   }
 
   ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
+    this.gS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
     });
-  this.form.get('nombre')?.valueChanges.subscribe(value=>{
-    this.busquedaNombre=value
-    this.buscar()
-  })
-
+    this.form.get('id')?.valueChanges.subscribe((value) => {
+      this.idgen = value;
+      this.buscar();
+    });
   }
 
   buscar() {
-    if (this.busquedaNombre && this.busquedaNombre.trim().length > 0) {
-      this.cS.searchByName(this.busquedaNombre.trim()).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-      });
+    if (this.idgen > 0) {
+      this.gS.listId(this.idgen).subscribe((data) => this.dataSource = new MatTableDataSource([data]));
     } else {
-      this.cS.list().subscribe(data => {
+      this.gS.list().subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
       });
     }
   }
-
 }

@@ -22,12 +22,18 @@ import { InsertareditarroleComponent } from './components/role/insertareditarrol
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
+import { InsertareditarpedidoComponent } from './components/pedido/insertareditarpedido/insertareditarpedido.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { InsertareditarpagoComponent } from './components/pago/insertareditarpago/insertareditarpago.component';
 import { BuscargaleriaComponent } from './components/galeria/buscargaleria/buscargaleria.component';
+import { BuscargeneroComponent } from './components/genero/buscargenero/buscargenero.component';
+import { BuscarusersComponent } from './components/users/buscarusers/buscarusers.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReportedisenosComponent } from './components/dashboard/reportedisenos/reportedisenos.component';
 import { ReporteraitingComponent } from './components/dashboard/reporteraiting/reporteraiting.component';
-import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
 import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
+
 
 
 //RUTAS DEL FRONTEND
@@ -77,11 +83,11 @@ export const routes: Routes = [
                 component: IsertareditarCategoriaComponent,
                 data: { roles: ['ADMIN'] }
             },
-            {
-                path:'busquedacategoria',
-                component:BuscarcategoriaComponent,
-                data: { roles: ['ADMIN'] }
-            },
+            //{
+                //path:'busquedacategoria',
+                //component:BusquedaCategoriaComponent,
+                //data: { roles: ['ADMIN'] }
+            //},
         ],
         canActivate: [seguridadGuard],
     },
@@ -138,6 +144,11 @@ export const routes: Routes = [
                 component: InsertareditargenComponent,
                 data: { roles: ['ADMIN'] }
             },
+            {
+                path: 'busquedagenero',
+                component: BuscargeneroComponent,
+                data: { roles: ['ADMIN'] }
+            },
         ],
         canActivate: [seguridadGuard],
     },
@@ -148,10 +159,17 @@ export const routes: Routes = [
             {
                 path: 'insertarusers',
                 component: InsertareditarusersComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
+                data: { roles: ['ADMIN'] }
+            },
+            {
+                path: 'busquedausers',
+                component: BuscarusersComponent,
+                data: { roles: ['ADMIN'] }
             },
         ],
         canActivate: [seguridadGuard],
@@ -172,6 +190,36 @@ export const routes: Routes = [
         canActivate: [seguridadGuard],
     },
 
+    //Ruta y subrutas de pedido
+    {
+        path:'rutapedidos',component:PedidoComponent,
+        children:[
+            {
+                path:'insertarpedido',
+                component: InsertareditarpedidoComponent,
+            },
+            {
+                path:'edicionespedido/:id',
+                component:InsertareditarpedidoComponent,
+            },
+        ],
+    },
+    //Ruta y subrutas de pago
+    {
+        path:'rutapagos',component:PagoComponent,
+        children:[
+            {
+                path:'insertarpago',
+                component: InsertareditarpagoComponent,
+            },
+            {
+                path:'edicionespago/:id',
+                component:InsertareditarpagoComponent,
+            },
+        ],
+    },
+
+
     {
         path:'rutadashboard',component:DashboardComponent,
         children: [
@@ -190,6 +238,7 @@ export const routes: Routes = [
         ],
         canActivate: [seguridadGuard],
     },
+
 
     //Ruta de la landing page
 	{
