@@ -1,0 +1,90 @@
+<div class="container">
+    <div style="text-align: center; margin: 5%">
+        <h1>Lista de pagos</h1>
+        <p>Total de registros: {{dataSource.data.length}}</p>
+    </div>
+
+    <div style="text-align: right; margin: 0 5% 1% 5%;">
+        <button mat-raised-button color="primary" [routerLink]="['insertarpago']">
+            <mat-icon>add</mat-icon> Agregar Pago
+        </button>
+    </div>
+
+    <div style="text-align: center; margin: 5%">
+        
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="c1">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element"> {{element.idPago}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="c2">
+                <th mat-header-cell *matHeaderCellDef>Metodo</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.metodoPago}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="c3">
+                <th mat-header-cell *matHeaderCellDef>Monto</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.montoPago}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="c4">
+                <th mat-header-cell *matHeaderCellDef>Comprobante</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.comprobantePago}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="c5">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.fechaPago}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="c6">
+                <th mat-header-cell *matHeaderCellDef>Pedido</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.pedido.idPedido }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="c7">
+                <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+                <td mat-cell *matCellDef="let element">
+                    <button matButton="outlined" [routerLink]="['edicionespagos',element.idPago]">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+                
+            </ng-container>
+
+            <ng-container matColumnDef="c8">
+                <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button matButton="outlined" (click)="eliminarPago(element.idPago)" 
+                >
+                <mat-icon>delete_outline</mat-icon>
+                </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <br />
+        <br />
+        <mat-paginator
+           [length]="20"
+           [pageSize]="10"
+           [pageSizeOptions]="[4, 8, 10]"
+           aria-label="Select page"
+           >
+        </mat-paginator>
+    </div>
+</div>

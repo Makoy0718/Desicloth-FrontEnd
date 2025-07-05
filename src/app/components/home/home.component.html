@@ -1,1 +1,17 @@
-<h1>Esta sera la Pagina luego de iniciar sesion</h1>
+<div class="bienvenida-container">
+  <mat-card class="bienvenida-card mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>¡Bienvenido a tu espacio creativo!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Transforma tu imaginación en diseños únicos. Personaliza, experimenta y crea sin límites.</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="accent" class="btn-crear" [routerLink]="['/rutadisenos/creardiseno']">
+        <mat-icon>brush</mat-icon> ¡Crea un diseño!
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,71 @@
+<div class="container">
+    <div style="text-align: center;margin: 5%;">
+        <h1>Registro de Pagos</h1>
+    </div>
+    <div style="text-align: center;margin: 5%;">
+        <form [formGroup]="form" (ngSubmit)="aceptar()" style="flex: 1;">
+
+            <mat-form-field class="example-full-width" *ngIf="edicion">
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="codigo" />
+                <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+                El Código del pedido es obligatorio!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="tipo">
+                @for (food of tiposPago; track food) {
+                    <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+                El metodo de pago es obligatorio!!
+            </mat-error>
+
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Monto</mat-label>
+                <input matInput placeholder="1000" formControlName="monto" />
+                <mat-error *ngIf="form.get('monto')?.hasError('required')">
+                    costo es obligatorio!!
+                 </mat-error>
+                </mat-form-field>
+            <br />
+            <mat-form-field>
+                 <mat-label>Comprobante</mat-label>
+                  <textarea matInput formControlName="componente"></textarea>
+                  <mat-error *ngIf="form.get('documentacion')?.hasError('required')">
+                    El comprobante es obligatoria!!
+                  </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Fecha</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fechaP" />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="form.get('fechaP')?.hasError('required')">
+                    La fecha es obligatoria!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>ID de pedido</mat-label>
+                <mat-select formControlName="pedid"> <!--Reactive Forms-->
+                    @for (food of listaPedido; track food) {
+                        <mat-option [value]="food.idPedido">{{food.idPedido}}</mat-option>
+                    }
+                </mat-select>
+                <mat-error *ngIf="form.get('pedid')?.hasError('required')">
+                    Asocia el pago a un pedido disponible (unico)!!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <button mattButton ="outlined">Aceptar</button>
+            <button matButton (click)="cancelar()">Cancelar</button>
+        </form>
+    </div>
+</div>
