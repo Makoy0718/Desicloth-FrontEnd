@@ -76,7 +76,7 @@ export class InsertareditarrecComponent implements OnInit {
       this.reclamo.titulo = this.form.value.title;
       this.reclamo.descripcion = this.form.value.description;
       this.reclamo.estado = this.form.value.state;
-      this.reclamo.user = this.form.value.us;
+      this.reclamo.user.idUser = this.form.value.us;
       if (this.edicion) {
         //actualizar
         this.rS.update(this.reclamo).subscribe(() => {
@@ -92,7 +92,7 @@ export class InsertareditarrecComponent implements OnInit {
           });
         });
       }
-      console.log(this.reclamo);
+      console.log(this.form.value);
       //this.router.navigate(['rutareclamo']);
     }
   }
@@ -102,12 +102,15 @@ export class InsertareditarrecComponent implements OnInit {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idReclamo),
-          nombre: new FormControl(data.titulo),
-          correo: new FormControl(data.descripcion),
-          contrasena: new FormControl(data.estado),
+          title: new FormControl(data.titulo),
+          description: new FormControl(data.descripcion),
+          state: new FormControl(data.estado),
           us: new FormControl(data.user.idUser),
         });
       });
     }
+  }
+  cancelar() {
+    this.router.navigate(['rutareclamo']);
   }
 }

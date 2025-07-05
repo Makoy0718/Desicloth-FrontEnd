@@ -76,7 +76,7 @@ export class InsertareditarusersComponent implements OnInit {
       this.users.username = this.form.value.nombre;
       this.users.correoUser = this.form.value.correo;
       this.users.password = this.form.value.contrasena;
-      this.users.rol = this.form.value.role;
+      this.users.rol.idRole = this.form.value.role.idRole;
       if (this.edicion) {
         //actualizar
         this.uS.update(this.users).subscribe(() => {

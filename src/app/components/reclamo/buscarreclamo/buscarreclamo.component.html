@@ -1,6 +1,6 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Lista de Géneros</h1>
+    <h1>Lista de Reclamos</h1>
   </div>
 
   <div>
@@ -14,23 +14,38 @@
 
   <div style="text-align: center; margin: 5%">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
+            <!-- Position Column -->
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.idGenero }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.idReclamo }}</td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>Género</th>
-        <td mat-cell *matCellDef="let element">{{ element.nombreGenero }}</td>
+        <th mat-header-cell *matHeaderCellDef>Titulo</th>
+        <td mat-cell *matCellDef="let element">{{ element.titulo }}</td>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="c3">
         <th mat-header-cell *matHeaderCellDef>Descripción</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.descripcionGenero }}
+          {{ element.descripcion }}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.estado }}
+        </td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.user.username }}
         </td>
       </ng-container>
 
@@ -42,4 +57,5 @@
     <br />
   </div>
 </div>
+
 

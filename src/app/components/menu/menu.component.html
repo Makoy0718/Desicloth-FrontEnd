@@ -47,8 +47,9 @@
 
 <!-- Opciones para el menu de users -->
 <mat-menu #menuUsers="matMenu">
-	<button mat-menu-item>Listar</button>
-	<button mat-menu-item>Registrar</button>
+	<button mat-menu-item routerLink="/rutausers">Listar</button>
+	<button mat-menu-item routerLink="/rutausers/insertarusers">Registrar</button>
+	<button mat-menu-item routerLink="/rutausers/busquedausers">Buscar Usuarios</button>
 </mat-menu>
 
 <!-- Opciones para el menu de roles -->
@@ -80,8 +81,8 @@
 
 <!-- Opciones para el menu de generos -->
 <mat-menu #menuGeneros="matMenu">
-	<button mat-menu-item routerLink="/rutageneros">Listar</button>
-	<button mat-menu-item routerLink="/rutageneros/insertargenero" *ngIf="isAdmin()">Registrar</button>
+	<button mat-menu-item routerLink="/rutagenero">Listar</button>
+	<button mat-menu-item routerLink="/rutagenero/insertargenero" *ngIf="isAdmin()">Registrar</button>
 </mat-menu>
 
 <!-- Opciones para el menu de prodctos -->
@@ -104,8 +105,9 @@
 
 <!-- Opciones para el menu de reclamos -->
 <mat-menu #menuReclamos="matMenu">
-	<button mat-menu-item routerLink="/rutareclamos">Listar</button>
-	<button mat-menu-item routerLink="/rutareclamos/insertarreclamo">Registrar</button>
+	<button mat-menu-item routerLink="/rutareclamo">Listar</button>
+	<button mat-menu-item routerLink="/rutareclamo/insertarreclamo">Registrar</button>
+	<button mat-menu-item routerLink="/rutareclamo/busquedareclamo">Buscar Reclamo</button>
 </mat-menu>
 
 <mat-menu #menuSalir="matMenu">

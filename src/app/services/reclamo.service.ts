@@ -32,10 +32,10 @@ export class ReclamoService {
   }
 
   update(a: Reclamo) {
-    return this.http.put(this.url, a);
+    return this.http.put(`${this.url}/modificarReclamo`, a);
   }
 
   deleteRec(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/eliminarReclamo/${id}`);
   }
 }
