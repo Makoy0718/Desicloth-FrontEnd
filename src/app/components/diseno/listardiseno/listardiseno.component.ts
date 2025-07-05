@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MenuComponent } from '../../menu/menu.component';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listardiseno',
@@ -19,11 +20,12 @@ import { MenuComponent } from '../../menu/menu.component';
 	MatCardModule, MatButtonModule, 
 	RouterLink, MatIconModule, 
 	MatFormFieldModule, MatSelectModule, 
-	MatOptionModule,],
+	MatOptionModule, MatPaginatorModule,
+	],
   templateUrl: './listardiseno.component.html',
   styleUrl: './listardiseno.component.css'
 })
-export class ListardisenoComponent{
+export class ListardisenoComponent implements OnInit{
 	disenos: Diseno[] = [];
   	disenosFiltrados: Diseno[] = [];
 
@@ -33,9 +35,12 @@ export class ListardisenoComponent{
 	categoriaSeleccionada: string | null = null;
 	generoSeleccionado: string | null = null;
 
-	
+	pageSize = 3; // Diseños por página
+	paginaActual = 0; //Pagina con la que comenzara el paginador
 
 	constructor(private disenoService: DisenoService) {}
+
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	ngOnInit(): void {
     	this.disenoService.listDiseno().subscribe(data => {
@@ -56,6 +61,26 @@ export class ListardisenoComponent{
 		const coincideGenero = !this.generoSeleccionado || diseno.genero.nombreGenero === this.generoSeleccionado;
 		return coincideCategoria && coincideGenero;
 		});
+
+		this.paginaActual = 0;
+
+		if (this.paginator) {
+			this.paginator.pageIndex = 0; // ✅ <- clave
+			this.paginator._changePageSize(this.paginator.pageSize); // fuerza redibujo
+		}
+	}
+
+	// Función para obtener solo los diseños visibles en la página actual
+	get disenosPaginados(): Diseno[] {
+		const start = this.paginaActual * this.pageSize;
+		const end = start + this.pageSize;
+		return this.disenosFiltrados.slice(start, end);
+	}
+
+	// Captura el evento de cambio de página del paginador
+	cambiarPagina(event: PageEvent): void {
+		this.pageSize = event.pageSize;
+		this.paginaActual = event.pageIndex;
 	}
 
 	eliminarDiseno(id: number) {

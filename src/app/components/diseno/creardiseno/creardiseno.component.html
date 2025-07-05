@@ -1,131 +1,115 @@
 <div class="diseño-container">
+	<mat-card class="main-card">
+    	<h1 class="titulo">Crea tu diseño</h1>
+    	<p class="subtitulo">Transforma tus ideas en prendas únicas con nuestros servicios exclusivos</p>
 
-	<h1 class="titulo">Crea tu diseño</h1>
-	<p class="subtitulo">Transforma tus ideas en prendas únicas con nuestros servicios exclusivos</p>
+    	<div class="contenido">
+      		<form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario mat-elevation-z2">
+        		<mat-slide-toggle formControlName="tipoIA">¿Generar con IA?</mat-slide-toggle>
+        		<h2 *ngIf="form.get('tipoIA')?.value">Personaliza con IA</h2>
+        		<p class="descripcion" *ngIf="form.get('tipoIA')?.value">
+          			Describe lo que deseas y la IA generará una visualización de tu prenda ideal.
+        		</p>
 
-	<div class="container" style="display: flex; gap: 2rem; padding: 2rem">
-		<form [formGroup]="form" (ngSubmit)="aceptar()" style="flex: 1">
-			<mat-slide-toggle formControlName="tipoIA">
-				¿Generar con IA?
-			</mat-slide-toggle>
-
-			<h2 *ngIf="form.get('tipoIA')?.value">Personaliza con IA</h2>
-      		<p class="descripcion" *ngIf="form.get('tipoIA')?.value">Utiliza nuestra inteligencia artificial para diseñar prendas personalizadas al instante. Describe lo que deseas y la IA generará una visualización de tu prenda ideal.</p>
-			<br>
-			<br>
-
-			<!-- Selector de Producto -->
-			<mat-form-field appearance="outline" class="full-width">
-				<mat-label>Selecciona un producto para el diseño</mat-label>
-				<mat-select [(value)]="form.controls['producto'].value" formControlName="producto">
-				<mat-option *ngFor="let producto of productos" [value]="producto">
-					{{ producto.nombreProducto }}
-				</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br><br>
-
-			<!-- Input de Id de diseno, solo visible si es edicion -->
-			<mat-form-field class="full-width" *ngIf="edicion">
-				<mat-label>Id</mat-label>
-				<input matInput formControlName="idDiseno" />
-			</mat-form-field>
-			<br *ngIf="edicion"><br *ngIf="edicion">
-			
-			<!-- Input de la base64 de la imagen cargada, solo visible si es edicion -->
-			<mat-form-field class="full-width" *ngIf="edicion">
-				<mat-label>Imagen (URL)</mat-label>
-				<input matInput formControlName="imagenDiseno" />
-			</mat-form-field>
-			<br *ngIf="edicion"><br *ngIf="edicion">
-
-			<!-- Input visible de precio de diseno -->
-			<mat-form-field class="full-width">
-				<mat-label>Asigna un precio al diseño</mat-label>
-				<input matInput type="number" formControlName="precioDiseno" />
-			</mat-form-field>
-			<br><br>
-
-			<!-- Input del comentario del diseno en la galeria almacenada, solo visible si NO es edicion -->
-			<mat-form-field class="full-width" *ngIf="!edicion">
-				<mat-label>Deja un comentario en tu diseno</mat-label>
-				<input matInput formControlName="comentarioDiseno" />
-			</mat-form-field>
-			<br><br>
-
-			<!-- Modificador de fecha que solo aparece si es edicion -->
-			<mat-form-field class="full-width" *ngIf="edicion">
-				<mat-label>Fecha de Origen</mat-label>
-				<input matInput [matDatepicker]="picker" formControlName="fechaOrigenDiseno" />
-				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-				<mat-datepicker #picker></mat-datepicker>
-			</mat-form-field>
-			<br *ngIf="edicion"><br *ngIf="edicion">
-
-			<!-- Selector de archivo, si es manual la carga -->
-			<div>
-				<input type="file" accept="image/*" (change)="onFileSelected($event)" *ngIf="!form.get('tipoIA')?.value"/>
-			</div>
-
-			<!-- Generador de imagen por IA, si es por IA la carga -->
-			<div *ngIf="form.get('tipoIA')?.value" class="prompt-section">
-				<mat-form-field class="full-width">
-					<mat-label>Describe tu diseño ideal</mat-label>
-					<input matInput formControlName="promtDiseno" />
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Producto</mat-label>
+					<mat-select formControlName="producto">
+						<mat-option *ngFor="let producto of productos" [value]="producto">
+							{{ producto.nombreProducto }}
+						</mat-option>
+					</mat-select>
 				</mat-form-field>
-				<button mat-icon-button color="primary" (click)="generarImagen()" type="button">
-					<mat-icon>autorenew</mat-icon>
-				</button>
-			</div>
-			<br><br>
 
-			<!-- Selector de categoría -->
-			<mat-form-field class="full-width">
+				<mat-form-field class="full-width" *ngIf="edicion">
+					<mat-label>ID del diseño</mat-label>
+					<input matInput formControlName="idDiseno" />
+				</mat-form-field>
+
+				<mat-form-field class="full-width">
+					<mat-label>Precio</mat-label>
+					<input matInput type="number" formControlName="precioDiseno" />
+				</mat-form-field>
+
+				<mat-form-field class="full-width" *ngIf="!edicion">
+					<mat-label>Comentario</mat-label>
+					<input matInput formControlName="comentarioDiseno" />
+				</mat-form-field>
+
+				<mat-form-field class="full-width" *ngIf="edicion">
+					<mat-label>Fecha de Origen</mat-label>
+					<input matInput [matDatepicker]="picker" formControlName="fechaOrigenDiseno" />
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+
+        		<div *ngIf="!form.get('tipoIA')?.value" class="upload-wrapper">
+					<button mat-raised-button color="accent" (click)="fileInput.click()">
+						<mat-icon>upload</mat-icon>
+						Subir imagen
+					</button>
+					<input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+				</div>
+
+				<div *ngIf="form.get('tipoIA')?.value" class="prompt-section">
+					<mat-form-field class="full-width">
+						<mat-label>Describe tu diseño ideal</mat-label>
+						<input matInput formControlName="promtDiseno" />
+					</mat-form-field>
+					<button mat-icon-button color="primary" (click)="generarImagen()" type="button">
+						<mat-icon>autorenew</mat-icon>
+					</button>
+				</div>
+
+				<mat-form-field class="full-width">
 				<mat-label>Categoría</mat-label>
-				<mat-select formControlName="categoria">
-					<mat-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria.nombreCategoria }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br><br>
+					<mat-select formControlName="categoria">
+						<mat-option *ngFor="let categoria of categorias" [value]="categoria">
+						{{ categoria.nombreCategoria }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 
-			<!-- Selector de genero -->
-			<mat-form-field class="full-width">
-				<mat-label>Género</mat-label>
-				<mat-select formControlName="genero">
-					<mat-option *ngFor="let genero of generos" [value]="genero">{{ genero.nombreGenero }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br><br>
+				<mat-form-field class="full-width">
+					<mat-label>Género</mat-label>
+					<mat-select formControlName="genero">
+						<mat-option *ngFor="let genero of generos" [value]="genero">
+						{{ genero.nombreGenero }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 
-			<!-- Selector de Galería -->
-			<mat-form-field appearance="outline" class="full-width">
-				<mat-label>Selecciona una galería</mat-label>
-				<mat-select [(value)]="form.controls['galeria'].value" formControlName="galeria">
-				<mat-option *ngFor="let galeria of galerias" [value]="galeria">
-					{{ galeria.nombreGaleria }}
-				</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br><br>
+				<mat-form-field appearance="outline" class="full-width" *ngIf="!edicion">
+					<mat-label>Galería</mat-label>
+					<mat-select formControlName="galeria">
+						<mat-option *ngFor="let galeria of galerias" [value]="galeria">
+						{{ galeria.nombreGaleria }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 
-			<button mat-raised-button color="primary" type="submit">Guardar Diseño</button>
-		</form>
+				<div class="boton-guardar">
+					<button mat-raised-button color="primary" type="submit" class="full-width">
+						Guardar Diseño
+					</button>
+				</div>
+      		</form>
+			
+			<div class="columna-derecha">
+				<div class="imagen-preview" *ngIf="imagenGenerada">
+					<img [src]="imagenGenerada" alt="Diseño generado" />
+				</div>
 
-		<!-- Columna derecha: imagen + tips -->
-		<div style="flex: 1; display: flex; flex-direction: column; gap: 0rem;">
-			<div class="imagen-preview" *ngIf="imagenGenerada">
-				<img [src]="imagenGenerada" alt="Diseño generado por IA" style="max-width: 100%; border-radius: 8px;" />
-			</div>
-
-			<div class="tips" *ngIf="form.get('tipoIA')?.value">
-				<h3>Consejos para mejores resultados:</h3>
-				<ul>
-					<li>Sé específico sobre el tipo de prenda (camiseta, vestido, etc.)</li>
-					<li>Describe colores, patrones y estilos con detalle</li>
+				<!-- Solo mostrar tips si el toggle IA está activado -->
+				<div class="tips" *ngIf="form.get('tipoIA')?.value">
+					<h3>Consejos para mejores resultados:</h3>
+					<ul>
+					<li>Sé específico sobre el tipo de prenda</li>
+					<li>Describe colores, patrones y estilos</li>
 					<li>Menciona el estilo que buscas (casual, formal, vintage)</li>
 					<li>Indica si deseas algún texto o logo específico</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</div>
+    	</div>
+  	</mat-card>
 </div>
