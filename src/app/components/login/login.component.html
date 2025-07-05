@@ -1,26 +1,21 @@
-<div class="container" style="text-align: center">
-    <div>
-        <!-- Logo de nuestra emrpresa --> 
-    </div>
-    <h2>Inicie sesión</h2>
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario</mat-label>
-      <input matInput placeholder="Username" [(ngModel)]="username" />
-    </mat-form-field>
-    
-    <br><br>
+<div class="container">
+  <div>
+    <!-- Logo de nuestra empresa -->
+  </div>
+  <h2>Inicie sesión</h2>
+  <mat-form-field class="example-full-width">
+    <mat-label>Usuario</mat-label>
+    <input matInput placeholder="Username" [(ngModel)]="username" />
+  </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input
-        type="password"
-        matInput
-        placeholder="Password"
-        [(ngModel)]="password"
-      />
-    </mat-form-field>
+  <br><br>
 
-    <br><br>
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput placeholder="Password" [(ngModel)]="password" />
+  </mat-form-field>
 
-    <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
+  <br><br>
+
+  <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
 </div>
