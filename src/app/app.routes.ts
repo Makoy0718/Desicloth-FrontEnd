@@ -88,7 +88,7 @@ export const routes: Routes = [
             {
                 path:'busquedacategoria',
                 component:BuscarcategoriaComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN', 'CLIENTE' ] }
             },
         ],
         canActivate: [seguridadGuard],
@@ -130,7 +130,7 @@ export const routes: Routes = [
             {
                 path:'busquedagaleria',
                 component:BuscargaleriaComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             
         ],
@@ -232,7 +232,7 @@ export const routes: Routes = [
                 component: ReportedisenosComponent,
             },
             {
-                path:'promedioraiting',
+                path:'comparacionraiting',
                 component:ReporteraitingComponent,
             },
             {
