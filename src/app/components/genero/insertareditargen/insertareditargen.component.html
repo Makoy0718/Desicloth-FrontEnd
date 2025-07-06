@@ -1,5 +1,6 @@
 <div class="container">
-  <div style="text-align: center;margin: 5%;"><h1>Registro de géneros</h1></div>
+  <div style="text-align: center;margin: 5%;" *ngIf = "!(edicion)"><h1>Registro de géneros</h1></div>
+  <div style="text-align: center;margin: 5%;" *ngIf = "edicion"><h1>Actualización de género</h1></div>
   <div style="text-align: center;margin: 5%;">
     <form [formGroup]="form" (submit)="aceptar()">
 
@@ -31,7 +32,8 @@
       <br />
       
 
-      <button matButton="outlined">Aceptar</button>
+      <button matButton="outlined" *ngIf = "edicion">Actualizar</button>
+      <button matButton="outlined" *ngIf = "!(edicion)">Aceptar</button>
       <button matButton (click)="cancelar()">Cancelar</button>
     </form>
   </div>

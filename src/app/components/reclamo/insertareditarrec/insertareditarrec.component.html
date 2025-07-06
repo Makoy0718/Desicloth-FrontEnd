@@ -1,6 +1,7 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Registro de Reclamos</h1>
+    <h1 *ngIf = "edicion">Actualizar de Reclamo</h1>
+    <h1 *ngIf = "!(edicion)">Registro de Reclamo</h1>
   </div>
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
@@ -44,20 +45,10 @@
       </mat-form-field>
       <br />
 
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="us">
-          <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
-            {{ u.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('us')?.hasError('required')">
-          El usuario es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br />
+      
 
-      <button matButton="outlined">Aceptar</button>
+      <button matButton="outlined" *ngIf = "edicion">Actualizar</button>
+      <button matButton="outlined" *ngIf = "!(edicion)">Aceptar</button>
       <button matButton (click)="cancelar()">Cancelar</button>
     </form>
   </div>
