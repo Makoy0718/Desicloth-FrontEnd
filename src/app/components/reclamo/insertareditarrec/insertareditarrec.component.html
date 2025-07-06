@@ -1,6 +1,7 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Registro de Reclamos</h1>
+    <h1 *ngIf = "edicion">Actualizar de Reclamo</h1>
+    <h1 *ngIf = "!(edicion)">Registro de Reclamo</h1>
   </div>
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
@@ -46,7 +47,8 @@
 
       
 
-      <button matButton="outlined">Aceptar</button>
+      <button matButton="outlined" *ngIf = "edicion">Actualizar</button>
+      <button matButton="outlined" *ngIf = "!(edicion)">Aceptar</button>
       <button matButton (click)="cancelar()">Cancelar</button>
     </form>
   </div>
