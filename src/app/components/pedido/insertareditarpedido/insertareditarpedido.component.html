@@ -34,19 +34,36 @@
             </mat-radio-group>
             <br />
 
+            <!-- 
             <br />
             <mat-form-field>
                 <mat-label>User</mat-label>
-                <mat-select formControlName="usu"> <!--Reactive Forms-->
+                <mat-select formControlName="usu">  Reactive Forms
                     @for (food of listaUsuarios; track food) {
                         <mat-option [value]="food.idUser">
-                            <!--{{food.username}}: {{food.idUser}}-->
+                            {{food.username}}: {{food.idUser}}
                             ID:{{food.idUser}} - Usuario:{{food.username}}
                         </mat-option>
                     }
                 </mat-select>
                 <mat-error *ngIf="form.get('usu')?.hasError('required')">
                     El username es obligatorio!!
+                </mat-error>
+            </mat-form-field>
+            <br />
+            -->
+            <br />
+            <mat-form-field>
+                <mat-label>Producto</mat-label>
+                <mat-select formControlName="producto"> <!--Reactive Forms-->
+                    <mat-option *ngFor="let p of productos"[value]="p">
+                            <!--{{food.username}}: {{food.idUser}}-->
+                            {{p.nombreProducto}} - {{p.tipoProducto}} - Talla: {{ p.tallaProducto }} - S/ {{ p.precioProducto }}
+                    </mat-option>
+                    
+                </mat-select>
+                <mat-error *ngIf="form.get('producto')?.hasError('required')">
+                    El producto es obligatorio!!
                 </mat-error>
             </mat-form-field>
             <br />
@@ -64,9 +81,10 @@
                     </mat-error>
             </mat-form-field>
             <br />-->
-            <button mattButton ="outlined">Aceptar</button>
-            <button matButton (click)="cancelar()">Cancelar</button>
-            <!--<button mat-raised-button color="primary" type="submit">Guardar Pedido</button>-->
+            <!--el boton tiene que ser de tipo submit para que el evento de form se active -->
+            <button mat-raised-button color="primary" type="submit">Aceptar</button>
+            <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+            
         </form>
     </div>
 </div>

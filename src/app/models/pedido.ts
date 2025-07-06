@@ -5,5 +5,4 @@ export class Pedido {
     fechaPedido:Date=new Date()
     estadoPedido:boolean=false
     users: Users = new Users()
-
 }

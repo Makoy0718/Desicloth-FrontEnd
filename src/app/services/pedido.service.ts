@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Pedido } from '../models/pedido';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 const base_url = environment.base;
 @Injectable({
@@ -20,12 +20,12 @@ export class PedidoService {
   listPedido(){
     return this.http.get<Pedido[]>(`${this.url}/listarPedido`)
   }
-  insertPedido(pednuv: Pedido){
-    return this.http.post(`${this.url}/insertarPedido`,pednuv);
+  insertPedido(pedido: Pedido):Observable<Pedido> {
+    return this.http.post<Pedido>(`${this.url}/insertarPedido`,pedido);
   }
 
-  updatePedido(pedmod: Pedido){
-    return this.http.put(`${this.url}/modificarPedido`,pedmod);
+  updatePedido(pedido: Pedido){
+    return this.http.put(`${this.url}/modificarPedido`,pedido);
   }
 
   deletePedido(id:number){
@@ -43,4 +43,8 @@ export class PedidoService {
   listIdPedido(id:number){
     return this.http.get<Pedido>(`${this.url}/buscarPedido/${id}`)
   }
+  //METODOS PARA BUSCAR
+  //busca el pedido por id
+  
+
 }

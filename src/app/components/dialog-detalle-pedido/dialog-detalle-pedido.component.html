@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Detalle del Pedido #{{data.idPedido}}</h2>
+
+<div mat-dialog-content>
+    <p><strong>Fecha:</strong> {{ data.fechaPedido | date }}</p>
+  <p><strong>Estado:</strong> {{ data.estadoPedido ? 'Pendiente' : 'Procesado' }}</p>
+  <p><strong>Usuario:</strong> {{ data.users.username }}</p>
+
+  <p><strong>Productos:</strong></p>
+  <ul>
+    <li *ngFor="let detalle of data.detalles">
+      {{ detalle.producto.nombreProducto }} - Talla: {{ detalle.producto.tallaProducto }}
+    </li>
+  </ul>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="cerrar()">Cerrar</button>
+</div>
