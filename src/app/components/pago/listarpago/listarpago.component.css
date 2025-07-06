@@ -1,0 +1,103 @@
+/* Estilos generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f7fc;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200vh;
+}
+
+/* Contenedor principal */
+div {
+  width: 90%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para las celdas */
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+/* Encabezados */
+th {
+  background-color: #f4f7fc;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Filas de la tabla */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo para los botones */
+button {
+  border: none;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Iconos dentro de los botones */
+mat-icon {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* Estilo para el botón eliminar */
+button[mat-button] {
+  background-color: #e74c3c;
+}
+
+button[mat-button]:hover {
+  background-color: #c0392b;
+}
+
+/* Espaciado de la tabla */
+mat-form-field {
+  margin-bottom: 10px;
+}
+
+

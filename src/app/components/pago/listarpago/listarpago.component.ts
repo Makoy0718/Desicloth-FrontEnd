@@ -9,6 +9,16 @@ import {MatIconModule} from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
+import { FormBuilder } from '@angular/forms';
+import { DetallePedido } from '../../../models/detallepedido';
+import { DetallepedidoService } from '../../../services/detallepedido.service';
+import {inject} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-listarpago',
@@ -19,6 +29,12 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     RouterLink,
     MatPaginatorModule,
+    MatTableModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MatPaginatorModule
   ],
   templateUrl: './listarpago.component.html',
   styleUrl: './listarpago.component.css'
@@ -26,11 +42,15 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 export class ListarpagoComponent implements OnInit {
 
   dataSource:MatTableDataSource<Pago>=new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7','c8'];
+
+  
 
    @ViewChild(MatPaginator) paginator!:MatPaginator;
 
-   constructor(private pagoS:PagoService){}
+   constructor(
+    private pagoS:PagoService
+  ){}
 
    ngOnInit():void{
     this.pagoS.listPago().subscribe((data) =>{
@@ -41,6 +61,8 @@ export class ListarpagoComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator=this.paginator;
     });
+
+  
   }
   ngAfterViewInit(){
     this.dataSource.paginator=this.paginator;//conectando
