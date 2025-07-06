@@ -35,6 +35,8 @@ import { ReporteraitingComponent } from './components/dashboard/reporteraiting/r
 import { ReportecategoriaComponent } from './components/dashboard/reportecategoria/reportecategoria.component';
 import { MisdisenosComponent } from './components/diseno/misdisenos/misdisenos.component';
 import { BuscarreclamoComponent } from './components/reclamo/buscarreclamo/buscarreclamo.component';
+import { ReporteiaComponent } from './components/dashboard/reporteia/reporteia.component';
+import { ReportedisenosporgeneroComponent } from './components/dashboard/reportedisenosporgenero/reportedisenosporgenero.component';
 
 
 
@@ -243,6 +245,14 @@ export const routes: Routes = [
             {
                 path:'conteodisenoporcategoria',
                 component:ReportecategoriaComponent,
+            },
+            {
+                path:'reporteia',
+                component:ReporteiaComponent,
+            },
+            {
+                path:'reportedisenosporgenero',
+                component:ReportedisenosporgeneroComponent,
             },
         ],
         canActivate: [seguridadGuard],

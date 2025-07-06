@@ -4,6 +4,10 @@ import { Galeria } from '../models/galeria';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { RaitingDTO } from '../models/RaitingDTO';
+import { GaleriasConIA } from '../models/galeriasconIA';
+import { TotalGalerias } from '../models/totalgalerias';
+
+
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
@@ -57,4 +61,12 @@ export class GaleriaService {
     return this.http.get<RaitingDTO>(`${this.url}/galerias/${idGaleria}/rating-promedio`);
   }
   
+  getTotalGalerias(): Observable<TotalGalerias> {
+    return this.http.get<TotalGalerias>(`${this.url}/total`);
+  }
+  
+  getGaleriasConIA(): Observable<GaleriasConIA> {
+    return this.http.get<GaleriasConIA>(`${this.url}/ia`);
+  }
+
 }

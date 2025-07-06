@@ -50,13 +50,15 @@
 <!-- Opciones para el menu de users -->
 <mat-menu #menuDashboard="matMenu">
 	<button mat-menu-item routerLink="/rutadashboard/reportediseno">Reportes de Diseños</button>
+	<button mat-menu-item routerLink="/rutadashboard/reporteia">Reportes de IA</button>
+	<button mat-menu-item routerLink="/rutadashboard/reportedisenosporgenero">Reportes de Diseños por Género</button>
 </mat-menu>
 
 <!-- Opciones para el menu de users -->
 <mat-menu #menuUsers="matMenu">
-	<button mat-menu-item routerLink="/rutausers">Listar</button>
+	<button mat-menu-item routerLink="/rutausers" *ngIf="isAdmin()">Listar</button>
 	<button mat-menu-item routerLink="/rutausers/insertarusers">Registrar</button>
-	<button mat-menu-item routerLink="/rutausers/busquedausers">Buscar Usuarios</button>
+	<button mat-menu-item routerLink="/rutausers/busquedausers" *ngIf="isAdmin()">Buscar Usuarios</button>
 </mat-menu>
 
 <!-- Opciones para el menu de roles -->
@@ -90,6 +92,7 @@
 <mat-menu #menuGeneros="matMenu">
 	<button mat-menu-item routerLink="/rutagenero">Listar</button>
 	<button mat-menu-item routerLink="/rutagenero/insertargenero" *ngIf="isAdmin()">Registrar</button>
+	<button mat-menu-item routerLink="/rutagenero/busquedagenero">Buscar Genero</button>
 </mat-menu>
 
 <!-- Opciones para el menu de prodctos -->
