@@ -132,7 +132,7 @@ export const routes: Routes = [
             {
                 path:'busquedagaleria',
                 component:BuscargaleriaComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             
         ],
@@ -239,7 +239,7 @@ export const routes: Routes = [
                 component: ReportedisenosComponent,
             },
             {
-                path:'promedioraiting',
+                path:'comparacionraiting',
                 component:ReporteraitingComponent,
             },
             {
