@@ -37,6 +37,7 @@ import { MisdisenosComponent } from './components/diseno/misdisenos/misdisenos.c
 import { BuscarreclamoComponent } from './components/reclamo/buscarreclamo/buscarreclamo.component';
 import { ReporteiaComponent } from './components/dashboard/reporteia/reporteia.component';
 import { ReportedisenosporgeneroComponent } from './components/dashboard/reportedisenosporgenero/reportedisenosporgenero.component';
+import { BusquedapagoComponent } from './components/pago/busquedapago/busquedapago.component';
 
 
 
@@ -227,6 +228,10 @@ export const routes: Routes = [
             {
                 path:'edicionespago/:id',
                 component:InsertareditarpagoComponent,
+            },
+            {
+                path:'buscarPorMetodo',
+                component:BusquedapagoComponent,
             },
         ],
     },
