@@ -18,21 +18,36 @@
 							{{ producto.nombreProducto }}
 						</mat-option>
 					</mat-select>
+					<mat-error *ngIf="form.get('producto')?.hasError('required')">
+						Es obligatorio el seleccionar un producto
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="full-width" *ngIf="edicion">
 					<mat-label>ID del diseño</mat-label>
 					<input matInput formControlName="idDiseno" />
+					<mat-error *ngIf="form.get('idDiseno')?.hasError('required')">
+						Es obligatorio el tener un ID
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="full-width">
 					<mat-label>Precio</mat-label>
 					<input matInput type="number" formControlName="precioDiseno" />
+					<mat-error *ngIf="form.get('precioDiseno')?.hasError('required')">
+						Es obligatorio especificar un precio
+					</mat-error>
+					<mat-error *ngIf="form.get('precioDiseno')?.hasError('max')">
+						El precio no puede superar 35
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="full-width" *ngIf="!edicion">
 					<mat-label>Comentario</mat-label>
 					<input matInput formControlName="comentarioDiseno" />
+					<mat-error *ngIf="form.get('comentarioDiseno')?.hasError('required')">
+						Es obligatorio añadir un comentario
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="full-width" *ngIf="edicion">
@@ -40,6 +55,9 @@
 					<input matInput [matDatepicker]="picker" formControlName="fechaOrigenDiseno" />
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-datepicker #picker></mat-datepicker>
+					<mat-error *ngIf="form.get('fechaOrigenDiseno')?.hasError('required')">
+						Es obligatorio que cuente con una fecha
+					</mat-error>
 				</mat-form-field>
 
         		<div *ngIf="!form.get('tipoIA')?.value" class="upload-wrapper">
@@ -48,6 +66,9 @@
 						Subir imagen
 					</button>
 					<input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+					<mat-error *ngIf="form.get('imagenDiseno')?.hasError('required')">
+						Es obligatorio que cuente con una imagen
+					</mat-error>
 				</div>
 
 				<div *ngIf="form.get('tipoIA')?.value" class="prompt-section">
@@ -58,6 +79,9 @@
 					<button mat-icon-button color="primary" (click)="generarImagen()" type="button">
 						<mat-icon>autorenew</mat-icon>
 					</button>
+					<mat-error *ngIf="form.get('imagenDiseno')?.hasError('required')">
+						Es obligatorio que cuente con una imagen
+					</mat-error>
 				</div>
 
 				<mat-form-field class="full-width">
@@ -67,6 +91,9 @@
 						{{ categoria.nombreCategoria }}
 						</mat-option>
 					</mat-select>
+					<mat-error *ngIf="form.get('categoria')?.hasError('required')">
+						Es obligatorio que se le de una categoria
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="full-width">
@@ -76,6 +103,9 @@
 						{{ genero.nombreGenero }}
 						</mat-option>
 					</mat-select>
+					<mat-error *ngIf="form.get('genero')?.hasError('required')">
+						Es obligatorio que se le de un genero
+					</mat-error>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline" class="full-width" *ngIf="!edicion">
@@ -85,6 +115,9 @@
 						{{ galeria.nombreGaleria }}
 						</mat-option>
 					</mat-select>
+					<mat-error *ngIf="form.get('galeria')?.hasError('required')">
+						Es obligatorio que se le asigne una galeria
+					</mat-error>
 				</mat-form-field>
 
 				<div class="boton-guardar">
