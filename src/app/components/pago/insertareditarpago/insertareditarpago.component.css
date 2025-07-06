@@ -1,0 +1,86 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    width: 40%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+  }
+  
+  /* Título del formulario */
+  h1 {
+    color: #1e40af;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  /* Estilos del formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilos para los campos de entrada */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input.mat-input-element {
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+  
+  input.mat-input-element:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
+  }
+  
+  /* Estilo de los botones */
+  button {
+    background-color: #1e40af;
+    color: #ffffff;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Mensajes de error */
+  mat-error {
+    color: #ff3d3d;
+    font-size: 14px;
+  }
+  
+  /* Espaciado entre los campos */
+  br {
+    margin-bottom: 20px;
+  }

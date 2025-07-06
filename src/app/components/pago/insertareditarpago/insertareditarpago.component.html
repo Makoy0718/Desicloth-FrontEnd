@@ -14,29 +14,30 @@
             </mat-form-field>
             <br />
 
-            <mat-label>Tipo</mat-label>
-            <mat-select formControlName="tipo">
+            <mat-label>Metodo de Pago</mat-label>
+            <mat-select formControlName="metodo">
                 @for (food of tiposPago; track food) {
                     <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
                 }
-            </mat-select>
-            <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+            <mat-error *ngIf="form.get('metodo')?.hasError('required')">
                 El metodo de pago es obligatorio!!
             </mat-error>
+            </mat-select>
+            
 
             <br />
             <mat-form-field class="example-full-width">
                 <mat-label>Monto</mat-label>
                 <input matInput placeholder="1000" formControlName="monto" />
                 <mat-error *ngIf="form.get('monto')?.hasError('required')">
-                    costo es obligatorio!!
+                    El monto es obligatorio!!
                  </mat-error>
                 </mat-form-field>
             <br />
             <mat-form-field>
                  <mat-label>Comprobante</mat-label>
-                  <textarea matInput formControlName="componente"></textarea>
-                  <mat-error *ngIf="form.get('documentacion')?.hasError('required')">
+                  <textarea matInput formControlName="comprobante"></textarea>
+                  <mat-error *ngIf="form.get('comprobante')?.hasError('required')">
                     El comprobante es obligatoria!!
                   </mat-error>
             </mat-form-field>
@@ -53,19 +54,22 @@
             </mat-form-field>
             <br />
             <mat-form-field>
-                <mat-label>ID de pedido</mat-label>
-                <mat-select formControlName="pedid"> <!--Reactive Forms-->
-                    @for (food of listaPedido; track food) {
-                        <mat-option [value]="food.idPedido">{{food.idPedido}}</mat-option>
-                    }
+                <mat-label>Pedido</mat-label>
+                <mat-select formControlName="pedido"> <!--Reactive Forms-->
+                    <mat-option *ngFor="let p of pedidosDisponibles" [value]="p">
+                         Pedido #{{ p.idPedido }} - Fecha: {{ p.fechaPedido | date:'shortDate' }} - 
+                         Estado: {{ p.estadoPedido ? 'Activo' : 'Inactivo' }}
+                    </mat-option>
                 </mat-select>
-                <mat-error *ngIf="form.get('pedid')?.hasError('required')">
+                <mat-error *ngIf="form.get('pedido')?.hasError('required')">
                     Asocia el pago a un pedido disponible (unico)!!!
                 </mat-error>
             </mat-form-field>
             <br />
-            <button mattButton ="outlined">Aceptar</button>
-            <button matButton (click)="cancelar()">Cancelar</button>
+            <button mat-raised-button color="primary" type="submit">Aceptar</button>
+            <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+
+            
         </form>
     </div>
 </div>
