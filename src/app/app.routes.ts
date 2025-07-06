@@ -213,7 +213,7 @@ export const routes: Routes = [
             {
                 path:'edicionespedido/:id',
                 component:InsertareditarpedidoComponent,
-            },
+            }, 
         ],
     },
     //Ruta y subrutas de pago

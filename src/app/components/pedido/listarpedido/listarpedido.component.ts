@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 import {
   MatDialog,
@@ -41,7 +42,8 @@ import { DialogDetallePedidoComponent } from '../../dialog-detalle-pedido/dialog
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   templateUrl: './listarpedido.component.html',
   styleUrl: './listarpedido.component.css'
@@ -149,12 +151,13 @@ export class ListarpedidoComponent implements OnInit {
     });
   }
   //Metodo para mostrar los productos asociados a un pedido
-  obtenerProductosPorPedido(idPedido:number):string{
-    const productos=this.detallePedidos
+  obtenerProductosPorPedido(idPedido: number): string {
+  const productos = this.detallePedidos
     .filter(detalle => detalle.pedido.idPedido === idPedido)
-    .map(detalle =>`${detalle.producto.nombreProducto} (${detalle.producto.tallaProducto})`);
-    console.log(`Productos del pedido ${idPedido}:`,productos);
-    return productos.length>0? productos.join(', '):'Sin productos'
-  }
+    .map(detalle => `${detalle.producto.nombreProducto} (${detalle.producto.tallaProducto})`);
+
+  return productos.length > 0 ? productos.join(', ') : 'Sin productos';
+}
+  
 
 }

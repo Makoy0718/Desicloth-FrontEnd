@@ -45,12 +45,6 @@ export class PagoService {
     return this.http.get<Pago>(`${this.url}/buscarPago/${id}`)
   }
 
-
-
- 
- 
-
-  
   
 }
 

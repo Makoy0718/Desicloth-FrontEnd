@@ -22,6 +22,7 @@ import { DetallepedidoService } from '../../../services/detallepedido.service';
 import { ProductoService } from '../../../services/producto.service';
 import { Producto } from '../../../models/producto';
 import { LoginService } from '../../../services/login.service';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-insertareditarpedido',
@@ -38,6 +39,7 @@ import { LoginService } from '../../../services/login.service';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
+    MatCardModule
   ],
   templateUrl: './insertareditarpedido.component.html',
   styleUrl: './insertareditarpedido.component.css'
@@ -161,4 +163,6 @@ export class InsertareditarpedidoComponent implements OnInit {
   cancelar(){
     this.router.navigate(['rutapedidos'])
   }
+  
+
 }

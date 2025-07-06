@@ -31,6 +31,9 @@
             <mat-radio-group aria-label="Select an option" formControlName="estado">
             <mat-radio-button [value]="true">Pendiente</mat-radio-button>
             <mat-radio-button [value]="false">Procesado</mat-radio-button>
+            <mat-error *ngIf="form.get('estado')?.hasError('required')">
+                    El estado de pedido es obligatorio!!
+                </mat-error>
             </mat-radio-group>
             <br />
 
@@ -50,24 +53,21 @@
                     El username es obligatorio!!
                 </mat-error>
             </mat-form-field>
-            <br />
-            -->
-            <br />
+            <br />-->
+            
             <mat-form-field>
                 <mat-label>Producto</mat-label>
-                <mat-select formControlName="producto"> <!--Reactive Forms-->
-                    <mat-option *ngFor="let p of productos"[value]="p">
-                            <!--{{food.username}}: {{food.idUser}}-->
-                            {{p.nombreProducto}} - {{p.tipoProducto}} - Talla: {{ p.tallaProducto }} - S/ {{ p.precioProducto }}
+                <mat-select formControlName="producto">
+                    <mat-option *ngFor="let p of productos" [value]="p">
+                        {{ p.nombreProducto }} - {{ p.tipoProducto }} - Talla: {{ p.tallaProducto }} - S/ {{ p.precioProducto }}
                     </mat-option>
-                    
                 </mat-select>
                 <mat-error *ngIf="form.get('producto')?.hasError('required')">
                     El producto es obligatorio!!
                 </mat-error>
             </mat-form-field>
-            <br />
-            
+            <br /><br />
+
             <!-- Para administrador
             <mat-form-field class="example-full-width">
                 <mat-label>ID Usuario</mat-label>

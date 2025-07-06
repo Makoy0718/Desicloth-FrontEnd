@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Pedido } from '../models/pedido';
@@ -44,7 +44,11 @@ export class PedidoService {
     return this.http.get<Pedido>(`${this.url}/buscarPedido/${id}`)
   }
   //METODOS PARA BUSCAR
-  //busca el pedido por id
-  
+  //busca por fecha
+  //BuscarPorFecha(fecha: Date):Observable<Pedido[]>{
+    //const fechaISO=fecha.toISOString().split('T')[0];//Formato yyyy-MM-dd
+    //const params = new HttpParams().set('fecha', fechaISO);//AQUI va la fecha
+    //return this.http.get<Pedido[]>(`${this.url}/buscarPorFecha`, {params});
+  //}
 
 }
