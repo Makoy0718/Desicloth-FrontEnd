@@ -52,6 +52,7 @@ export class PagoService {
     const params = new HttpParams().set('metodo',metodo);
     return this.http.get<Pago[]>(`${this.url}/buscarPorMetodo`, {params});
   }
+  
   //query1:top 5 pagos mas altos:
   obtenerTop5Pagos():Observable<Pago[]>{
     return this.http.get<Pago[]>(`${this.url}/top5pagos`)

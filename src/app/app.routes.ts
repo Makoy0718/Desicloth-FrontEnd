@@ -43,6 +43,10 @@ import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria
 
 
 
+import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
+import { ReporteTop5PagosComponent } from './components/dashboard/reportepago/reportepago.component';
+import { ReportePagosUsuarioComponent } from './components/dashboard/reportepago-usuario/reportepago-usuario.component';
+
 
 //RUTAS DEL FRONTEND
 export const routes: Routes = [
@@ -128,10 +132,12 @@ export const routes: Routes = [
             {
                 path: 'insertagaleria',
                 component: InsertareditarGaleriaComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path:'busquedagaleria',
@@ -215,12 +221,14 @@ export const routes: Routes = [
             {
                 path:'insertarpedido',
                 component: InsertareditarpedidoComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path:'edicionespedido/:id',
                 component:InsertareditarpedidoComponent,
+                data: { roles: ['ADMIN'] }
             }, 
-        ],
+        ],canActivate: [seguridadGuard],
     },
     //Ruta y subrutas de pago
     {
@@ -229,16 +237,19 @@ export const routes: Routes = [
             {
                 path:'insertarpago',
                 component: InsertareditarpagoComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path:'edicionespago/:id',
                 component:InsertareditarpagoComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path:'buscarPorMetodo',
                 component:BusquedapagoComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
-        ],
+        ],canActivate: [seguridadGuard],
     },
     //Rutas de todo lo relacionado con  dashboard y los reportes
     {
@@ -264,6 +275,18 @@ export const routes: Routes = [
                 path:'reportedisenosporgenero',
                 component:ReportedisenosporgeneroComponent,
             },
+            {
+                path:'reportepago',
+                component:ReportePagosUsuarioComponent,
+            },
+            {
+                path:'reportepagousuario',
+                component:ReporteTop5PagosComponent,
+            },
+
+
+
+            
         ],
         canActivate: [seguridadGuard],
     },
