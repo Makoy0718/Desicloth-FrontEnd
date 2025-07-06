@@ -39,7 +39,7 @@ import { ReporteiaComponent } from './components/dashboard/reporteia/reporteia.c
 import { ReportedisenosporgeneroComponent } from './components/dashboard/reportedisenosporgenero/reportedisenosporgenero.component';
 
 import { BusquedapagoComponent } from './components/pago/busquedapago/busquedapago.component';
-import { BuscarcategoriaComponent } from './components/categoria/buscarcategoria/buscarcategoria.component';
+
 
 
 
