@@ -100,7 +100,9 @@ export class ReportedisenosComponent implements OnInit {
 			const found = data.find(d => d.categoria === cat && d.origen === origen);
 			return found ? found.cantidad : 0;
 			}),
-			backgroundColor: this.colorAleatorio()
+			backgroundColor: ['#2a2dd1', '#9293e0'],
+			borderColor: '#131570',
+			borderWidth: 1
 		}));
 		});
 	}
