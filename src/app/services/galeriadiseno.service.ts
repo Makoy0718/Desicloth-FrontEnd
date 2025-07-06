@@ -38,4 +38,8 @@ export class GaleriadisenoService {
   deleteGaleriaDiseno(id: number) {
     return this.http.delete(`${this.url}/eliminarGaleriaDiseno/${id}`);
   }
+
+  deleteByDisenoId(idDiseno: number) {
+    return this.http.delete(`${this.url}/eliminarPorDiseno/${idDiseno}`);
+  }
 }

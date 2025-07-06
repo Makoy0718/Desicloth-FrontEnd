@@ -13,6 +13,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MenuComponent } from '../../menu/menu.component';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { LoginService } from '../../../services/login.service';
+import { GaleriadisenoService } from '../../../services/galeriadiseno.service';
 
 @Component({
   selector: 'app-listardiseno',
@@ -41,16 +42,27 @@ export class ListardisenoComponent implements OnInit{
 
 	role: string = '';
 
-	constructor(private disenoService: DisenoService, private loginService: LoginService) {}
+	constructor(private disenoService: DisenoService, private loginService: LoginService, 
+		private galeriadisenoService: GaleriadisenoService
+	) {}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	ngOnInit(): void {
     	this.disenoService.listDiseno().subscribe(data => {
 			this.disenos = data;
-			this.disenosFiltrados = data; // Inicializa las tarjetas con todos los diseños
-			this.extraerCategoriasYGeneros(); // Extrae las categorías y géneros para los filtros
+			this.disenosFiltrados = data;
+			this.extraerCategoriasYGeneros();
 		});
+
+		// Escucha cambios cuando se actualiza la lista desde otro componente
+		this.disenoService.getListDiseno().subscribe(data => {
+			this.disenos = data;
+			this.filtrarDisenos(); // aplica los filtros con la nueva lista
+			this.extraerCategoriasYGeneros(); // actualiza las opciones de filtro
+		});
+
+  this.verificar();
   	}
 
 	extraerCategoriasYGeneros() {
@@ -87,13 +99,16 @@ export class ListardisenoComponent implements OnInit{
 	}
 
 	eliminarDiseno(id: number) {
-    	this.disenoService.deleteDiseno(id).subscribe((data) => {
-      		this.disenoService.listDiseno().subscribe((data) => {
-        		this.disenos = data;
-  				this.filtrarDisenos(); // Aplica los filtros actuales a los nuevos datos
-  				this.extraerCategoriasYGeneros(); // Si quieres actualizar las opciones del filtro también
-      		});
-    	});
+		// Primero elimina todos los GaleriaDiseno asociados a este diseño
+		this.galeriadisenoService.deleteByDisenoId(id).subscribe(() => {
+			// Luego elimina el diseño en sí
+			this.disenoService.deleteDiseno(id).subscribe(() => {
+			// Y actualiza la lista global
+			this.disenoService.listDiseno().subscribe((data) => {
+				this.disenoService.setListDiseno(data);
+			});
+			});
+		});
   	}
 
 	//Llamamos el metodo para mostrar el rol y luego llama al metodo para verificar si hay un token

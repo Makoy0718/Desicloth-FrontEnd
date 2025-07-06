@@ -13,6 +13,7 @@ import { Diseno } from '../../../models/diseno';
 import { DisenoService } from '../../../services/diseno.service';
 import { UsersService } from '../../../services/users.service';
 import { LoginService } from '../../../services/login.service';
+import { GaleriadisenoService } from '../../../services/galeriadiseno.service';
 
 @Component({
   selector: 'app-misdisenos',
@@ -50,11 +51,18 @@ export class MisdisenosComponent implements OnInit {
   constructor(
     private disenoService: DisenoService,
     private loginService: LoginService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private galeriadisenoService: GaleriadisenoService
   ) {}
 
   ngOnInit(): void {
     this.obtenerDisenosDelUsuario();
+
+    this.disenoService.getListDiseno().subscribe((data) => {
+      this.disenos = data;
+      this.disenosFiltrados = data;
+      this.extraerCategoriasYGeneros();
+    });
   }
 
   obtenerDisenosDelUsuario(): void {
@@ -105,8 +113,12 @@ export class MisdisenosComponent implements OnInit {
   }
 
   eliminarDiseno(id: number) {
-    this.disenoService.deleteDiseno(id).subscribe(() => {
-      this.obtenerDisenosDelUsuario();
+    this.galeriadisenoService.deleteByDisenoId(id).subscribe(() => {
+      this.disenoService.deleteDiseno(id).subscribe(() => {
+        this.disenoService.listByUserIdDiseno(this.idUser).subscribe((data) => {
+          this.disenoService.setListDiseno(data); // ← Actualiza con la nueva lista
+        });
+      });
     });
   }
 
