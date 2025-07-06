@@ -44,18 +44,7 @@
       </mat-form-field>
       <br />
 
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="us">
-          <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
-            {{ u.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('us')?.hasError('required')">
-          El usuario es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br />
+      
 
       <button matButton="outlined">Aceptar</button>
       <button matButton (click)="cancelar()">Cancelar</button>

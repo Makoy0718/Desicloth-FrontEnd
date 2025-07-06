@@ -18,6 +18,7 @@ import { Users } from '../../../models/users';
 import { Reclamo } from '../../../models/reclamo';
 import { ReclamoService } from '../../../services/reclamo.service';
 import { UsersService } from '../../../services/users.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-insertareditarrec',
@@ -37,7 +38,7 @@ import { UsersService } from '../../../services/users.service';
 export class InsertareditarrecComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   reclamo: Reclamo = new Reclamo();
-  listaUsuarios: Users[] = [];
+  users: Users = new Users();
   status: boolean = false;
 
   id: number = 0;
@@ -48,7 +49,8 @@ export class InsertareditarrecComponent implements OnInit {
     private uS: UsersService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS: LoginService
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -58,15 +60,13 @@ export class InsertareditarrecComponent implements OnInit {
       this.init();
     });
 
+    this.obtenerIdUsuario();
+
     this.form = this.formBuilder.group({
       codigo: [''],
       title: ['', Validators.required],
       description: ['', Validators.required],
       state: ['', Validators.required],
-      us: ['', Validators.required],
-    });
-    this.uS.list().subscribe(data => {
-      this.listaUsuarios = data;
     });
   }
   aceptar() {
@@ -76,7 +76,7 @@ export class InsertareditarrecComponent implements OnInit {
       this.reclamo.titulo = this.form.value.title;
       this.reclamo.descripcion = this.form.value.description;
       this.reclamo.estado = this.form.value.state;
-      this.reclamo.user.idUser = this.form.value.us;
+      this.reclamo.user.idUser = this.users.idUser;
       if (this.edicion) {
         //actualizar
         this.rS.update(this.reclamo).subscribe(() => {
@@ -93,7 +93,7 @@ export class InsertareditarrecComponent implements OnInit {
         });
       }
       console.log(this.form.value);
-      //this.router.navigate(['rutareclamo']);
+      this.router.navigate(['rutareclamo']);
     }
   }
 
@@ -113,4 +113,17 @@ export class InsertareditarrecComponent implements OnInit {
   cancelar() {
     this.router.navigate(['rutareclamo']);
   }
+
+  obtenerIdUsuario() {
+		const username = this.lS.showUsername();
+		console.log(username)
+
+		this.uS.searchUserByName(username).subscribe({
+		next: (users) => {
+			this.users = users; 
+		}
+		});
+
+    console.log(this.users.idUser);
+	}
 }
