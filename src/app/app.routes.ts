@@ -128,10 +128,12 @@ export const routes: Routes = [
             {
                 path: 'insertagaleria',
                 component: InsertareditarGaleriaComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path:'busquedagaleria',
