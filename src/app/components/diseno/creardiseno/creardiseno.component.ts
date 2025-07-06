@@ -63,7 +63,7 @@ export class CreardisenoComponent implements OnInit{
   	edicion: boolean = false;
 
 	//Iniciamos el gemini para poder usarlo en el componente
-	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "Clave Gemini AI" });
+	GeminiAI: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyDUbwHdIZQE7lsbh6ffwZD7Ozj739-hdXI" });
   
 	imagenBase64: string = '';
 	
