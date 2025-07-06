@@ -94,7 +94,7 @@ export class CreardisenoComponent implements OnInit{
 			this.form = this.fb.group({
 				idDiseno: [''],
 				imagenDiseno: ['', Validators.required],
-				precioDiseno: [0, Validators.required],
+				precioDiseno: [0, [Validators.required, Validators.max(35)]],
 				fechaOrigenDiseno: [new Date(), Validators.required],
 				tipoIA: [false, Validators.required],
 				promtDiseno: [''],
@@ -109,7 +109,7 @@ export class CreardisenoComponent implements OnInit{
 			this.form = this.fb.group({
 				idDiseno: [''],
 				imagenDiseno: ['', Validators.required],
-				precioDiseno: [0, Validators.required],
+				precioDiseno: [0, [Validators.required, Validators.max(35)]],
 				fechaOrigenDiseno: [new Date(), Validators.required],
 				tipoIA: [false, Validators.required],
 				promtDiseno: [''],

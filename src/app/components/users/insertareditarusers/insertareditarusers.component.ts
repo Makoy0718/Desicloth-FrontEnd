@@ -18,6 +18,7 @@ import { Users } from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
 import { Role } from '../../../models/role';
 import { RoleService } from '../../../services/role.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-insertareditarusers',
@@ -38,8 +39,9 @@ export class InsertareditarusersComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   users: Users = new Users();
   roles: Role[] = [];
+  autoRol: Role = new Role();
   status: boolean = false;
-
+  sesioniniciada: boolean = false;
   id: number = 0;
   edicion: boolean = false;
 
@@ -48,7 +50,8 @@ export class InsertareditarusersComponent implements OnInit {
     private rS: RoleService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS: LoginService
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -58,25 +61,38 @@ export class InsertareditarusersComponent implements OnInit {
       this.init();
     });
 
+    this.sesionIniciada();
+
+    console.log(this.sesioniniciada);
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre: ['', Validators.required],
       correo: ['', Validators.required],
       contrasena: ['', Validators.required],
-      role: [null, Validators.required],
+      role: [2, Validators.required],
     });
-    this.rS.list().subscribe((roless: Role[]) => {
-      this.roles = roless;
-    });
+    
+    
+    if (!(this.sesioniniciada)) {
+      this.autoRol.idRole = 2; 
+    } else {
+      this.rS.list().subscribe((roless: Role[]) => {
+        this.roles = roless;
+      });
+    }
   }
   aceptar() {
-    console.log(this.form.value);
     if (this.form.valid) {
       this.users.idUser = this.form.value.codigo;
       this.users.username = this.form.value.nombre;
       this.users.correoUser = this.form.value.correo;
       this.users.password = this.form.value.contrasena;
-      this.users.rol.idRole = this.form.value.role.idRole;
+      if(this.sesioniniciada) {
+        this.users.rol.idRole = this.form.value.role.idRole;
+      }
+      else { 
+        this.users.rol = this.autoRol; // Asignar rol por defecto si no hay sesión iniciada
+      }
       if (this.edicion) {
         //actualizar
         this.uS.update(this.users).subscribe(() => {
@@ -92,7 +108,12 @@ export class InsertareditarusersComponent implements OnInit {
           });
         });
       }
-      this.router.navigate(['rutausers']);
+
+      if (this.sesioniniciada) {
+      this.router.navigate(['rutausers']);  
+    } else {
+      this.router.navigate(['login']);
+    }
     }
   }
 
@@ -110,7 +131,15 @@ export class InsertareditarusersComponent implements OnInit {
     }
   }
 
+  sesionIniciada() {
+    this.sesioniniciada = this.lS.verificar();
+  }
+
   cancelar() {
-    this.router.navigate(['rutalanding']);  
+    if (this.sesioniniciada) {
+      this.router.navigate(['rutausers']);  
+    } else {
+      this.router.navigate(['rutalanding']);
+    }
   }
 }
