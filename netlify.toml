@@ -5,4 +5,3 @@
   package = "@netlify/angular-runtime"
 
   [plugins.inputs]
-  skipPrerender = true
