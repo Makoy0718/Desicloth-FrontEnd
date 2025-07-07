@@ -1,7 +1,0 @@
-[functions]
-  included_files = ["dist/**"]
-
-[[plugins]]
-  package = "@netlify/angular-runtime"
-
-  [plugins.inputs]
