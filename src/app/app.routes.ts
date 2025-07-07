@@ -75,10 +75,9 @@ export const routes: Routes = [
 			{ 
 				path:'editarrole/:id',
 				component:InsertareditarroleComponent,
-                data: { renderMode: 'no-prerender' }
 			}
     	],
-        data: { roles: ['ADMIN'] },
+        data: { roles: ['ADMIN'], renderMode: 'no-prerender' },
         canActivate: [seguridadGuard],
     },
     //Rutas y subrutas de categoria
@@ -94,7 +93,7 @@ export const routes: Routes = [
             {
                 path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN']}
             },
             {
                 path:'busquedacategoria',
@@ -103,6 +102,7 @@ export const routes: Routes = [
             },
         ],
         canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Rutas y subrutas disenos
 	{
@@ -117,7 +117,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesdiseno/:id',
                 component: CreardisenoComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN']}
             },
             {
                 path: 'misdisenos',
@@ -126,6 +126,7 @@ export const routes: Routes = [
             },
         ],
         canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Rutas y subrutas de galeria
     {
@@ -140,7 +141,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
-                data: { roles: ['ADMIN', 'CLIENTE'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN', 'CLIENTE']}
             },
             {
                 path:'busquedagaleria',
@@ -150,6 +151,7 @@ export const routes: Routes = [
             
         ],
         canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Rutas y subrutas de genero
     {
@@ -163,7 +165,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesgenero/:id',
                 component: InsertareditargenComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN']}
             },
             {
                 path: 'busquedagenero',
@@ -172,6 +174,7 @@ export const routes: Routes = [
             },
         ],
         canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Rutas y subrutas de users
     {
@@ -186,7 +189,7 @@ export const routes: Routes = [
                 path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
                 canActivate: [seguridadGuard],
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'busquedausers',
@@ -195,6 +198,7 @@ export const routes: Routes = [
                 data: { roles: ['ADMIN'] }
             },
         ],
+        data: { renderMode: 'no-prerender' },
         
     },
     //Rutas y subrutas de reclamo
@@ -209,7 +213,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesreclamo/:id',
                 component: InsertareditarrecComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'busquedareclamo',
@@ -218,6 +222,7 @@ export const routes: Routes = [
             },
         ],
         canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Ruta y subrutas de pedido
     {
@@ -231,9 +236,11 @@ export const routes: Routes = [
             {
                 path:'edicionespedido/:id',
                 component:InsertareditarpedidoComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN'] }
             }, 
-        ],canActivate: [seguridadGuard],
+        ],
+        canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Ruta y subrutas de pago
     {
@@ -247,14 +254,16 @@ export const routes: Routes = [
             {
                 path:'edicionespago/:id',
                 component:InsertareditarpagoComponent,
-                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
+                data: { roles: ['ADMIN'] }
             },
             {
                 path:'buscarPorMetodo',
                 component:BusquedapagoComponent,
                 data: { roles: ['ADMIN', 'CLIENTE'] }
             },
-        ],canActivate: [seguridadGuard],
+        ],
+        canActivate: [seguridadGuard],
+        data: { renderMode: 'no-prerender' },
     },
     //Rutas de todo lo relacionado con  dashboard y los reportes
     {
