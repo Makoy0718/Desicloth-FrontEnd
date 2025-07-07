@@ -98,7 +98,7 @@ export const routes: Routes = [
             {
                 path:'busquedacategoria',
                 component:BuscarcategoriaComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
         ],
         canActivate: [seguridadGuard],
@@ -110,7 +110,8 @@ export const routes: Routes = [
         children:[
             { 
                 path: 'insertardiseno',
-                component: CreardisenoComponent
+                component: CreardisenoComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path: 'edicionesdiseno/:id',
@@ -120,6 +121,7 @@ export const routes: Routes = [
             {
                 path: 'misdisenos',
                 component: MisdisenosComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
         ],
         canActivate: [seguridadGuard],
@@ -177,7 +179,7 @@ export const routes: Routes = [
             {
                 path: 'insertarusers',
                 component: InsertareditarusersComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path: 'edicionesusers/:id',
@@ -201,10 +203,12 @@ export const routes: Routes = [
             {
                 path: 'insertarreclamo',
                 component: InsertareditarrecComponent,
+                data: { roles: ['ADMIN', 'CLIENTE'] }
             },
             {
                 path: 'edicionesreclamo/:id',
                 component: InsertareditarrecComponent,
+                data: { roles: ['ADMIN'] }
             },
             {
                 path: 'busquedareclamo',
@@ -288,6 +292,7 @@ export const routes: Routes = [
 
             
         ],
+        data: { roles: ['ADMIN'] },
         canActivate: [seguridadGuard],
     },
 
