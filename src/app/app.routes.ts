@@ -74,7 +74,8 @@ export const routes: Routes = [
 			},
 			{ 
 				path:'editarrole/:id',
-				component:InsertareditarroleComponent
+				component:InsertareditarroleComponent,
+                data: { renderMode: 'no-prerender' }
 			}
     	],
         data: { roles: ['ADMIN'] },
@@ -93,7 +94,7 @@ export const routes: Routes = [
             {
                 path: 'edicionescategoria/:id',
                 component: IsertareditarCategoriaComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path:'busquedacategoria',
@@ -116,7 +117,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesdiseno/:id',
                 component: CreardisenoComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path: 'misdisenos',
@@ -139,7 +140,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesgaleria/:id',
                 component: InsertareditarGaleriaComponent,
-                data: { roles: ['ADMIN', 'CLIENTE'] }
+                data: { roles: ['ADMIN', 'CLIENTE'], renderMode: 'no-prerender' }
             },
             {
                 path:'busquedagaleria',
@@ -162,7 +163,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesgenero/:id',
                 component: InsertareditargenComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path: 'busquedagenero',
@@ -185,7 +186,7 @@ export const routes: Routes = [
                 path: 'edicionesusers/:id',
                 component: InsertareditarusersComponent,
                 canActivate: [seguridadGuard],
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path: 'busquedausers',
@@ -208,7 +209,7 @@ export const routes: Routes = [
             {
                 path: 'edicionesreclamo/:id',
                 component: InsertareditarrecComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path: 'busquedareclamo',
@@ -230,7 +231,7 @@ export const routes: Routes = [
             {
                 path:'edicionespedido/:id',
                 component:InsertareditarpedidoComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             }, 
         ],canActivate: [seguridadGuard],
     },
@@ -246,7 +247,7 @@ export const routes: Routes = [
             {
                 path:'edicionespago/:id',
                 component:InsertareditarpagoComponent,
-                data: { roles: ['ADMIN'] }
+                data: { roles: ['ADMIN'], renderMode: 'no-prerender' }
             },
             {
                 path:'buscarPorMetodo',
