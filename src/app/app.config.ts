@@ -7,14 +7,14 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay,} from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';  // tu interceptor
+
 export function tokenGetter() {
-  // Si no hay window, devolvemos null (no hay token)
   if (typeof window === 'undefined') {
     return null;
   }
-
   const token = window.sessionStorage.getItem('token');
-  // Solo devolvemos algo si es un JWT válido de 3 partes
   return token && token.split('.').length === 3 ? token : null;
 }
 
@@ -23,16 +23,22 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(),withInterceptorsFromDi()),
-	  provideCharts(withDefaultRegisterables()),
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    provideCharts(withDefaultRegisterables()),
     importProvidersFrom(
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          allowedDomains: ['localhost:8084'],
+          allowedDomains: ['localhost:8084', 'desiclothapi.onrender.com'], // agrega tus dominios backend
           disallowedRoutes: ['http://localhost:8084/login/forget'],
         },
       })
-    )
+    ),
+    // Registrar el interceptor
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
 };

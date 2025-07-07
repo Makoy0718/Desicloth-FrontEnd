@@ -25,7 +25,7 @@ export const seguridadGuard= (
   if (requiredRoles) {
     const userRole = lService.showRole();
     if (!userRole || !requiredRoles.includes(userRole)) {
-      router.navigate(['/rutadisenos']);
+      router.navigate(['/home']);
       return false;
     }
   }
