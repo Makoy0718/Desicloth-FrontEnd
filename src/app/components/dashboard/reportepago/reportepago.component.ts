@@ -42,8 +42,8 @@ export class ReporteTop5PagosComponent implements OnInit {
           {
             data: data.map(p => p.montoPago),
             label: 'Monto en S/',
-            backgroundColor: '#4CAF50',
-            borderColor: '#388E3C',
+            backgroundColor: '#03A9F4',
+            borderColor: '#0288D1',
             borderWidth: 1
           }
         ]

@@ -42,7 +42,7 @@ import {MatCardModule} from '@angular/material/card';
 export class ListarpagoComponent implements OnInit {
 
   dataSource:MatTableDataSource<Pago>=new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7',];
+  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7','c8'];
 
   
 

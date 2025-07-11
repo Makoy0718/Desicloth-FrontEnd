@@ -29,8 +29,11 @@ export const appConfig: ApplicationConfig = {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          allowedDomains: ['localhost:8084', 'desiclothapi.onrender.com'], // agrega tus dominios backend
+
+          allowedDomains:['localhost:8085'],
           disallowedRoutes: ['http://localhost:8084/login/forget'],
+          //allowedDomains: ['localhost:8084', 'desiclothapi.onrender.com'], // agrega tus dominios backend
+          //disallowedRoutes: ['http://localhost:8084/login/forget'],
         },
       })
     ),

@@ -1,6 +1,8 @@
 export const environment = {
   production:false,
-  base:"https://desiclothapi.onrender.com"
+
+  base: "http://localhost:8084"
+  //base:"https://desiclothapi.onrender.com"
 }
 
 //https://desiclothapi.onrender.co
